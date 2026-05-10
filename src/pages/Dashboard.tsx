@@ -7,35 +7,7 @@ import { cn } from "../lib/utils";
 
 const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
 
-const COURSES: any[] = [
-  {
-    id: 1,
-    title: "The Art of Cinematic Editing",
-    description: "Master the rhythm and pace of high-end storytelling. A complete blueprint for professional video editors.",
-    category: "Video Editing",
-    pages: 124,
-    size: "18MB",
-    isPurchased: true,
-  },
-  {
-    id: 2,
-    title: "TypeScript Mastery for Architects",
-    description: "Advanced patterns and types for building scalable applications. Deep dive into type safety.",
-    category: "Coding",
-    pages: 89,
-    size: "12MB",
-    isPurchased: false,
-  },
-  {
-    id: 3,
-    title: "UI Design Systems with Figma",
-    description: "Learn to build and maintain complex design systems that scale across platforms.",
-    category: "Design",
-    pages: 156,
-    size: "24MB",
-    isPurchased: true,
-  }
-];
+const COURSES: any[] = [];
 
 export default function Dashboard() {
   const { user } = useAuth();
