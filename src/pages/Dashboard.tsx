@@ -67,8 +67,8 @@ export default function Dashboard() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-2"
             >
-              <div className="w-8 h-[2px] bg-blue-500" />
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-blue-500">
+              <div className={cn("w-8 h-[2px]", activeTab === "purchased" ? "bg-emerald-500" : "bg-blue-500")} />
+              <span className={cn("text-[10px] font-bold tracking-[0.2em] uppercase", activeTab === "purchased" ? "text-emerald-600" : "text-blue-500")}>
                 {activeTab === "purchased" ? "Your Collection" : "Discover Knowledge"}
               </span>
             </motion.div>
@@ -78,7 +78,7 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl font-bold tracking-tight"
             >
-              {activeTab === "purchased" ? "Your" : "Explore"} <span className="text-black/30 font-serif italic font-normal">Playbooks.</span>
+              {activeTab === "purchased" ? "My" : "Explore"} <span className={cn("font-serif italic font-normal", activeTab === "purchased" ? "text-emerald-600/40" : "text-black/30")}>Playbooks.</span>
             </motion.h1>
             
             <motion.p 
@@ -100,10 +100,14 @@ export default function Dashboard() {
           >
             <div className="flex flex-col">
               <span className="text-3xl font-bold">{filteredCourses.length}</span>
-              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Available</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">
+                {activeTab === "purchased" ? "Owned" : "Available"}
+              </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-3xl font-bold">{COURSES.filter(c => c.isPurchased).length}</span>
+              <span className={cn("text-3xl font-bold", activeTab === "purchased" && "text-emerald-600")}>
+                {COURSES.filter(c => c.isPurchased).length}
+              </span>
               <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Mastered</span>
             </div>
           </motion.div>
@@ -157,22 +161,46 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              className="group relative bg-white border border-gray-100 rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+              className={cn(
+                "group relative border rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 overflow-hidden",
+                course.isPurchased 
+                  ? "bg-white border-emerald-100 hover:shadow-emerald-500/5" 
+                  : "bg-white border-gray-100 hover:shadow-black/5"
+              )}
             >
               {/* Card Decor */}
-              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-[4rem] -mr-16 -mt-16 transition-transform duration-500 group-hover:scale-110" />
+              <div className={cn(
+                "absolute top-0 right-0 w-32 h-32 rounded-bl-[4rem] -mr-16 -mt-16 transition-transform duration-500 group-hover:scale-110",
+                course.isPurchased ? "bg-emerald-50" : "bg-gray-50"
+              )} />
               
               <div className="relative z-10">
                 <div className="flex items-start justify-between mb-8">
-                  <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300 group-hover:text-black transition-colors duration-500">
+                  <div className={cn(
+                    "w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-500",
+                    course.isPurchased ? "bg-emerald-50 text-emerald-300 group-hover:text-emerald-600" : "bg-gray-50 text-gray-300 group-hover:text-black"
+                  )}>
                     <FileText size={28} />
                   </div>
-                  <span className="text-[10px] font-bold tracking-widest text-gray-300 uppercase group-hover:text-blue-500 transition-colors">
-                    {course.category}
-                  </span>
+                  <div className="flex flex-col items-end gap-2">
+                    <span className={cn(
+                      "text-[10px] font-bold tracking-widest uppercase transition-colors",
+                      course.isPurchased ? "text-emerald-600/40" : "text-gray-300 group-hover:text-blue-500"
+                    )}>
+                      {course.category}
+                    </span>
+                    {course.isPurchased && (
+                      <span className="flex items-center gap-1 text-[9px] font-bold bg-emerald-500 text-white px-2 py-0.5 rounded-full tracking-wider">
+                        <Star size={8} fill="currentColor" /> OWNED
+                      </span>
+                    )}
+                  </div>
                 </div>
 
-                <h3 className="text-2xl font-bold mb-4 tracking-tight leading-tight group-hover:text-blue-600 transition-colors">
+                <h3 className={cn(
+                  "text-2xl font-bold mb-4 tracking-tight leading-tight transition-colors",
+                  course.isPurchased ? "group-hover:text-emerald-700" : "group-hover:text-blue-600"
+                )}>
                   {course.title}
                 </h3>
                 
@@ -192,11 +220,21 @@ export default function Dashboard() {
                   </div>
                 </div>
 
-                <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
-                  <button className="flex-1 bg-black text-white rounded-xl py-4 text-sm font-bold active:scale-95 transition-all hover:bg-gray-800">
-                    {course.isPurchased ? "Open Playbook" : "Get Access"}
+                <div className={cn("flex items-center gap-4 pt-8 border-t", course.isPurchased ? "border-emerald-50" : "border-gray-50")}>
+                  <button className={cn(
+                    "flex-1 rounded-xl py-4 text-sm font-bold active:scale-95 transition-all",
+                    course.isPurchased 
+                      ? "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/10" 
+                      : "bg-black text-white hover:bg-gray-800 shadow-lg shadow-black/10"
+                  )}>
+                    {course.isPurchased ? "Read Now" : "Get Access"}
                   </button>
-                  <button className="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-100 transition-all">
+                  <button className={cn(
+                    "w-14 h-14 rounded-xl flex items-center justify-center transition-all",
+                    course.isPurchased 
+                      ? "bg-emerald-50 text-emerald-600 hover:bg-emerald-100" 
+                      : "bg-gray-50 text-gray-400 hover:text-black hover:bg-gray-100"
+                  )}>
                     <Download size={20} />
                   </button>
                 </div>
@@ -209,13 +247,27 @@ export default function Dashboard() {
           <motion.div 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            className="text-center py-40 bg-gray-50 rounded-[3rem] border border-dashed border-gray-200"
+            className="text-center py-40 bg-white rounded-[3rem] border border-dashed border-gray-200"
           >
-            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-gray-200 shadow-sm">
-              <Filter size={32} />
+            <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-200">
+              {activeTab === "purchased" ? <BookOpen size={32} /> : <Filter size={32} />}
             </div>
-            <h3 className="text-xl font-bold mb-2">No playbooks found</h3>
-            <p className="text-gray-400">Try adjusting your search or category filters.</p>
+            <h3 className="text-xl font-bold mb-2">
+              {activeTab === "purchased" ? "Your library is empty" : "No playbooks found"}
+            </h3>
+            <p className="text-gray-400 mb-8">
+              {activeTab === "purchased" 
+                ? "You haven't added any playbooks to your collection yet." 
+                : "Try adjusting your search or category filters."}
+            </p>
+            {activeTab === "purchased" && (
+              <button 
+                onClick={() => navigate("/dashboard")}
+                className="bg-black text-white px-8 py-3 rounded-full text-sm font-bold hover:bg-gray-800 transition-all"
+              >
+                Go to Library
+              </button>
+            )}
           </motion.div>
         )}
       </main>
