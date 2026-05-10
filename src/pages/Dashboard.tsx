@@ -46,32 +46,29 @@ export default function Dashboard() {
         <div className="min-h-screen flex items-end pb-10 sm:pb-16 lg:pb-20 px-6 sm:px-12 md:px-20 lg:px-28">
           <div className="max-w-xs">
             {/* Badge link */}
-            <a 
-              href="#" 
-              className="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-blue-500 hover:text-blue-600 transition-colors mb-3 group"
-            >
-              Seen on Shark Tank in India
-              <span className="inline-block transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-            </a>
+            <div className="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-blue-500 mb-3">
+              New PDF Playbooks Available
+              <span className="inline-block transition-transform duration-200">→</span>
+            </div>
 
             {/* Headline */}
             <h1 className="text-[1.5rem] sm:text-[1.75rem] leading-[1.15] font-medium text-gray-900 tracking-tight mb-3">
-              Simple, smart prosthetics made for people who keep fighting.
+              Forge your path to absolute mastery.
             </h1>
 
             {/* Subtext */}
             <p className="text-[13px] text-gray-400 font-normal mb-3">
-              Reclaim your movement now.
+              High-density, structured learning materials designed for absolute efficiency.
             </p>
 
             {/* CTA anchor */}
-            <a 
-              href="#" 
+            <button 
+              onClick={() => navigate("/dashboard")}
               className="inline-flex items-center gap-2 text-[13px] font-medium text-blue-500 border border-blue-400 rounded-full px-5 py-2.5 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-200 group"
             >
-              Try a free fitting
+              Explore Library
               <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-            </a>
+            </button>
           </div>
         </div>
 
