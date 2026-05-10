@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FileText, Download, Search, Filter, BookOpen, Clock, Star } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
@@ -45,8 +45,38 @@ export default function Dashboard() {
   const activeTab = searchParams.get("tab") || "all";
   const activeCategory = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : "All";
   const [searchQuery, setSearchQuery] = useState("");
+  const [courses, setCourses] = useState(COURSES);
 
-  const filteredCourses = COURSES.filter((course) => {
+  // Load purchases from localStorage on mount
+  useEffect(() => {
+    const savedPurchases = localStorage.getItem("user_purchases");
+    if (savedPurchases) {
+      const purchasedIds = JSON.parse(savedPurchases);
+      setCourses(prev => prev.map(course => ({
+        ...course,
+        isPurchased: purchasedIds.includes(course.id) || course.isPurchased
+      })));
+    }
+  }, []);
+
+  const handlePurchase = (courseId: number) => {
+    setCourses(prev => {
+      const updated = prev.map(course => 
+        course.id === courseId ? { ...course, isPurchased: true } : course
+      );
+      
+      // Persist to localStorage
+      const purchasedIds = updated.filter(c => c.isPurchased).map(c => c.id);
+      localStorage.setItem("user_purchases", JSON.stringify(purchasedIds));
+      
+      return updated;
+    });
+
+    // Optional: Redirect to purchased tab after a delay or show a toast
+    // For now, we just update the state instantly
+  };
+
+  const filteredCourses = courses.filter((course) => {
     const matchesCategory = activeCategory === "All" || course.category === activeCategory;
     const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab = activeTab === "all" || (activeTab === "purchased" && course.isPurchased);
@@ -221,12 +251,15 @@ export default function Dashboard() {
                 </div>
 
                 <div className={cn("flex items-center gap-4 pt-8 border-t", course.isPurchased ? "border-emerald-50" : "border-gray-50")}>
-                  <button className={cn(
-                    "flex-1 rounded-xl py-4 text-sm font-bold active:scale-95 transition-all",
-                    course.isPurchased 
-                      ? "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/10" 
-                      : "bg-black text-white hover:bg-gray-800 shadow-lg shadow-black/10"
-                  )}>
+                  <button 
+                    onClick={() => course.isPurchased ? null : handlePurchase(course.id)}
+                    className={cn(
+                      "flex-1 rounded-xl py-4 text-sm font-bold active:scale-95 transition-all",
+                      course.isPurchased 
+                        ? "bg-emerald-600 text-white hover:bg-emerald-700 shadow-lg shadow-emerald-600/10" 
+                        : "bg-black text-white hover:bg-gray-800 shadow-lg shadow-black/10"
+                    )}
+                  >
                     {course.isPurchased ? "Read Now" : "Get Access"}
                   </button>
                   <button className={cn(
