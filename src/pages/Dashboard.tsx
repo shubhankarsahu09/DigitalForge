@@ -1,24 +1,50 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { FileText, Download, Search, Filter, BookOpen } from "lucide-react";
+import { FileText, Download, Search, Filter, BookOpen, Clock, Star } from "lucide-react";
 import { useAuth } from "../hooks/useAuth";
 import { useNavigate, useSearchParams, useParams, Link } from "react-router-dom";
 import { cn } from "../lib/utils";
 
-const CATEGORIES = ["Video Editing", "Coding"];
+const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
 
-const COURSES: any[] = [];
+const COURSES: any[] = [
+  {
+    id: 1,
+    title: "The Art of Cinematic Editing",
+    description: "Master the rhythm and pace of high-end storytelling. A complete blueprint for professional video editors.",
+    category: "Video Editing",
+    pages: 124,
+    size: "18MB",
+    isPurchased: true,
+  },
+  {
+    id: 2,
+    title: "TypeScript Mastery for Architects",
+    description: "Advanced patterns and types for building scalable applications. Deep dive into type safety.",
+    category: "Coding",
+    pages: 89,
+    size: "12MB",
+    isPurchased: false,
+  },
+  {
+    id: 3,
+    title: "UI Design Systems with Figma",
+    description: "Learn to build and maintain complex design systems that scale across platforms.",
+    category: "Design",
+    pages: 156,
+    size: "24MB",
+    isPurchased: true,
+  }
+];
 
 export default function Dashboard() {
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { category } = useParams();
   const [searchParams] = useSearchParams();
   const activeTab = searchParams.get("tab") || "all";
   const activeCategory = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : "All";
   const [searchQuery, setSearchQuery] = useState("");
-
-
 
   const filteredCourses = COURSES.filter((course) => {
     const matchesCategory = activeCategory === "All" || course.category === activeCategory;
@@ -28,164 +54,171 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-[#f0f0ee] text-[#1d1d1f] font-sans">
-      {/* Background Video */}
-      <video
-        autoPlay
-        muted
-        loop
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260508_215831_c6a8989c-d716-4d8d-8745-e972a2eec711.mp4" type="video/mp4" />
-      </video>
+    <div className="min-h-screen bg-[#FBFBFD] text-[#1D1D1F]">
+      {/* Top spacing for Navbar */}
+      <div className="h-20" />
 
-      {/* Foreground Content */}
-      <div className="relative z-10 flex flex-col min-h-screen">
-        {/* Hero Section */}
-        <div className="min-h-screen flex items-end pb-10 sm:pb-16 lg:pb-20 px-6 sm:px-12 md:px-20 lg:px-28">
-          <div className="max-w-xs">
-            {/* Badge link */}
-            <div className="inline-flex items-center gap-1.5 text-[11.5px] font-medium text-blue-500 mb-3">
-              New PDF Playbooks Available
-              <span className="inline-block transition-transform duration-200">→</span>
-            </div>
-
-            {/* Headline */}
-            <h1 className="text-[1.5rem] sm:text-[1.75rem] leading-[1.15] font-medium text-gray-900 tracking-tight mb-3">
-              Forge your path to absolute mastery.
-            </h1>
-
-            {/* Subtext */}
-            <p className="text-[13px] text-gray-400 font-normal mb-3">
-              High-density, structured learning materials designed for absolute efficiency.
-            </p>
-
-            {/* CTA anchor */}
-            <button 
-              onClick={() => navigate("/dashboard")}
-              className="inline-flex items-center gap-2 text-[13px] font-medium text-blue-500 border border-blue-400 rounded-full px-5 py-2.5 hover:bg-blue-500 hover:text-white hover:border-blue-500 transition-all duration-200 group"
+      <main className="max-w-7xl mx-auto px-6 py-12 md:py-20">
+        {/* Header Section */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div className="space-y-4">
+            <motion.div
+              initial={{ opacity: 0, x: -10 }}
+              animate={{ opacity: 1, x: 0 }}
+              className="flex items-center gap-2"
             >
-              Explore Library
-              <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
-            </button>
+              <div className="w-8 h-[2px] bg-blue-500" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-blue-500">
+                {activeTab === "purchased" ? "Your Collection" : "Discover Knowledge"}
+              </span>
+            </motion.div>
+            
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="text-4xl md:text-6xl font-bold tracking-tight"
+            >
+              {activeTab === "purchased" ? "Your" : "Explore"} <span className="text-black/30 font-serif italic font-normal">Playbooks.</span>
+            </motion.h1>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="text-lg text-gray-400 max-w-lg leading-relaxed"
+            >
+              {activeTab === "purchased" 
+                ? "Your personal library of high-density learning materials. Continue where you left off."
+                : "The most comprehensive blueprints for modern skills. Precision-engineered for your growth."}
+            </motion.p>
           </div>
+
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="flex items-center gap-10 border-l border-gray-100 pl-10 h-24"
+          >
+            <div className="flex flex-col">
+              <span className="text-3xl font-bold">{filteredCourses.length}</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Available</span>
+            </div>
+            <div className="flex flex-col">
+              <span className="text-3xl font-bold">{COURSES.filter(c => c.isPurchased).length}</span>
+              <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">Mastered</span>
+            </div>
+          </motion.div>
         </div>
 
-        {/* Dashboard Content (Search & Grid) */}
-        <main className="relative bg-white/80 backdrop-blur-2xl py-20 px-8 md:px-28 border-t border-black/5">
-          <div className="max-w-7xl mx-auto">
-            {/* Header info */}
-            <div className="flex flex-col md:flex-row md:items-end justify-between gap-12 mb-12">
-              <div>
-                <motion.div
-                  initial={{ opacity: 0, y: 10 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  className="flex items-center gap-3 mb-6"
-                >
-                  <div className="w-1.5 h-1.5 rounded-full bg-black/20" />
-                  <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-black/40">
-                    Your Library
-                  </span>
-                </motion.div>
-                <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#1d1d1f]">
-                  {activeTab === "purchased" ? "Your" : (category ? activeCategory : "Explore")} <span className="text-black/40 font-serif-italic font-normal">Playbooks.</span>
-                </h2>
-              </div>
-              <div className="flex items-center gap-12 border-l border-black/5 pl-12">
-                <div className="flex flex-col">
-                  <span className="text-4xl font-bold text-[#1d1d1f]">{COURSES.length}</span>
-                  <span className="text-[10px] font-bold text-black/50 uppercase tracking-widest mt-1">Playbooks</span>
-                </div>
-              </div>
+        {/* Filters & Search */}
+        <section className="sticky top-20 z-30 bg-[#FBFBFD]/80 backdrop-blur-md py-6 mb-12 border-b border-gray-100">
+          <div className="flex flex-col lg:flex-row gap-6">
+            <div className="relative flex-1 group">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 group-focus-within:text-black transition-colors" size={18} />
+              <input
+                type="text"
+                placeholder={`Search in ${category ? activeCategory : 'all categories'}...`}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-gray-100/50 border-none rounded-2xl py-4 pl-12 pr-6 text-base focus:outline-none focus:ring-2 focus:ring-black/5 transition-all placeholder:text-gray-400/60"
+              />
             </div>
 
-            {/* Controls */}
-            <section className="flex flex-col md:flex-row gap-6 mb-12">
-              <div className="relative flex-1 group">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-[#86868b] group-focus-within:text-black transition-colors" size={18} />
-                <input
-                  type="text"
-                  placeholder={`Search ${category ? activeCategory : 'library'}...`}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-black/5 border-none rounded-2xl py-4 pl-12 pr-6 text-base focus:outline-none focus:ring-2 focus:ring-black/5 transition-all placeholder:text-[#86868b]/50"
-                />
-              </div>
-
-              <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 scrollbar-hide">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
+              <Link
+                to="/dashboard"
+                className={cn(
+                  "px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all active:scale-95",
+                  !category ? "bg-black text-white shadow-xl shadow-black/10" : "bg-gray-100 text-gray-500 hover:bg-gray-200"
+                )}
+              >
+                All
+              </Link>
+              {CATEGORIES.map((cat) => (
                 <Link
-                  to="/dashboard"
+                  key={cat}
+                  to={`/dashboard/${cat.toLowerCase()}`}
                   className={cn(
                     "px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all active:scale-95",
-                    !category ? "bg-black text-white shadow-lg" : "bg-black/5 text-[#1d1d1f] hover:bg-black/10"
+                    category === cat.toLowerCase() ? "bg-black text-white shadow-xl shadow-black/10" : "bg-gray-100 text-gray-500 hover:bg-gray-200"
                   )}
                 >
-                  All
+                  {cat}
                 </Link>
-                {CATEGORIES.map((cat) => (
-                  <Link
-                    key={cat}
-                    to={`/dashboard/${cat.toLowerCase()}`}
-                    className={cn(
-                      "px-6 py-3 rounded-full text-sm font-medium whitespace-nowrap transition-all active:scale-95",
-                      category === cat.toLowerCase() ? "bg-black text-white shadow-lg" : "bg-black/5 text-[#1d1d1f] hover:bg-black/10"
-                    )}
-                  >
-                    {cat}
-                  </Link>
-                ))}
-              </div>
-            </section>
-
-            {/* Course Grid */}
-            <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {filteredCourses.map((course) => (
-                <motion.div
-                  key={course.id}
-                  whileHover={{ y: -8 }}
-                  className="group bg-white/50 backdrop-blur-sm border border-black/5 rounded-[2.5rem] p-10 flex flex-col h-full cursor-pointer hover:bg-white transition-all duration-300"
-                >
-                  <div className="flex items-start justify-between mb-8">
-                    <div className="w-14 h-14 rounded-2xl bg-black/5 flex items-center justify-center text-black/20 group-hover:text-black transition-colors">
-                      <FileText size={28} />
-                    </div>
-                    <div className="flex flex-col items-end gap-1">
-                      <span className="text-[10px] font-bold tracking-widest text-black/30 uppercase">{course.category}</span>
-                      <div className="w-8 h-1 bg-black/5 rounded-full" />
-                    </div>
-                  </div>
-                  <h3 className="text-2xl font-bold mb-4 text-[#1d1d1f]">{course.title}</h3>
-                  <p className="text-[#424245] font-medium text-base mb-10 line-clamp-2 leading-relaxed flex-grow">{course.description}</p>
-                  <div className="flex items-center justify-between pt-8 border-t border-black/5">
-                    <div className="flex flex-col gap-1">
-                      <span className="text-[11px] font-bold text-black/40 uppercase tracking-wider">PDF Playbook</span>
-                      <div className="flex items-center gap-3 text-sm font-medium text-black/60">
-                        <span className="flex items-center gap-1.5"><BookOpen size={14} /> {course.pages}p</span>
-                        <span className="w-1 h-1 rounded-full bg-black/10" />
-                        <span>{course.size}</span>
-                      </div>
-                    </div>
-                    <button className="w-12 h-12 rounded-full bg-black/5 hover:bg-black text-black/40 hover:text-white transition-all flex items-center justify-center">
-                      <Download size={20} />
-                    </button>
-                  </div>
-                </motion.div>
               ))}
-            </section>
-
-            {filteredCourses.length === 0 && (
-              <div className="text-center py-40">
-                <div className="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center mx-auto mb-6 text-black/10">
-                  <Filter size={32} />
-                </div>
-                <p className="text-[#86868b] text-lg font-medium">No playbooks found in this category.</p>
-              </div>
-            )}
+            </div>
           </div>
-        </main>
-      </div>
+        </section>
+
+        {/* Content Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredCourses.map((course, idx) => (
+            <motion.div
+              key={course.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.05 }}
+              className="group relative bg-white border border-gray-100 rounded-[2rem] p-8 flex flex-col h-full hover:shadow-2xl hover:shadow-black/5 transition-all duration-500 hover:-translate-y-1 overflow-hidden"
+            >
+              {/* Card Decor */}
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gray-50 rounded-bl-[4rem] -mr-16 -mt-16 transition-transform duration-500 group-hover:scale-110" />
+              
+              <div className="relative z-10">
+                <div className="flex items-start justify-between mb-8">
+                  <div className="w-14 h-14 rounded-2xl bg-gray-50 flex items-center justify-center text-gray-300 group-hover:text-black transition-colors duration-500">
+                    <FileText size={28} />
+                  </div>
+                  <span className="text-[10px] font-bold tracking-widest text-gray-300 uppercase group-hover:text-blue-500 transition-colors">
+                    {course.category}
+                  </span>
+                </div>
+
+                <h3 className="text-2xl font-bold mb-4 tracking-tight leading-tight group-hover:text-blue-600 transition-colors">
+                  {course.title}
+                </h3>
+                
+                <p className="text-gray-500 text-base mb-10 line-clamp-2 leading-relaxed">
+                  {course.description}
+                </p>
+
+                <div className="flex items-center gap-4 mb-8">
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400">
+                    <BookOpen size={14} />
+                    {course.pages} Pages
+                  </div>
+                  <div className="w-1 h-1 rounded-full bg-gray-200" />
+                  <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400">
+                    <Clock size={14} />
+                    {course.size}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-4 pt-8 border-t border-gray-50">
+                  <button className="flex-1 bg-black text-white rounded-xl py-4 text-sm font-bold active:scale-95 transition-all hover:bg-gray-800">
+                    {course.isPurchased ? "Open Playbook" : "Get Access"}
+                  </button>
+                  <button className="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center text-gray-400 hover:text-black hover:bg-gray-100 transition-all">
+                    <Download size={20} />
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {filteredCourses.length === 0 && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            className="text-center py-40 bg-gray-50 rounded-[3rem] border border-dashed border-gray-200"
+          >
+            <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-6 text-gray-200 shadow-sm">
+              <Filter size={32} />
+            </div>
+            <h3 className="text-xl font-bold mb-2">No playbooks found</h3>
+            <p className="text-gray-400">Try adjusting your search or category filters.</p>
+          </motion.div>
+        )}
+      </main>
     </div>
   );
 }
