@@ -19,12 +19,10 @@ export default function Dashboard() {
   const activeCategory = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : "All";
   const [searchQuery, setSearchQuery] = useState("");
   const [courses, setCourses] = useState(COURSES);
-  const [isSyncing, setIsSyncing] = useState(true);
 
   // Load purchases from Supabase on mount
   useEffect(() => {
     if (!user) {
-      setIsSyncing(false);
       return;
     }
 
@@ -46,8 +44,6 @@ export default function Dashboard() {
         }
       } catch (error) {
         console.error("Error fetching purchases:", error);
-      } finally {
-        setIsSyncing(false);
       }
     };
 
