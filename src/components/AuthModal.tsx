@@ -81,7 +81,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
                 <div className="w-5 h-5 rounded-full border border-foreground/60" />
               </div>
               <h2 className="text-2xl font-bold tracking-tight text-foreground">
-                {view === 'login' ? 'Welcome Back' : 'Join Mindloop'}
+                {view === 'login' ? 'Welcome Back' : 'Join DigitalForge'}
               </h2>
               <p className="text-sm text-muted-foreground mt-2">
                 {view === 'login' 

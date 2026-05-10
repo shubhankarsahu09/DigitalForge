@@ -54,7 +54,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
           "font-bold text-base tracking-tight transition-colors",
           isInternalPage ? "text-black" : "text-foreground"
         )}>
-          Mindloop
+          DigitalForge
         </span>
       </Link>
 

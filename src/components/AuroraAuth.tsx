@@ -194,7 +194,7 @@ export default function AuroraAuth({
               <div className="relative flex items-center justify-center w-7 h-7 rounded-full border-2 border-white">
                 <div className="w-3 h-3 rounded-full border border-white" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">Mindloop</span>
+              <span className="text-xl font-bold tracking-tight text-white">DigitalForge</span>
             </motion.div>
 
             <motion.div
@@ -203,7 +203,7 @@ export default function AuroraAuth({
               className="space-y-4"
             >
               <h1 className="text-4xl font-medium tracking-tight whitespace-nowrap text-white">
-                {view === "signup" ? "Join Mindloop" : view === "login" ? "Welcome Back" : view === "forgot-password" ? "Reset Access" : "New Password"}
+                {view === "signup" ? "Join DigitalForge" : view === "login" ? "Welcome Back" : view === "forgot-password" ? "Reset Access" : "New Password"}
               </h1>
               <p className="text-white/60 text-sm leading-relaxed">
                 {view === "signup" 
@@ -370,7 +370,7 @@ export default function AuroraAuth({
             {/* Footer */}
             {view !== "update-password" && (
               <p className="text-center text-sm text-muted-foreground">
-                {view === "signup" ? "Member of the team?" : view === "login" ? "New to Mindloop?" : "Remember your password?"}{" "}
+                {view === "signup" ? "Member of the team?" : view === "login" ? "New to DigitalForge?" : "Remember your password?"}{" "}
                 <button
                   type="button"
                   onClick={() => setView(view === "signup" ? "login" : "signup")}
