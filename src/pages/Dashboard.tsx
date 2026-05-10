@@ -3,12 +3,15 @@ import { motion } from "framer-motion";
 import { FileText, Download, Search, Filter, BookOpen, Clock, Star } from "lucide-react";
 import { useNavigate, useSearchParams, useParams, Link } from "react-router-dom";
 import { cn } from "../lib/utils";
+import { supabase } from "../lib/supabase";
+import { useAuth } from "../hooks/useAuth";
 
 const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
 
 const COURSES: any[] = [];
 
 export default function Dashboard() {
+  const { user } = useAuth();
   const navigate = useNavigate();
   const { category } = useParams();
   const [searchParams] = useSearchParams();
@@ -16,34 +19,67 @@ export default function Dashboard() {
   const activeCategory = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : "All";
   const [searchQuery, setSearchQuery] = useState("");
   const [courses, setCourses] = useState(COURSES);
+  const [isSyncing, setIsSyncing] = useState(true);
 
-  // Load purchases from localStorage on mount
+  // Load purchases from Supabase on mount
   useEffect(() => {
-    const savedPurchases = localStorage.getItem("user_purchases");
-    if (savedPurchases) {
-      const purchasedIds = JSON.parse(savedPurchases);
-      setCourses(prev => prev.map(course => ({
-        ...course,
-        isPurchased: purchasedIds.includes(course.id) || course.isPurchased
-      })));
+    if (!user) {
+      setIsSyncing(false);
+      return;
     }
-  }, []);
 
-  const handlePurchase = (courseId: number) => {
-    setCourses(prev => {
-      const updated = prev.map(course => 
+    const fetchPurchases = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('purchases')
+          .select('course_id')
+          .eq('user_id', user.id);
+
+        if (error) throw error;
+
+        if (data) {
+          const purchasedIds = data.map(p => p.course_id);
+          setCourses(prev => prev.map(course => ({
+            ...course,
+            isPurchased: purchasedIds.includes(String(course.id)) || course.isPurchased
+          })));
+        }
+      } catch (error) {
+        console.error("Error fetching purchases:", error);
+      } finally {
+        setIsSyncing(false);
+      }
+    };
+
+    fetchPurchases();
+  }, [user]);
+
+  const handlePurchase = async (courseId: number) => {
+    if (!user) return;
+
+    try {
+      // 1. Save to Supabase
+      const { error } = await supabase
+        .from('purchases')
+        .insert({ 
+          user_id: user.id, 
+          course_id: String(courseId) 
+        });
+
+      if (error) {
+        // If it already exists (Unique constraint), we just continue
+        if (error.code !== '23505') throw error;
+      }
+
+      // 2. Update local state
+      setCourses(prev => prev.map(course => 
         course.id === courseId ? { ...course, isPurchased: true } : course
-      );
-      
-      // Persist to localStorage
-      const purchasedIds = updated.filter(c => c.isPurchased).map(c => c.id);
-      localStorage.setItem("user_purchases", JSON.stringify(purchasedIds));
-      
-      return updated;
-    });
+      ));
 
-    // Optional: Redirect to purchased tab after a delay or show a toast
-    // For now, we just update the state instantly
+    } catch (error) {
+      console.error("Error saving purchase:", error);
+      alert("Failed to save purchase. Please try again.");
+    }
   };
 
   const filteredCourses = courses.filter((course) => {

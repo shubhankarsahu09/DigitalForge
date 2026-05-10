@@ -4,31 +4,9 @@ const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 } as any,
   viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.6, delay, ease: "easeOut" },
+  transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
-const features = [
-  {
-    title: "Downloadable Layouts",
-    description:
-      "Beautifully designed, print-ready PDF playbooks that you can read, annotate, and keep in your digital library forever.",
-  },
-  {
-    title: "High-Density Content",
-    description:
-      "No fluff. Every page is packed with actionable insights, step-by-step logic, and real-world examples you can implement.",
-  },
-  {
-    title: "Offline Mastery",
-    description:
-      "Learn anywhere without needing a connection. Your courses are yours to keep, offline and always accessible.",
-  },
-  {
-    title: "Written Mentorship",
-    description:
-      "Get the direct logic of industry experts distilled into structured guides that act as a mentor in your pocket.",
-  },
-];
 
 export default function SolutionSection() {
   return (

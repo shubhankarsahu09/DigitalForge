@@ -4,29 +4,9 @@ const fadeUp = (delay: number) => ({
   initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 } as any,
   viewport: { once: true, margin: "-100px" },
-  transition: { duration: 0.6, delay, ease: "easeOut" },
+  transition: { duration: 0.6, delay, ease: "easeOut" as const },
 });
 
-const platforms = [
-  {
-    icon: "/icon-chatgpt.png",
-    name: "Coding Guides",
-    description:
-      "Deeply structured PDF playbooks covering modern development. From logic to deployment, master coding through written clarity.",
-  },
-  {
-    icon: "/icon-perplexity.png",
-    name: "Design Blueprints",
-    description:
-      "Visual-first PDF guides for creative professionals. Master editing, color theory, and digital layout with print-ready precision.",
-  },
-  {
-    icon: "/icon-google.png",
-    name: "Growth Playbooks",
-    description:
-      "Action-oriented PDF courses on business and marketing. Implement strategies directly from high-impact written curricula.",
-  },
-];
 
 export default function SearchSection() {
   return (

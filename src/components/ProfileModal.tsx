@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, User, Lock, Loader2, Check, ArrowRight } from "lucide-react";
 import { supabase } from "../lib/supabase";
-import { cn } from "../lib/utils";
 
 interface ProfileModalProps {
   isOpen: boolean;

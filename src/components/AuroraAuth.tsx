@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Circle, Chrome, Github, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
+import { motion } from "motion/react";
+import { Chrome, Github, Eye, EyeOff, ArrowRight, Loader2 } from "lucide-react";
 import { cn } from "../lib/utils";
 import { supabase } from "../lib/supabase";
 
