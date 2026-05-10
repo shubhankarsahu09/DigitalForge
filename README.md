@@ -1,73 +1,29 @@
-# React + TypeScript + Vite
+# DigitalForge
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+> **Mastery, Distilled.**
 
-Currently, two official plugins are available:
+In an age of information overload, we believe in the power of clarity. DigitalForge is a premium learning ecosystem designed for those who value their time as much as their growth. 
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+We don't do fluff. We don't do 40-hour video loops. We build high-density, structured PDF playbooks that serve as the definitive blueprint for mastering complex skills.
 
-## React Compiler
+## The Vision
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+DigitalForge is built on three core pillars:
 
-## Expanding the ESLint configuration
+- **Precision**: Every page is engineered to provide maximum value. No filler, just the core principles and actionable insights you need to succeed.
+- **Portability**: Your knowledge should go where you go. Our playbooks are yours to keep, download, and reference forever—offline and distraction-free.
+- **Mastery**: We bridge the gap between "knowing" and "doing." Each guide is a catalyst for real-world application, designed to take you from novice to expert with surgical efficiency.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## The Platform
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Experience a seamless, high-end interface crafted for focus:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Curated Library**: Explore a hand-picked selection of playbooks across technology, creative arts, and business.
+- **Instant Access**: Dive into your purchased courses instantly with a streamlined, Apple-inspired dashboard.
+- **Premium Experience**: A dark-mode aesthetic paired with liquid-glass components, designed to feel as premium as the knowledge it holds.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+*“Knowledge is not power. The application of knowledge is power.”*
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Built with React, TypeScript, and a passion for deep learning.
