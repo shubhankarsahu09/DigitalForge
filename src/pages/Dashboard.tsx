@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { FileText, Download, Search, Filter, BookOpen, Clock, Star } from "lucide-react";
-import { useAuth } from "../hooks/useAuth";
 import { useNavigate, useSearchParams, useParams, Link } from "react-router-dom";
 import { cn } from "../lib/utils";
 
@@ -10,7 +9,6 @@ const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
 const COURSES: any[] = [];
 
 export default function Dashboard() {
-  const { user } = useAuth();
   const navigate = useNavigate();
   const { category } = useParams();
   const [searchParams] = useSearchParams();
