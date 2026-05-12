@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "motion/react";
 
 const LAST_UPDATED = "May 12, 2026";
 const SUPPORT_EMAIL = "support@digitalforge.com";
