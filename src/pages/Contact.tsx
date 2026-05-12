@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { motion } from "motion/react";
+
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
