@@ -17,7 +17,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const isInternalPage = location.pathname.startsWith("/dashboard") || location.pathname === "/about" || location.search.includes("tab=");
+  const isInternalPage = location.pathname.startsWith("/dashboard") || location.pathname === "/about" || location.pathname === "/contact" || location.search.includes("tab=");
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,6 +63,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         {[
           { name: "Home", path: "/" },
           { name: "About Us", path: "/about" },
+          { name: "Contact", path: "/contact" },
           { name: "Course", path: "/dashboard" },
           { name: "Purchased Course", path: "/dashboard?tab=purchased" },
         ].map((link, i) => (
@@ -189,6 +190,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
+              { name: "Contact", path: "/contact" },
               { name: "Course", path: "/dashboard" },
               { name: "Purchased Course", path: "/dashboard?tab=purchased" },
             ].map((link) => (

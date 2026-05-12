@@ -19,12 +19,12 @@ export default function Footer() {
         >
           Terms
         </Link>
-        <a
-          href="mailto:shubhankarsahu82@gmail.com"
+        <Link
+          to="/contact"
           className="text-muted-foreground text-sm hover:text-foreground transition-colors duration-200"
         >
           Contact
-        </a>
+        </Link>
       </div>
     </footer>
   );

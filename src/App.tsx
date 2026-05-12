@@ -13,6 +13,7 @@ import Footer from "./components/Footer";
 import AuroraAuth from "./components/AuroraAuth";
 import Dashboard from "./pages/Dashboard";
 import About from "./pages/About";
+import Contact from "./pages/Contact";
 import { useAuth } from "./hooks/useAuth";
 import ProfileModal from "./components/ProfileModal";
 
@@ -92,6 +93,10 @@ function App() {
           <Route 
             path="/about" 
             element={<About />} 
+          />
+          <Route 
+            path="/contact" 
+            element={<Contact />} 
           />
         </Routes>
 
