@@ -1,216 +1,213 @@
-import { useState } from "react";
-import { motion } from "motion/react";
-
-const SUPPORT_EMAIL = "shubhankarsahu82@gmail.com";
-
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
-    // We'll let the form submit naturally to Formspree
     setIsSubmitting(true);
+    // Formspree handles the actual submission
   };
 
   return (
     <div style={{
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-      background: "#fafafa",
+      background: "#ffffff",
       minHeight: "100vh",
-      color: "#1a1a1a",
-      lineHeight: 1.7,
+      color: "#000",
+      lineHeight: 1.5,
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
-        .mono { font-family: 'DM Mono', 'Courier New', monospace; }
-
-        .input-field {
-          width: 100%;
-          background: transparent;
-          border: none;
-          border-bottom: 1px solid #ddd;
-          padding: 16px 0;
-          font-family: 'Inter', sans-serif;
-          font-size: 16px;
-          color: #1a1a1a;
-          transition: border-color 0.3s ease;
-          outline: none;
-        }
-
-        .input-field:focus {
-          border-bottom-color: #000;
+        .input-group {
+          margin-bottom: 24px;
         }
 
         .input-label {
-          font-family: 'DM Mono', monospace;
-          font-size: 10px;
-          text-transform: uppercase;
-          letter-spacing: 0.2em;
-          color: #999;
+          font-size: 13px;
+          font-weight: 600;
+          color: #666;
+          margin-bottom: 8px;
           display: block;
-          margin-top: 32px;
+          letter-spacing: -0.01em;
+        }
+
+        .modern-input {
+          width: 100%;
+          background: #f5f5f7;
+          border: 1px solid transparent;
+          border-radius: 12px;
+          padding: 14px 18px;
+          font-family: 'Inter', sans-serif;
+          font-size: 15px;
+          color: #1d1d1f;
+          transition: all 0.2s ease;
+          outline: none;
+        }
+
+        .modern-input:focus {
+          background: #ffffff;
+          border-color: #000;
+          box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+        }
+
+        .modern-input::placeholder {
+          color: #a1a1a6;
         }
 
         .submit-btn {
-          margin-top: 64px;
+          width: 100%;
           background: #000;
           color: #fff;
           border: none;
-          padding: 18px 48px;
-          font-family: 'DM Mono', monospace;
-          font-size: 12px;
-          text-transform: uppercase;
-          letter-spacing: 0.2em;
+          padding: 16px;
+          font-size: 15px;
+          font-weight: 600;
+          border-radius: 12px;
           cursor: pointer;
-          transition: all 0.3s ease;
-          border-radius: 2px;
+          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+          margin-top: 12px;
         }
 
         .submit-btn:hover {
-          background: #333;
-          transform: translateY(-2px);
-          box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+          transform: translateY(-1px);
+          box-shadow: 0 8px 24px rgba(0,0,0,0.15);
         }
 
-        .submit-btn:disabled {
-          background: #ccc;
-          cursor: not-allowed;
+        .submit-btn:active {
+          transform: translateY(0);
+        }
+
+        .info-card {
+          background: #f5f5f7;
+          padding: 32px;
+          border-radius: 24px;
+          height: 100%;
+        }
+
+        @media (max-width: 768px) {
+          .grid-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
+          .hero-section { padding: 120px 0 40px !important; }
         }
       `}</style>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px" }}>
-        <div style={{ padding: "180px 0 80px" }}>
+      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+        
+        {/* Modern Hero Section */}
+        <div className="hero-section" style={{ padding: "160px 0 80px", textAlign: "center" }}>
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="mono" style={{ fontSize: 12, letterSpacing: "0.3em", color: "#c9a96e", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>
-              Get In Touch
-            </div>
-            <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "#000", marginBottom: 40 }}>
-              Let's <em style={{ color: "#c9a96e" }}>Connect</em>
+            <h1 style={{ 
+              fontSize: "clamp(48px, 8vw, 82px)", 
+              fontWeight: 800, 
+              letterSpacing: "-0.04em", 
+              lineHeight: 1,
+              marginBottom: 24
+            }}>
+              Contact <span style={{ color: "#c9a96e" }}>Support.</span>
             </h1>
-            <p style={{ fontSize: 20, color: "#666", maxWidth: 650, lineHeight: 1.5, fontWeight: 400 }}>
-              Have a question about our playbooks or need technical support? Drop us a line below and we'll get back to you as soon as possible.
+            <p style={{ 
+              fontSize: 19, 
+              color: "#86868b", 
+              maxWidth: 600, 
+              margin: "0 auto",
+              fontWeight: 500
+            }}>
+              We're here to help you get the most out of DigitalForge. Reach out and our team will be in touch.
             </p>
           </motion.div>
         </div>
 
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 350px) 1fr", gap: 80, paddingBottom: 160 }}>
-          {/* Info Sidebar */}
-          <div style={{ borderRight: "1px solid #eee", paddingRight: 40 }}>
-            <div style={{ marginBottom: 48 }}>
-              <span className="mono" style={{ fontSize: 10, color: "#999", textTransform: "uppercase", letterSpacing: "0.2em" }}>Office Hours</span>
-              <p className="cormorant" style={{ fontSize: 24, marginTop: 12 }}>Mon — Fri <br /> 9am — 6pm IST</p>
-            </div>
-            <div style={{ marginBottom: 48 }}>
-              <span className="mono" style={{ fontSize: 10, color: "#999", textTransform: "uppercase", letterSpacing: "0.2em" }}>Direct Email</span>
-              <p className="cormorant" style={{ fontSize: 24, marginTop: 12, color: "#c9a96e" }}>{SUPPORT_EMAIL}</p>
-            </div>
-            <div>
-              <span className="mono" style={{ fontSize: 10, color: "#999", textTransform: "uppercase", letterSpacing: "0.2em" }}>Social</span>
-              <div style={{ display: "flex", gap: 16, marginTop: 16 }}>
-                <a href="#" style={{ fontSize: 14, color: "#000", textDecoration: "none" }} className="mono">TW</a>
-                <a href="#" style={{ fontSize: 14, color: "#000", textDecoration: "none" }} className="mono">IN</a>
-                <a href="#" style={{ fontSize: 14, color: "#000", textDecoration: "none" }} className="mono">IG</a>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Form */}
-          <div>
+        <div className="grid-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 32, paddingBottom: 120, alignItems: "start" }}>
+          
+          {/* Form Side */}
+          <motion.div 
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.2 }}
+            style={{ background: "#fff", padding: "40px", borderRadius: "32px", border: "1px solid #f0f0f0", boxShadow: "0 20px 40px rgba(0,0,0,0.03)" }}
+          >
             {submitted ? (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                style={{ textAlign: "center", padding: "40px 0" }}
-              >
-                <h3 className="cormorant" style={{ fontSize: 32, marginBottom: 16 }}>Message Received.</h3>
-                <p className="content-text">Thank you for reaching out. We'll be in touch shortly.</p>
-                <button 
-                  onClick={() => setSubmitted(false)}
-                  className="submit-btn"
-                >
-                  Send Another
-                </button>
-              </motion.div>
+              <div style={{ textAlign: "center", padding: "40px 0" }}>
+                <div style={{ fontSize: 48, marginBottom: 20 }}>✉️</div>
+                <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 12 }}>Message Sent</h2>
+                <p style={{ color: "#86868b", marginBottom: 32 }}>We'll get back to you at your email address shortly.</p>
+                <button onClick={() => setSubmitted(false)} className="submit-btn" style={{ maxWidth: 200 }}>Done</button>
+              </div>
             ) : (
-              <form 
-                action={`https://formspree.io/f/mldevnqz`} // This is a placeholder, user should ideally create their own
-                method="POST"
-                onSubmit={handleSubmit}
-              >
-                {/* Hidden field for the target email */}
-                <input type="hidden" name="_replyto" value={SUPPORT_EMAIL} />
-                <input type="hidden" name="_subject" value="New message from DigitalForge Contact Form" />
-
-                <div style={{ marginBottom: 20 }}>
-                  <label className="input-label">Your Name</label>
-                  <input 
-                    type="text" 
-                    name="name" 
-                    required 
-                    placeholder="Enter your name" 
-                    className="input-field"
-                  />
+              <form action="https://formspree.io/f/mldevnqz" method="POST" onSubmit={handleSubmit}>
+                <div className="input-group">
+                  <label className="input-label">Full Name</label>
+                  <input type="text" name="name" required placeholder="John Doe" className="modern-input" />
                 </div>
 
-                <div style={{ marginBottom: 20 }}>
+                <div className="input-group">
                   <label className="input-label">Email Address</label>
-                  <input 
-                    type="email" 
-                    name="email" 
-                    required 
-                    placeholder="name@example.com" 
-                    className="input-field"
-                  />
+                  <input type="email" name="email" required placeholder="name@example.com" className="modern-input" />
                 </div>
 
-                <div style={{ marginBottom: 20 }}>
-                  <label className="input-label">Subject</label>
-                  <select name="subject" className="input-field" required>
-                    <option value="">Select a topic</option>
-                    <option value="Product Inquiry">Product Inquiry</option>
-                    <option value="Technical Support">Technical Support</option>
-                    <option value="Partnership">Partnership</option>
-                    <option value="Other">Other</option>
+                <div className="input-group">
+                  <label className="input-label">Topic</label>
+                  <select name="topic" className="modern-input" required style={{ appearance: "none" }}>
+                    <option value="General">General Inquiry</option>
+                    <option value="Billing">Billing & Access</option>
+                    <option value="Technical">Technical Issue</option>
+                    <option value="Feedback">Feedback</option>
                   </select>
                 </div>
 
-                <div style={{ marginBottom: 20 }}>
-                  <label className="input-label">How can we help?</label>
-                  <textarea 
-                    name="message" 
-                    required 
-                    placeholder="Tell us about your inquiry..." 
-                    className="input-field"
-                    style={{ minHeight: 120, resize: "vertical" }}
-                  />
+                <div className="input-group">
+                  <label className="input-label">Message</label>
+                  <textarea name="message" required placeholder="How can we help?" className="modern-input" style={{ minHeight: 150, resize: "none" }} />
                 </div>
 
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="submit-btn"
-                >
+                <button type="submit" className="submit-btn" disabled={isSubmitting}>
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
               </form>
             )}
+          </motion.div>
 
-            {/* Premium Footer Branding */}
-            <div style={{ marginTop: 120, paddingTop: 64, borderTop: "4px solid #000" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-                <div className="mono" style={{ fontSize: 11, color: "#aaa" }}>© {new Date().getFullYear()} DIGITALFORGE.</div>
-                <div className="mono" style={{ fontSize: 11, color: "#aaa" }}>EST. 2026</div>
+          {/* Contact Info Side */}
+          <motion.div 
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ delay: 0.3 }}
+            className="info-card"
+          >
+            <div style={{ marginBottom: 40 }}>
+              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Direct Support</h3>
+              <p style={{ color: "#515154", fontSize: 15, marginBottom: 8 }}>Email us directly for urgent matters:</p>
+              <a href={`mailto:${SUPPORT_EMAIL}`} style={{ color: "#c9a96e", fontWeight: 600, fontSize: 18, textDecoration: "none" }}>{SUPPORT_EMAIL}</a>
+            </div>
+
+            <div style={{ marginBottom: 40 }}>
+              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Response Time</h3>
+              <p style={{ color: "#515154", fontSize: 15, lineHeight: 1.6 }}>Our typical response time is within 2-4 hours during business days. We operate between 9:00 AM and 6:00 PM IST.</p>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Follow Us</h3>
+              <div style={{ display: "flex", gap: 12 }}>
+                {["Instagram", "Twitter", "LinkedIn"].map(social => (
+                  <a key={social} href="#" style={{ 
+                    padding: "8px 16px", 
+                    background: "#fff", 
+                    borderRadius: "100px", 
+                    fontSize: 13, 
+                    fontWeight: 600, 
+                    color: "#000", 
+                    textDecoration: "none",
+                    border: "1px solid #e5e5e5"
+                  }}>{social}</a>
+                ))}
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </div>
