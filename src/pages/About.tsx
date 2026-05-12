@@ -271,19 +271,19 @@ export default function About() {
   return (
     <div style={{
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-      background: "#ffffff",
+      background: "#fafafa",
       minHeight: "100vh",
       color: "#1a1a1a",
-      lineHeight: 1.6,
+      lineHeight: 1.7,
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Mono:wght@300;400&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500;600&family=DM+Mono:wght@300;400&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        ::-webkit-scrollbar { width: 4px; }
-        ::-webkit-scrollbar-track { background: #f9f9f9; }
-        ::-webkit-scrollbar-thumb { background: #e0e0e0; border-radius: 4px; }
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: #fafafa; }
+        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
 
         .cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
         .mono { font-family: 'DM Mono', 'Courier New', monospace; }
@@ -292,20 +292,21 @@ export default function About() {
           background: none;
           border: none;
           cursor: pointer;
-          font-family: 'DM Mono', monospace;
-          font-size: 11px;
-          letter-spacing: 0.1em;
-          text-transform: uppercase;
-          padding: 12px 24px;
+          font-family: 'Inter', sans-serif;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: -0.01em;
+          padding: 12px 0;
+          margin-right: 32px;
           transition: all 0.2s ease;
           position: relative;
-          color: #888;
+          color: #999;
         }
 
         .tab-btn::after {
           content: '';
           position: absolute;
-          bottom: -1px;
+          bottom: 0;
           left: 0;
           width: 0;
           height: 2px;
@@ -317,12 +318,12 @@ export default function About() {
         .tab-btn.active::after { width: 100%; }
 
         .section-card {
-          padding: 40px 0;
+          padding: 64px 0;
           transition: opacity 0.3s ease;
         }
 
         .section-card + .section-card {
-          border-top: 1px solid #f0f0f0;
+          border-top: 1px solid #eaeaea;
         }
 
         .nav-item {
@@ -331,68 +332,77 @@ export default function About() {
           cursor: pointer;
           text-align: left;
           width: 100%;
-          padding: 10px 0;
-          font-family: 'DM Mono', monospace;
-          font-size: 10px;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
+          padding: 12px 0;
+          font-family: 'Inter', sans-serif;
+          font-size: 12px;
+          font-weight: 500;
+          letter-spacing: -0.01em;
           color: #999;
           transition: all 0.2s ease;
+          border-bottom: 1px solid transparent;
         }
 
-        .nav-item:hover, .nav-item.active { color: #000; transform: translateX(4px); }
-
-        .header-bar {
-          position: sticky;
-          top: 0;
-          z-index: 40;
-          background: rgba(255, 255, 255, 0.8);
-          backdrop-filter: blur(20px);
-          border-bottom: 1px solid #f0f0f0;
-        }
+        .nav-item:hover, .nav-item.active { color: #000; }
 
         .badge {
           font-family: 'DM Mono', monospace;
-          font-size: 9px;
+          font-size: 10px;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          background: #f5f5f5;
-          border: 1px solid #e5e5e5;
-          color: #666;
-          padding: 4px 12px;
-          border-radius: 4px;
+          background: #000;
+          color: #fff;
+          padding: 6px 14px;
+          border-radius: 100px;
+          display: inline-block;
         }
 
         .content-text {
           color: #444;
-          font-size: 16px;
-          line-height: 1.7;
+          font-size: 17px;
+          line-height: 1.8;
           white-space: pre-line;
+          font-weight: 400;
         }
 
         .content-text strong {
           color: #000;
           font-weight: 600;
         }
+
+        @media (max-width: 768px) {
+          .sidebar { display: none; }
+          .main-content { padding-left: 0 !important; }
+        }
       `}</style>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 32px" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px" }}>
 
-        {/* Hero */}
-        <div style={{ padding: "140px 0 64px" }}>
-          <div className="mono" style={{ fontSize: 11, letterSpacing: "0.2em", color: "#999", textTransform: "uppercase", marginBottom: 24 }}>
-            DigitalForge Legal
-          </div>
-          <h1 className="cormorant" style={{ fontSize: "clamp(48px, 8vw, 84px)", fontWeight: 300, lineHeight: 1, letterSpacing: "-0.03em", color: "#000", marginBottom: 32 }}>
-            Policies & <em style={{ color: "#c9a96e" }}>Terms</em>
-          </h1>
-          <p style={{ fontSize: 18, color: "#666", maxWidth: 600, lineHeight: 1.6 }}>
-            The formal framework governing your experience on DigitalForge. <br />
-            <span style={{ fontSize: 13, color: "#999" }} className="mono">Last updated {LAST_UPDATED}</span>
-          </p>
+        {/* Hero Section */}
+        <div style={{ padding: "180px 0 80px" }}>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="mono" style={{ fontSize: 12, letterSpacing: "0.3em", color: "#c9a96e", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>
+              Legal Framework
+            </div>
+            <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "#000", marginBottom: 40 }}>
+              Trust & <em style={{ color: "#c9a96e" }}>Integrity</em>
+            </h1>
+            <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
+              <p style={{ fontSize: 20, color: "#666", maxWidth: 650, lineHeight: 1.5, fontWeight: 400 }}>
+                DigitalForge is built on a foundation of clarity. Our policies ensure a secure and transparent environment for every learner.
+              </p>
+              <div className="mono" style={{ fontSize: 12, color: "#999", borderLeft: "1px solid #ddd", paddingLeft: 20 }}>
+                Version 1.0.4<br />
+                Updated {LAST_UPDATED}
+              </div>
+            </div>
+          </motion.div>
 
           {/* Tab Switcher */}
-          <div style={{ display: "flex", gap: 8, marginTop: 64, borderBottom: "1px solid #f0f0f0" }}>
+          <div style={{ display: "flex", marginTop: 80, borderBottom: "1px solid #eaeaea" }}>
             <button
               className={`tab-btn ${activeTab === "tos" ? "active" : ""}`}
               onClick={() => setActiveTab("tos")}
@@ -408,13 +418,13 @@ export default function About() {
           </div>
         </div>
 
-        {/* Main Content */}
-        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 240px) 1fr", gap: 0, paddingBottom: 120 }}>
+        {/* Main Content Grid */}
+        <div style={{ display: "grid", gridTemplateColumns: "minmax(0, 280px) 1fr", gap: 0, paddingBottom: 160 }}>
 
-          {/* Sidebar TOC */}
-          <div className="hidden md:block" style={{ paddingTop: 40, paddingRight: 40, borderRight: "1px solid #f0f0f0", position: "sticky", top: 120, height: "fit-content" }}>
-            <div className="mono" style={{ fontSize: 10, letterSpacing: "0.1em", color: "#000", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>
-              On this page
+          {/* Sidebar Navigation */}
+          <div className="sidebar" style={{ paddingTop: 64, paddingRight: 60, position: "sticky", top: 140, height: "fit-content" }}>
+            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.15em", color: "#000", textTransform: "uppercase", marginBottom: 32, fontWeight: 600 }}>
+              Navigation
             </div>
             {currentSections.map((s) => (
               <button
@@ -424,7 +434,7 @@ export default function About() {
                   setActiveSection(s.id);
                   const el = document.getElementById(s.id);
                   if (el) {
-                    const offset = 120;
+                    const offset = 140;
                     const bodyRect = document.body.getBoundingClientRect().top;
                     const elementRect = el.getBoundingClientRect().top;
                     const elementPosition = elementRect - bodyRect;
@@ -438,14 +448,21 @@ export default function About() {
             ))}
           </div>
 
-          {/* Sections */}
-          <div style={{ paddingTop: 40, paddingLeft: "clamp(0px, 8vw, 80px)" }}>
-            <div style={{ marginBottom: 48 }}>
-              <div className="badge" style={{ marginBottom: 16 }}>{activeTab === "tos" ? "Agreement" : "Data Protection"}</div>
-              <p className="content-text" style={{ fontSize: 18, color: "#1a1a1a", fontWeight: 400 }}>
+          {/* Content Body */}
+          <div className="main-content" style={{ paddingTop: 64, paddingLeft: "clamp(0px, 10vw, 100px)" }}>
+            <div style={{ marginBottom: 80 }}>
+              <div className="badge" style={{ marginBottom: 24 }}>
+                {activeTab === "tos" ? "Terms & Conditions" : "Privacy & Data"}
+              </div>
+              <h3 className="cormorant" style={{ fontSize: 36, fontWeight: 400, color: "#000", marginBottom: 24 }}>
                 {activeTab === "tos" 
-                  ? "Please review these terms carefully. They define our mutual rights and responsibilities when you use DigitalForge." 
-                  : "We take your privacy seriously. This document outlines our data practices and your rights regarding your personal information."}
+                  ? "Our promise of quality and service." 
+                  : "How we protect your digital footprint."}
+              </h3>
+              <p className="content-text" style={{ fontSize: 19, color: "#1a1a1a" }}>
+                {activeTab === "tos" 
+                  ? "These terms outline the agreement between DigitalForge and our users. By using our platform, you agree to uphold these standards." 
+                  : "We believe in radical transparency. This policy details our commitment to your privacy and how we manage your information."}
               </p>
             </div>
 
@@ -458,11 +475,11 @@ export default function About() {
                 <h2
                   className="cormorant"
                   style={{
-                    fontSize: 28,
+                    fontSize: 32,
                     fontWeight: 400,
                     color: "#000",
-                    marginBottom: 24,
-                    letterSpacing: "-0.01em"
+                    marginBottom: 28,
+                    letterSpacing: "-0.02em"
                   }}
                 >
                   {section.title}
@@ -471,17 +488,22 @@ export default function About() {
               </div>
             ))}
 
-            {/* Footer note */}
-            <div style={{ marginTop: 80, paddingTop: 40, borderTop: "2px solid #000" }}>
-              <p className="mono" style={{ fontSize: 12, color: "#000", letterSpacing: "0.05em", fontWeight: 500 }}>
-                © {new Date().getFullYear()} DigitalForge. All rights reserved.
-              </p>
-              <p className="mono" style={{ fontSize: 12, color: "#666", letterSpacing: "0.05em", marginTop: 8 }}>
-                Distilled Knowledge in Every PDF.
-              </p>
-              <p className="mono" style={{ fontSize: 12, color: "#666", letterSpacing: "0.05em", marginTop: 16 }}>
-                Direct inquiries to <span style={{ color: "#000", textDecoration: "underline" }}>{SUPPORT_EMAIL}</span>
-              </p>
+            {/* Premium Footer Branding */}
+            <div style={{ marginTop: 120, paddingTop: 64, borderTop: "4px solid #000" }}>
+              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40 }}>
+                <div>
+                  <div className="cormorant" style={{ fontSize: 32, fontWeight: 400, marginBottom: 12 }}>DigitalForge</div>
+                  <p className="mono" style={{ fontSize: 12, color: "#999", letterSpacing: "0.1em" }}>DISTILLED KNOWLEDGE</p>
+                </div>
+                <div style={{ textAlign: "right" }}>
+                  <p className="mono" style={{ fontSize: 13, color: "#000", fontWeight: 600, marginBottom: 8 }}>Questions or Feedback?</p>
+                  <p className="mono" style={{ fontSize: 13, color: "#c9a96e", textDecoration: "underline" }}>{SUPPORT_EMAIL}</p>
+                </div>
+              </div>
+              <div style={{ marginTop: 64, display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #eee", paddingTop: 32 }}>
+                <p className="mono" style={{ fontSize: 11, color: "#aaa" }}>© {new Date().getFullYear()} DIGITALFORGE. ALL RIGHTS RESERVED.</p>
+                <p className="mono" style={{ fontSize: 11, color: "#aaa" }}>MADE WITH INTEGRITY</p>
+              </div>
             </div>
           </div>
         </div>

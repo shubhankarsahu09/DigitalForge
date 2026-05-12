@@ -17,7 +17,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const isInternalPage = location.pathname.startsWith("/dashboard") || location.search.includes("tab=");
+  const isInternalPage = location.pathname.startsWith("/dashboard") || location.pathname === "/about" || location.search.includes("tab=");
 
   useEffect(() => {
     const handleScroll = () => {
