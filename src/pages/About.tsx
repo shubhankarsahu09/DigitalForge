@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { motion } from "motion/react";
 
 const LAST_UPDATED = "May 12, 2026";
-const SUPPORT_EMAIL = "support@digitalforge.com";
+const SUPPORT_EMAIL = "shubhankarsahu82@gmail.com";
 const WEBSITE = "www.digitalforge.com";
 
 const sections = {

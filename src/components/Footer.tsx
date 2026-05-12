@@ -20,7 +20,7 @@ export default function Footer() {
           Terms
         </Link>
         <a
-          href="mailto:support@digitalforge.com"
+          href="mailto:shubhankarsahu82@gmail.com"
           className="text-muted-foreground text-sm hover:text-foreground transition-colors duration-200"
         >
           Contact
