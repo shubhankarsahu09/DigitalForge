@@ -108,7 +108,7 @@ export default function Contact() {
             <button onClick={() => setSubmitted(false)} className="submit-btn" style={{ background: "transparent", color: "#000", border: "1px solid #eee", marginTop: 32 }}>Back</button>
           </motion.div>
         ) : (
-          <form action="https://formspree.io/f/mldevnqz" method="POST" onSubmit={handleSubmit}>
+          <form action="https://formspree.io/shubhankarsahu82@gmail.com" method="POST" onSubmit={handleSubmit}>
             <div style={{ textAlign: "left" }}>
               <span className="label-hint">Identity</span>
               <input type="text" name="name" required placeholder="Your Name" className="minimal-input" />
