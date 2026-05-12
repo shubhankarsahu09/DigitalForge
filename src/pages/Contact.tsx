@@ -1,3 +1,8 @@
+import { useState } from "react";
+import { motion } from "motion/react";
+
+const SUPPORT_EMAIL = "shubhankarsahu82@gmail.com";
+
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
