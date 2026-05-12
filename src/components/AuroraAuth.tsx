@@ -50,8 +50,9 @@ const StepItem = ({ number, text, active }: StepItemProps) => (
 
 const SocialButton = ({ icon: Icon, label, onClick }: SocialButtonProps) => (
   <button
+    type="button"
     onClick={onClick}
-    className="flex items-center justify-center gap-3 liquid-glass rounded-xl py-3.5 hover:bg-white/5 transition-all active:scale-[0.98] group"
+    className="flex items-center justify-center gap-3 liquid-glass rounded-xl py-3.5 hover:bg-white/5 transition-all active:scale-[0.98] group cursor-pointer pointer-events-auto relative z-[110]"
   >
     <Icon size={18} className="text-muted-foreground group-hover:text-foreground transition-colors" />
     <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">{label}</span>
@@ -61,12 +62,15 @@ const SocialButton = ({ icon: Icon, label, onClick }: SocialButtonProps) => (
 const InputGroup = ({ label, placeholder, type, value, onChange, required }: InputGroupProps) => {
   const [showPassword, setShowPassword] = useState(false);
   const isPassword = type === "password";
+  const id = React.useId();
 
   return (
     <div className="space-y-2.5">
-      <label className="text-sm font-medium text-muted-foreground ml-1">{label}</label>
+      <label htmlFor={id} className="text-sm font-medium text-muted-foreground ml-1">{label}</label>
       <div className="relative group">
         <input
+          id={id}
+          name={label.toLowerCase().replace(/\s+/g, '_')}
           type={isPassword ? (showPassword ? "text" : "password") : type}
           required={required}
           value={value}
@@ -112,6 +116,23 @@ export default function AuroraAuth({
   const [error, setError] = useState<string | null>(null);
   const [message, setMessage] = useState<string | null>(null);
 
+  const handleSocialLogin = async (provider: 'google' | 'github') => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: `${window.location.origin}/dashboard`,
+        },
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      setError(err.message);
+      setIsLoading(false);
+    }
+  };
+
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -124,6 +145,7 @@ export default function AuroraAuth({
           email: formData.email,
           password: formData.password,
           options: {
+            emailRedirectTo: `${window.location.origin}/dashboard`,
             data: {
               first_name: formData.firstName,
               last_name: formData.lastName,
@@ -254,8 +276,16 @@ export default function AuroraAuth({
 
             {/* Social Buttons */}
             <div className="grid grid-cols-2 gap-4">
-              <SocialButton icon={Chrome} label="Google" />
-              <SocialButton icon={Github} label="Github" />
+              <SocialButton 
+                icon={Chrome} 
+                label="Google" 
+                onClick={() => handleSocialLogin('google')} 
+              />
+              <SocialButton 
+                icon={Github} 
+                label="Github" 
+                onClick={() => handleSocialLogin('github')} 
+              />
             </div>
 
             {/* Divider */}
