@@ -17,7 +17,8 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
-  const isInternalPage = location.pathname.startsWith("/dashboard") || location.pathname === "/about" || location.pathname === "/contact" || location.search.includes("tab=");
+  // Determine if we're on the landing page or internal pages
+  const isLandingPage = location.pathname === "/";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,26 +36,17 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-28 py-4 transition-all duration-300",
         isScrolled 
-          ? (isInternalPage ? "bg-white/80 backdrop-blur-md border-b border-black/5 py-3" : "bg-black/60 backdrop-blur-md border-b border-white/5 py-3") 
-          : "bg-transparent"
+          ? "bg-black/80 backdrop-blur-md border-b border-white/5 py-3" 
+          : (!isLandingPage ? "bg-black/40 backdrop-blur-sm py-4" : "bg-transparent")
       )}
     >
       {/* Logo */}
       <Link to="/" className="flex items-center gap-3 group">
-        <div className={cn(
-          "relative flex items-center justify-center w-7 h-7 rounded-full border-2 transition-colors",
-          isInternalPage ? "border-black/60 group-hover:border-black" : "border-foreground/60 group-hover:border-foreground"
-        )}>
-          <div className={cn(
-            "w-3 h-3 rounded-full border transition-colors",
-            isInternalPage ? "border-black/60 group-hover:border-black" : "border-foreground/60 group-hover:border-foreground"
-          )} />
+        <div className="relative flex items-center justify-center w-7 h-7 rounded-full border-2 border-foreground/60 group-hover:border-foreground transition-colors">
+          <div className="w-3 h-3 rounded-full border border-foreground/60 group-hover:border-foreground transition-colors" />
         </div>
-        <span className={cn(
-          "font-bold text-base tracking-tight transition-colors",
-          isInternalPage ? "text-black" : "text-foreground"
-        )}>
-          DigitalForge
+        <span className="font-bold text-base tracking-tight text-white transition-colors">
+          DIGITAL<span className="text-[#c9a96e]">FORGE</span>
         </span>
       </Link>
 
@@ -72,16 +64,13 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               to={link.path}
               className={cn(
                 "transition-colors duration-200",
-                isInternalPage ? "text-black/60 hover:text-black" : "text-muted-foreground hover:text-foreground"
+                location.pathname === link.path ? "text-white" : "text-white/60 hover:text-white"
               )}
             >
               {link.name}
             </Link>
-            {i < 3 && (
-              <span className={cn(
-                "transition-colors",
-                isInternalPage ? "text-black/10" : "text-muted-foreground/30"
-              )}>•</span>
+            {i < 4 && (
+              <span className="text-white/10">•</span>
             )}
           </React.Fragment>
         ))}
@@ -95,19 +84,13 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             <>
               <button
                 onClick={onProfile}
-                className={cn(
-                  "text-[13px] font-medium transition-colors",
-                  isInternalPage ? "text-black/60 hover:text-black" : "text-muted-foreground hover:text-foreground"
-                )}
+                className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
               >
                 Profile
               </button>
               <button
                 onClick={() => signOut()}
-                className={cn(
-                  "text-[13px] font-medium transition-colors",
-                  isInternalPage ? "text-black/60 hover:text-black" : "text-muted-foreground hover:text-foreground"
-                )}
+                className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
               >
                 Logout
               </button>
@@ -116,19 +99,13 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             <>
               <button
                 onClick={onLogin}
-                className={cn(
-                  "text-[13px] font-medium transition-colors",
-                  isInternalPage ? "text-black/60 hover:text-black" : "text-muted-foreground hover:text-foreground"
-                )}
+                className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
               >
                 Log In
               </button>
               <button
                 onClick={onSignup}
-                className={cn(
-                  "text-[13px] font-bold px-5 py-1.5 rounded-full transition-all active:scale-95",
-                  isInternalPage ? "bg-black text-white hover:bg-black/90" : "bg-foreground text-background hover:bg-foreground/90"
-                )}
+                className="text-[13px] font-bold px-5 py-1.5 rounded-full bg-white text-black hover:bg-white/90 transition-all active:scale-95"
               >
                 SIGN UP
               </button>
@@ -149,12 +126,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               aria-label={label}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className={cn(
-                "w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200",
-                isInternalPage 
-                  ? "bg-black/5 text-black/40 hover:bg-black/10 hover:text-black" 
-                  : "liquid-glass text-muted-foreground hover:text-foreground"
-              )}
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 text-white/40 hover:bg-white/10 hover:text-white transition-all duration-200"
             >
               <Icon size={14} />
             </motion.a>
@@ -163,10 +135,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
 
         {/* Mobile Menu Toggle */}
         <button
-          className={cn(
-            "lg:hidden p-2 transition-colors",
-            isInternalPage ? "text-black" : "text-foreground"
-          )}
+          className="lg:hidden p-2 text-white transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -180,12 +149,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className={cn(
-              "absolute top-full left-0 right-0 backdrop-blur-xl border-b flex flex-col p-8 gap-6 lg:hidden",
-              isInternalPage 
-                ? "bg-white/95 border-black/5" 
-                : "bg-black/95 border-white/10"
-            )}
+            className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/10 flex flex-col p-8 gap-6 lg:hidden"
           >
             {[
               { name: "Home", path: "/" },
@@ -198,8 +162,8 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                 key={link.name}
                 to={link.path}
                 className={cn(
-                  "text-lg font-medium border-b pb-2",
-                  isInternalPage ? "text-black border-black/5" : "text-foreground border-white/5"
+                  "text-lg font-medium border-b border-white/5 pb-2",
+                  location.pathname === link.path ? "text-white" : "text-white/60"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -213,10 +177,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                     onLogin();
                     setIsMobileMenuOpen(false);
                   }}
-                  className={cn(
-                    "text-center py-3 rounded-lg border",
-                    isInternalPage ? "border-black/10 text-black" : "border-white/10 text-foreground"
-                  )}
+                  className="text-center py-3 rounded-lg border border-white/10 text-white"
                 >
                   Log In
                 </button>
@@ -225,10 +186,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                     onSignup();
                     setIsMobileMenuOpen(false);
                   }}
-                  className={cn(
-                    "text-center py-3 rounded-lg font-bold",
-                    isInternalPage ? "bg-black text-white" : "bg-white text-black"
-                  )}
+                  className="text-center py-3 rounded-lg font-bold bg-white text-black"
                 >
                   Sign Up
                 </button>
