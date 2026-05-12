@@ -1,15 +1,9 @@
-import { useState } from "react";
-import { motion } from "motion/react";
-
-const SUPPORT_EMAIL = "shubhankarsahu82@gmail.com";
-
 export default function Contact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = async () => {
     setIsSubmitting(true);
-    // Formspree handles the actual submission
   };
 
   return (
@@ -18,47 +12,42 @@ export default function Contact() {
       background: "#ffffff",
       minHeight: "100vh",
       color: "#000",
-      lineHeight: 1.5,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      padding: "80px 24px",
     }}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .input-group {
-          margin-bottom: 24px;
-        }
-
-        .input-label {
-          font-size: 13px;
-          font-weight: 600;
-          color: #666;
-          margin-bottom: 8px;
-          display: block;
-          letter-spacing: -0.01em;
-        }
-
-        .modern-input {
+        .form-container {
           width: 100%;
-          background: #f5f5f7;
-          border: 1px solid transparent;
-          border-radius: 12px;
-          padding: 14px 18px;
+          max-width: 480px;
+          text-align: center;
+        }
+
+        .minimal-input {
+          width: 100%;
+          background: transparent;
+          border: none;
+          border-bottom: 1px solid #eee;
+          padding: 20px 0;
           font-family: 'Inter', sans-serif;
-          font-size: 15px;
-          color: #1d1d1f;
-          transition: all 0.2s ease;
+          font-size: 16px;
+          color: #000;
+          transition: all 0.3s ease;
           outline: none;
+          margin-bottom: 8px;
         }
 
-        .modern-input:focus {
-          background: #ffffff;
-          border-color: #000;
-          box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+        .minimal-input:focus {
+          border-bottom-color: #000;
         }
 
-        .modern-input::placeholder {
-          color: #a1a1a6;
+        .minimal-input::placeholder {
+          color: #bbb;
         }
 
         .submit-btn {
@@ -66,153 +55,87 @@ export default function Contact() {
           background: #000;
           color: #fff;
           border: none;
-          padding: 16px;
-          font-size: 15px;
-          font-weight: 600;
-          border-radius: 12px;
+          padding: 20px;
+          font-size: 14px;
+          font-weight: 500;
+          letter-spacing: 0.1em;
+          text-transform: uppercase;
           cursor: pointer;
-          transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-          margin-top: 12px;
+          transition: all 0.3s ease;
+          margin-top: 48px;
         }
 
         .submit-btn:hover {
-          transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+          background: #333;
+          letter-spacing: 0.15em;
         }
 
-        .submit-btn:active {
-          transform: translateY(0);
+        .submit-btn:disabled {
+          background: #eee;
+          color: #aaa;
+          cursor: not-allowed;
         }
 
-        .info-card {
-          background: #f5f5f7;
-          padding: 32px;
-          border-radius: 24px;
-          height: 100%;
-        }
-
-        @media (max-width: 768px) {
-          .grid-layout { grid-template-columns: 1fr !important; gap: 40px !important; }
-          .hero-section { padding: 120px 0 40px !important; }
+        .label-hint {
+          display: block;
+          text-align: left;
+          font-size: 11px;
+          color: #999;
+          text-transform: uppercase;
+          letter-spacing: 0.05em;
+          margin-top: 24px;
         }
       `}</style>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
-        
-        {/* Modern Hero Section */}
-        <div className="hero-section" style={{ padding: "160px 0 80px", textAlign: "center" }}>
+      <div className="form-container">
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+        >
+          <h1 style={{ fontSize: 32, fontWeight: 300, letterSpacing: "-0.02em", marginBottom: 12 }}>Contact Us.</h1>
+          <p style={{ fontSize: 15, color: "#888", marginBottom: 48 }}>Drop a message and we'll get back shortly.</p>
+        </motion.div>
+
+        {submitted ? (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            style={{ padding: "40px 0" }}
           >
-            <h1 style={{ 
-              fontSize: "clamp(48px, 8vw, 82px)", 
-              fontWeight: 800, 
-              letterSpacing: "-0.04em", 
-              lineHeight: 1,
-              marginBottom: 24
-            }}>
-              Contact <span style={{ color: "#c9a96e" }}>Support.</span>
-            </h1>
-            <p style={{ 
-              fontSize: 19, 
-              color: "#86868b", 
-              maxWidth: 600, 
-              margin: "0 auto",
-              fontWeight: 500
-            }}>
-              We're here to help you get the most out of DigitalForge. Reach out and our team will be in touch.
-            </p>
+            <div style={{ fontSize: 32, marginBottom: 16 }}>✓</div>
+            <p style={{ fontSize: 16, color: "#666" }}>Your message has been sent.</p>
+            <button onClick={() => setSubmitted(false)} className="submit-btn" style={{ background: "transparent", color: "#000", border: "1px solid #eee", marginTop: 32 }}>Back</button>
           </motion.div>
-        </div>
-
-        <div className="grid-layout" style={{ display: "grid", gridTemplateColumns: "1fr 1.2fr", gap: 32, paddingBottom: 120, alignItems: "start" }}>
-          
-          {/* Form Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-            style={{ background: "#fff", padding: "40px", borderRadius: "32px", border: "1px solid #f0f0f0", boxShadow: "0 20px 40px rgba(0,0,0,0.03)" }}
-          >
-            {submitted ? (
-              <div style={{ textAlign: "center", padding: "40px 0" }}>
-                <div style={{ fontSize: 48, marginBottom: 20 }}>✉️</div>
-                <h2 style={{ fontSize: 24, fontWeight: 700, marginBottom: 12 }}>Message Sent</h2>
-                <p style={{ color: "#86868b", marginBottom: 32 }}>We'll get back to you at your email address shortly.</p>
-                <button onClick={() => setSubmitted(false)} className="submit-btn" style={{ maxWidth: 200 }}>Done</button>
-              </div>
-            ) : (
-              <form action="https://formspree.io/f/mldevnqz" method="POST" onSubmit={handleSubmit}>
-                <div className="input-group">
-                  <label className="input-label">Full Name</label>
-                  <input type="text" name="name" required placeholder="John Doe" className="modern-input" />
-                </div>
-
-                <div className="input-group">
-                  <label className="input-label">Email Address</label>
-                  <input type="email" name="email" required placeholder="name@example.com" className="modern-input" />
-                </div>
-
-                <div className="input-group">
-                  <label className="input-label">Topic</label>
-                  <select name="topic" className="modern-input" required style={{ appearance: "none" }}>
-                    <option value="General">General Inquiry</option>
-                    <option value="Billing">Billing & Access</option>
-                    <option value="Technical">Technical Issue</option>
-                    <option value="Feedback">Feedback</option>
-                  </select>
-                </div>
-
-                <div className="input-group">
-                  <label className="input-label">Message</label>
-                  <textarea name="message" required placeholder="How can we help?" className="modern-input" style={{ minHeight: 150, resize: "none" }} />
-                </div>
-
-                <button type="submit" className="submit-btn" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : "Send Message"}
-                </button>
-              </form>
-            )}
-          </motion.div>
-
-          {/* Contact Info Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.3 }}
-            className="info-card"
-          >
-            <div style={{ marginBottom: 40 }}>
-              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Direct Support</h3>
-              <p style={{ color: "#515154", fontSize: 15, marginBottom: 8 }}>Email us directly for urgent matters:</p>
-              <a href={`mailto:${SUPPORT_EMAIL}`} style={{ color: "#c9a96e", fontWeight: 600, fontSize: 18, textDecoration: "none" }}>{SUPPORT_EMAIL}</a>
+        ) : (
+          <form action="https://formspree.io/f/mldevnqz" method="POST" onSubmit={handleSubmit}>
+            <div style={{ textAlign: "left" }}>
+              <span className="label-hint">Identity</span>
+              <input type="text" name="name" required placeholder="Your Name" className="minimal-input" />
+              
+              <span className="label-hint">Communication</span>
+              <input type="email" name="email" required placeholder="Email Address" className="minimal-input" />
+              
+              <span className="label-hint">Subject</span>
+              <select name="topic" className="minimal-input" required style={{ appearance: "none", background: "url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%23bbb%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Cpolyline%20points%3D%226%209%2012%2015%2018%209%22%3E%3C/polyline%3E%3C/svg%3E') no-repeat right center", backgroundSize: "16px" }}>
+                <option value="General">General Inquiry</option>
+                <option value="Access">Product Access</option>
+                <option value="Billing">Billing</option>
+                <option value="Other">Other</option>
+              </select>
+              
+              <span className="label-hint">Message</span>
+              <textarea name="message" required placeholder="How can we help?" className="minimal-input" style={{ minHeight: 120, resize: "none" }} />
             </div>
 
-            <div style={{ marginBottom: 40 }}>
-              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Response Time</h3>
-              <p style={{ color: "#515154", fontSize: 15, lineHeight: 1.6 }}>Our typical response time is within 2-4 hours during business days. We operate between 9:00 AM and 6:00 PM IST.</p>
-            </div>
+            <button type="submit" className="submit-btn" disabled={isSubmitting}>
+              {isSubmitting ? "Processing..." : "Submit Message"}
+            </button>
+          </form>
+        )}
 
-            <div>
-              <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Follow Us</h3>
-              <div style={{ display: "flex", gap: 12 }}>
-                {["Instagram", "Twitter", "LinkedIn"].map(social => (
-                  <a key={social} href="#" style={{ 
-                    padding: "8px 16px", 
-                    background: "#fff", 
-                    borderRadius: "100px", 
-                    fontSize: 13, 
-                    fontWeight: 600, 
-                    color: "#000", 
-                    textDecoration: "none",
-                    border: "1px solid #e5e5e5"
-                  }}>{social}</a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
+        <div style={{ marginTop: 80, opacity: 0.3 }}>
+          <p style={{ fontSize: 10, letterSpacing: "0.2em", textTransform: "uppercase" }}>© DigitalForge</p>
         </div>
       </div>
     </div>
