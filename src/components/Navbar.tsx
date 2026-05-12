@@ -62,7 +62,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
       <div className="hidden lg:flex items-center gap-6 text-[13px] font-medium tracking-tight">
         {[
           { name: "Home", path: "/" },
-          { name: "About Us", path: "/#about" },
+          { name: "About Us", path: "/about" },
           { name: "Course", path: "/dashboard" },
           { name: "Purchased Course", path: "/dashboard?tab=purchased" },
         ].map((link, i) => (
@@ -188,7 +188,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
           >
             {[
               { name: "Home", path: "/" },
-              { name: "About Us", path: "/#about" },
+              { name: "About Us", path: "/about" },
               { name: "Course", path: "/dashboard" },
               { name: "Purchased Course", path: "/dashboard?tab=purchased" },
             ].map((link) => (

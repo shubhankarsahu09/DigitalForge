@@ -12,6 +12,7 @@ import CtaSection from "./components/CtaSection";
 import Footer from "./components/Footer";
 import AuroraAuth from "./components/AuroraAuth";
 import Dashboard from "./pages/Dashboard";
+import About from "./pages/About";
 import { useAuth } from "./hooks/useAuth";
 import ProfileModal from "./components/ProfileModal";
 
@@ -87,6 +88,10 @@ function App() {
             element={
               user ? <Dashboard /> : <Navigate to="/" replace />
             } 
+          />
+          <Route 
+            path="/about" 
+            element={<About />} 
           />
         </Routes>
 
