@@ -260,8 +260,17 @@ We will respond to all privacy inquiries within 30 days.`
 };
 
 export default function About() {
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("tos");
   const [activeSection, setActiveSection] = useState<string | null>(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = params.get("tab");
+    if (tab === "privacy" || tab === "tos") {
+      setActiveTab(tab);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
