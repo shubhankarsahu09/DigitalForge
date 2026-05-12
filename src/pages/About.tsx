@@ -386,7 +386,7 @@ export default function About() {
         }
       `}</style>
 
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "0 40px" }}>
+      <div className="md:px-28 px-8" style={{ margin: "0 auto" }}>
 
         {/* Hero Section */}
         <div style={{ padding: "180px 0 80px" }}>

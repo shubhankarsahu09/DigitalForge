@@ -121,7 +121,7 @@ export default function Contact() {
         }
       `}</style>
 
-      <div style={{ maxWidth: 1100, margin: "0 auto", padding: "0 24px" }}>
+      <div className="md:px-28 px-8" style={{ margin: "0 auto" }}>
         
         {/* Modern Hero Section */}
         <div className="hero-section" style={{ padding: "160px 0 80px", textAlign: "center" }}>
