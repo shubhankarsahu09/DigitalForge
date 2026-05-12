@@ -1,9 +1,6 @@
 import { useState, useEffect } from "react";
-import React from "react";
 
 const LAST_UPDATED = "May 12, 2026";
-const EFFECTIVE_DATE = "May 12, 2026";
-const COMPANY = "DigitalForge";
 const SUPPORT_EMAIL = "support@digitalforge.com";
 const WEBSITE = "www.digitalforge.com";
 
@@ -264,13 +261,6 @@ We will respond to all privacy inquiries within 30 days.`
 export default function About() {
   const [activeTab, setActiveTab] = useState("tos");
   const [activeSection, setActiveSection] = useState<string | null>(null);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
