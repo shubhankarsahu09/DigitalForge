@@ -39,9 +39,9 @@ export default function Contact() {
   return (
     <div style={{
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-      background: "#ffffff",
+      background: "hsl(var(--background))",
       minHeight: "100vh",
-      color: "#000",
+      color: "#ffffff",
       lineHeight: 1.5,
     }}>
       <style>{`
@@ -56,7 +56,7 @@ export default function Contact() {
         .input-label {
           font-size: 13px;
           font-weight: 600;
-          color: #666;
+          color: #a1a1a6;
           margin-bottom: 8px;
           display: block;
           letter-spacing: -0.01em;
@@ -64,31 +64,31 @@ export default function Contact() {
 
         .modern-input {
           width: 100%;
-          background: #f5f5f7;
-          border: 1px solid transparent;
+          background: #111;
+          border: 1px solid #222;
           border-radius: 12px;
           padding: 14px 18px;
           font-family: 'Inter', sans-serif;
           font-size: 15px;
-          color: #1d1d1f;
+          color: #fff;
           transition: all 0.2s ease;
           outline: none;
         }
 
         .modern-input:focus {
-          background: #ffffff;
-          border-color: #000;
-          box-shadow: 0 0 0 4px rgba(0,0,0,0.05);
+          background: #000;
+          border-color: #fff;
+          box-shadow: 0 0 0 4px rgba(255,255,255,0.1);
         }
 
         .modern-input::placeholder {
-          color: #a1a1a6;
+          color: #666;
         }
 
         .submit-btn {
           width: 100%;
-          background: #000;
-          color: #fff;
+          background: #fff;
+          color: #000;
           border: none;
           padding: 16px;
           font-size: 15px;
@@ -101,7 +101,7 @@ export default function Contact() {
 
         .submit-btn:hover {
           transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+          box-shadow: 0 8px 24px rgba(255,255,255,0.15);
         }
 
         .submit-btn:active {
@@ -109,10 +109,11 @@ export default function Contact() {
         }
 
         .info-card {
-          background: #f5f5f7;
+          background: #111;
           padding: 32px;
           border-radius: 24px;
           height: 100%;
+          border: 1px solid #222;
         }
 
         @media (max-width: 768px) {
@@ -158,7 +159,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            style={{ background: "#fff", padding: "40px", borderRadius: "32px", border: "1px solid #f0f0f0", boxShadow: "0 20px 40px rgba(0,0,0,0.03)" }}
+            style={{ background: "#0a0a0a", padding: "40px", borderRadius: "32px", border: "1px solid #222", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}
           >
             {submitted ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
@@ -210,7 +211,7 @@ export default function Contact() {
           >
             <div style={{ marginBottom: 40 }}>
               <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Response Time</h3>
-              <p style={{ color: "#515154", fontSize: 15, lineHeight: 1.6 }}>Our typical response time is within 2-4 hours during business days. We operate between 9:00 AM and 6:00 PM IST.</p>
+              <p style={{ color: "#a1a1a6", fontSize: 15, lineHeight: 1.6 }}>Our typical response time is within 2-4 hours during business days. We operate between 9:00 AM and 6:00 PM IST.</p>
             </div>
 
             <div>
@@ -219,13 +220,13 @@ export default function Contact() {
                 {["Instagram", "Twitter", "LinkedIn"].map(social => (
                   <a key={social} href="#" style={{ 
                     padding: "8px 16px", 
-                    background: "#fff", 
+                    background: "#111", 
                     borderRadius: "100px", 
                     fontSize: 13, 
                     fontWeight: 600, 
-                    color: "#000", 
+                    color: "#fff", 
                     textDecoration: "none",
-                    border: "1px solid #e5e5e5"
+                    border: "1px solid #333"
                   }}>{social}</a>
                 ))}
               </div>

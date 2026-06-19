@@ -282,9 +282,9 @@ export default function About() {
   return (
     <div style={{
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
-      background: "#fafafa",
+      background: "hsl(var(--background))",
       minHeight: "100vh",
-      color: "#1a1a1a",
+      color: "#fff",
       lineHeight: 1.7,
     }}>
       <style>{`
@@ -293,8 +293,8 @@ export default function About() {
         * { box-sizing: border-box; }
 
         ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: #fafafa; }
-        ::-webkit-scrollbar-thumb { background: #d1d1d1; border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
 
         .cormorant { font-family: 'Cormorant Garamond', Georgia, serif; }
         .mono { font-family: 'DM Mono', 'Courier New', monospace; }
@@ -321,11 +321,11 @@ export default function About() {
           left: 0;
           width: 0;
           height: 2px;
-          background: #000;
+          background: #fff;
           transition: width 0.3s ease;
         }
 
-        .tab-btn.active { color: #000; }
+        .tab-btn.active { color: #fff; }
         .tab-btn.active::after { width: 100%; }
 
         .section-card {
@@ -334,7 +334,7 @@ export default function About() {
         }
 
         .section-card + .section-card {
-          border-top: 1px solid #eaeaea;
+          border-top: 1px solid #222;
         }
 
         .nav-item {
@@ -353,22 +353,22 @@ export default function About() {
           border-bottom: 1px solid transparent;
         }
 
-        .nav-item:hover, .nav-item.active { color: #000; }
+        .nav-item:hover, .nav-item.active { color: #fff; }
 
         .badge {
           font-family: 'DM Mono', monospace;
           font-size: 10px;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          background: #000;
-          color: #fff;
+          background: #fff;
+          color: #000;
           padding: 6px 14px;
           border-radius: 100px;
           display: inline-block;
         }
 
         .content-text {
-          color: #444;
+          color: #a1a1a6;
           font-size: 17px;
           line-height: 1.8;
           white-space: pre-line;
@@ -376,7 +376,7 @@ export default function About() {
         }
 
         .content-text strong {
-          color: #000;
+          color: #fff;
           font-weight: 600;
         }
 
@@ -398,14 +398,14 @@ export default function About() {
             <div className="mono" style={{ fontSize: 12, letterSpacing: "0.3em", color: "#c9a96e", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>
               Legal Framework
             </div>
-            <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "#000", marginBottom: 40 }}>
+            <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "#fff", marginBottom: 40 }}>
               Trust & <em style={{ color: "#c9a96e" }}>Integrity</em>
             </h1>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
-              <p style={{ fontSize: 20, color: "#666", maxWidth: 650, lineHeight: 1.5, fontWeight: 400 }}>
+              <p style={{ fontSize: 20, color: "#999", maxWidth: 650, lineHeight: 1.5, fontWeight: 400 }}>
                 DigitalForge is built on a foundation of clarity. Our policies ensure a secure and transparent environment for every learner.
               </p>
-              <div className="mono" style={{ fontSize: 12, color: "#999", borderLeft: "1px solid #ddd", paddingLeft: 20 }}>
+              <div className="mono" style={{ fontSize: 12, color: "#666", borderLeft: "1px solid #333", paddingLeft: 20 }}>
                 Version 1.0.4<br />
                 Updated {LAST_UPDATED}
               </div>
@@ -413,7 +413,7 @@ export default function About() {
           </motion.div>
 
           {/* Tab Switcher */}
-          <div style={{ display: "flex", marginTop: 80, borderBottom: "1px solid #eaeaea" }}>
+          <div style={{ display: "flex", marginTop: 80, borderBottom: "1px solid #222" }}>
             <button
               className={`tab-btn ${activeTab === "tos" ? "active" : ""}`}
               onClick={() => setActiveTab("tos")}
@@ -434,7 +434,7 @@ export default function About() {
 
           {/* Sidebar Navigation */}
           <div className="sidebar" style={{ paddingTop: 64, paddingRight: 60, position: "sticky", top: 140, height: "fit-content" }}>
-            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.15em", color: "#000", textTransform: "uppercase", marginBottom: 32, fontWeight: 600 }}>
+            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.15em", color: "#fff", textTransform: "uppercase", marginBottom: 32, fontWeight: 600 }}>
               Navigation
             </div>
             {currentSections.map((s) => (
@@ -465,12 +465,12 @@ export default function About() {
               <div className="badge" style={{ marginBottom: 24 }}>
                 {activeTab === "tos" ? "Terms & Conditions" : "Privacy & Data"}
               </div>
-              <h3 className="cormorant" style={{ fontSize: 36, fontWeight: 400, color: "#000", marginBottom: 24 }}>
+              <h3 className="cormorant" style={{ fontSize: 36, fontWeight: 400, color: "#fff", marginBottom: 24 }}>
                 {activeTab === "tos" 
                   ? "Our promise of quality and service." 
                   : "How we protect your digital footprint."}
               </h3>
-              <p className="content-text" style={{ fontSize: 19, color: "#1a1a1a" }}>
+              <p className="content-text" style={{ fontSize: 19, color: "#ccc" }}>
                 {activeTab === "tos" 
                   ? "These terms outline the agreement between DigitalForge and our users. By using our platform, you agree to uphold these standards." 
                   : "We believe in radical transparency. This policy details our commitment to your privacy and how we manage your information."}
@@ -488,7 +488,7 @@ export default function About() {
                   style={{
                     fontSize: 32,
                     fontWeight: 400,
-                    color: "#000",
+                    color: "#fff",
                     marginBottom: 28,
                     letterSpacing: "-0.02em"
                   }}
@@ -500,20 +500,20 @@ export default function About() {
             ))}
 
             {/* Premium Footer Branding */}
-            <div style={{ marginTop: 120, paddingTop: 64, borderTop: "4px solid #000" }}>
+            <div style={{ marginTop: 120, paddingTop: 64, borderTop: "4px solid #fff" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40 }}>
                 <div>
                   <div className="cormorant" style={{ fontSize: 32, fontWeight: 400, marginBottom: 12 }}>DigitalForge</div>
                   <p className="mono" style={{ fontSize: 12, color: "#999", letterSpacing: "0.1em" }}>DISTILLED KNOWLEDGE</p>
                 </div>
                 <div style={{ textAlign: "right" }}>
-                  <p className="mono" style={{ fontSize: 13, color: "#000", fontWeight: 600, marginBottom: 8 }}>Questions or Feedback?</p>
+                  <p className="mono" style={{ fontSize: 13, color: "#fff", fontWeight: 600, marginBottom: 8 }}>Questions or Feedback?</p>
                   <p className="mono" style={{ fontSize: 13, color: "#c9a96e", textDecoration: "underline" }}>{SUPPORT_EMAIL}</p>
                 </div>
               </div>
-              <div style={{ marginTop: 64, display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #eee", paddingTop: 32 }}>
-                <p className="mono" style={{ fontSize: 11, color: "#aaa" }}>© {new Date().getFullYear()} DIGITALFORGE. ALL RIGHTS RESERVED.</p>
-                <p className="mono" style={{ fontSize: 11, color: "#aaa" }}>MADE WITH INTEGRITY</p>
+              <div style={{ marginTop: 64, display: "flex", justifyContent: "space-between", alignItems: "center", borderTop: "1px solid #222", paddingTop: 32 }}>
+                <p className="mono" style={{ fontSize: 11, color: "#666" }}>© {new Date().getFullYear()} DIGITALFORGE. ALL RIGHTS RESERVED.</p>
+                <p className="mono" style={{ fontSize: 11, color: "#666" }}>MADE WITH INTEGRITY</p>
               </div>
             </div>
           </div>
