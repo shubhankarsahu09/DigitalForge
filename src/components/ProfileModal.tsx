@@ -96,30 +96,30 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.9, y: 20 }}
-            className="relative w-full max-w-md bg-white rounded-[2.5rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.2)] overflow-hidden border border-black/5 text-[#1d1d1f]"
+            className="relative w-full max-w-md bg-zinc-950 rounded-[2.5rem] shadow-[0_32px_64px_-12px_rgba(0,0,0,0.5)] overflow-hidden border border-white/10 text-white"
           >
             {/* Header */}
-            <div className="p-8 border-b border-black/5 flex items-center justify-between bg-[#fbfbfd]">
+            <div className="p-8 border-b border-white/10 flex items-center justify-between bg-white/5">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-black flex items-center justify-center text-white shadow-lg shadow-black/10">
+                <div className="w-12 h-12 rounded-2xl bg-white/10 border border-white/10 flex items-center justify-center text-white shadow-lg shadow-black/50">
                   {step === "verify" ? <Lock size={22} /> : <User size={22} />}
                 </div>
                 <div>
-                  <h2 className="text-xl font-semibold text-[#1d1d1f]">
+                  <h2 className="text-xl font-semibold text-white">
                     {step === "verify" ? "Identity Check" : "Profile Settings"}
                   </h2>
-                  <p className="text-[10px] font-bold text-black/50 uppercase tracking-[0.2em] mt-0.5">
+                  <p className="text-[10px] font-bold text-white/50 uppercase tracking-[0.2em] mt-0.5">
                     {step === "verify" ? "Security Required" : "Update Identity"}
                   </p>
                 </div>
               </div>
-              <button
+                <button
                 onClick={() => {
                   onClose();
                   setStep("verify");
                   setCurrentPassword("");
                 }}
-                className="w-10 h-10 rounded-full bg-black/5 hover:bg-black/10 flex items-center justify-center text-black/40 hover:text-black transition-all"
+                className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-white/40 hover:text-white transition-all"
               >
                 <X size={20} />
               </button>
@@ -130,22 +130,22 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
               {step === "verify" ? (
                 <form onSubmit={handleVerify} className="space-y-6">
                   <div className="space-y-3">
-                    <p className="text-sm text-[#424245] font-medium leading-relaxed mb-6">
+                    <p className="text-sm text-white/60 font-medium leading-relaxed mb-6">
                       For your security, please verify your current password before managing your account.
                     </p>
-                    <label className="text-[11px] font-bold text-black/60 uppercase tracking-widest ml-1">
+                    <label className="text-[11px] font-bold text-white/60 uppercase tracking-widest ml-1">
                       Current Password
                     </label>
                     <div className="relative group">
-                      <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20 group-focus-within:text-black transition-colors" />
-                      <input
+                      <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-white transition-colors" />
+                        <input
                         type="password"
                         required
                         autoFocus
                         value={currentPassword}
                         onChange={(e) => setCurrentPassword(e.target.value)}
                         placeholder="••••••••"
-                        className="w-full bg-white border border-black/10 rounded-2xl py-4 pl-12 pr-6 text-sm text-[#1d1d1f] focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all placeholder:text-black/20 shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
+                        className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-sm text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all placeholder:text-white/30"
                       />
                     </div>
                   </div>
@@ -154,7 +154,7 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                     <motion.div 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 text-[13px] flex items-center gap-3"
+                      className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-[13px] flex items-center gap-3"
                     >
                       <X size={16} className="shrink-0" />
                       {error}
@@ -164,7 +164,7 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                   <button
                     type="submit"
                     disabled={isLoading}
-                    className="w-full bg-black text-white font-bold py-4 rounded-2xl hover:bg-black/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group shadow-xl shadow-black/10 disabled:opacity-50"
+                    className="w-full bg-white text-black font-bold py-4 rounded-2xl hover:bg-white/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-50"
                   >
                     {isLoading ? (
                       <Loader2 className="animate-spin" size={20} />
@@ -181,34 +181,34 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                   <div className="space-y-6">
                     {/* Display Name */}
                     <div className="space-y-3">
-                      <label className="text-[11px] font-bold text-black/60 uppercase tracking-widest ml-1">
+                      <label className="text-[11px] font-bold text-white/60 uppercase tracking-widest ml-1">
                         New Display Name
                       </label>
                       <div className="relative group">
-                        <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20 group-focus-within:text-black transition-colors" />
+                        <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-white transition-colors" />
                         <input
                           type="text"
                           value={displayName}
                           onChange={(e) => setDisplayName(e.target.value)}
                           placeholder="Your Name"
-                          className="w-full bg-white border border-black/10 rounded-2xl py-4 pl-12 pr-6 text-sm text-[#1d1d1f] focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all placeholder:text-black/20 shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-sm text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all placeholder:text-white/30"
                         />
                       </div>
                     </div>
 
                     {/* New Password */}
                     <div className="space-y-3">
-                      <label className="text-[11px] font-bold text-black/60 uppercase tracking-widest ml-1">
+                      <label className="text-[11px] font-bold text-white/60 uppercase tracking-widest ml-1">
                         New Password
                       </label>
                       <div className="relative group">
-                        <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-black/20 group-focus-within:text-black transition-colors" />
+                        <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-white transition-colors" />
                         <input
                           type="password"
                           value={newPassword}
                           onChange={(e) => setNewPassword(e.target.value)}
                           placeholder="•••••••• (Optional)"
-                          className="w-full bg-white border border-black/10 rounded-2xl py-4 pl-12 pr-6 text-sm text-[#1d1d1f] focus:outline-none focus:ring-4 focus:ring-black/5 focus:border-black transition-all placeholder:text-black/20 shadow-[0_2px_4px_rgba(0,0,0,0.02)]"
+                          className="w-full bg-white/5 border border-white/10 rounded-2xl py-4 pl-12 pr-6 text-sm text-white focus:outline-none focus:ring-1 focus:ring-white/30 focus:border-white/30 transition-all placeholder:text-white/30"
                         />
                       </div>
                     </div>
@@ -218,7 +218,7 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                     <motion.div 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 rounded-2xl bg-red-50 border border-red-100 text-red-600 text-[13px] flex items-center gap-3"
+                      className="p-4 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-400 text-[13px] flex items-center gap-3"
                     >
                       <X size={16} className="shrink-0" />
                       {error}
@@ -229,7 +229,7 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                     <motion.div 
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className="p-4 rounded-2xl bg-green-50 border border-green-100 text-green-600 text-[13px] flex items-center gap-3"
+                      className="p-4 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[13px] flex items-center gap-3"
                     >
                       <Check size={16} className="shrink-0" />
                       {message}
@@ -240,7 +240,7 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                     <button
                       type="submit"
                       disabled={isLoading}
-                      className="flex-1 bg-black text-white font-bold py-4 rounded-2xl hover:bg-black/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group shadow-xl shadow-black/10 disabled:opacity-50"
+                      className="flex-1 bg-white text-black font-bold py-4 rounded-2xl hover:bg-white/90 active:scale-[0.98] transition-all flex items-center justify-center gap-2 group shadow-[0_0_20px_rgba(255,255,255,0.1)] disabled:opacity-50"
                     >
                       {isLoading ? (
                         <Loader2 className="animate-spin" size={20} />
@@ -257,7 +257,7 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
                         setStep("verify");
                         setCurrentPassword("");
                       }}
-                      className="px-8 bg-black/5 text-black/60 font-semibold py-4 rounded-2xl hover:bg-black/10 active:scale-[0.98] transition-all text-sm"
+                      className="px-8 bg-white/5 text-white/60 font-semibold py-4 rounded-2xl hover:bg-white/10 hover:text-white active:scale-[0.98] transition-all text-sm"
                     >
                       Back
                     </button>
@@ -267,13 +267,13 @@ export default function ProfileModal({ isOpen, onClose, user }: ProfileModalProp
             </div>
 
             {/* Footer */}
-            <div className="px-8 py-6 bg-[#fbfbfd] border-t border-black/5 flex items-center justify-between">
-              <span className="text-[10px] font-bold text-black/40 uppercase tracking-[0.2em]">
+            <div className="px-8 py-6 bg-white/5 border-t border-white/10 flex items-center justify-between">
+              <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">
                 {user?.email}
               </span>
               <div className="flex items-center gap-1.5">
-                <div className="w-1.5 h-1.5 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.4)]" />
-                <span className="text-[10px] font-bold text-black/40 uppercase tracking-[0.2em]">
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.4)]" />
+                <span className="text-[10px] font-bold text-white/40 uppercase tracking-[0.2em]">
                   Encrypted
                 </span>
               </div>

@@ -84,8 +84,8 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
               </h2>
               <p className="text-sm text-muted-foreground mt-2">
                 {view === 'login' 
-                  ? 'Sign in to access your PDF library' 
-                  : 'Create an account to start your transformation'}
+                  ? 'Sign in to access your tool workspace' 
+                  : 'Create an account to forge your workflow'}
               </p>
             </div>
 
