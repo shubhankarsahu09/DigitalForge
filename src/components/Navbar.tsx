@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Linkedin, Twitter, Menu, X } from "lucide-react";
+import { Instagram, Linkedin, Twitter, Menu, X, Sun, Moon } from "lucide-react";
 import { cn } from "../lib/utils";
 import { useAuth } from "../hooks/useAuth";
+import { useTheme } from "../hooks/useTheme";
 import { Link, useLocation } from "react-router-dom";
 
 interface NavbarProps {
@@ -13,6 +14,7 @@ interface NavbarProps {
 
 export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
   const { user, signOut } = useAuth();
+  const { theme, toggleTheme } = useTheme();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
@@ -46,8 +48,8 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-28 py-4 transition-all duration-300",
         isScrolled 
-          ? "bg-black/80 backdrop-blur-md border-b border-white/5 py-3" 
-          : (!isLandingPage ? "bg-black/40 backdrop-blur-sm py-4" : "bg-transparent")
+          ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-3" 
+          : (!isLandingPage ? "bg-background/40 backdrop-blur-sm py-4" : "bg-transparent")
       )}
     >
       {/* Logo */}
@@ -55,7 +57,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         <div className="relative flex items-center justify-center w-7 h-7 rounded-full border-2 border-foreground/60 group-hover:border-foreground transition-colors">
           <div className="w-3 h-3 rounded-full border border-foreground/60 group-hover:border-foreground transition-colors" />
         </div>
-        <span className="font-bold text-base tracking-tight text-white transition-colors">
+        <span className="font-bold text-base tracking-tight text-foreground transition-colors">
           DIGITAL<span className="text-[#c9a96e]">FORGE</span>
         </span>
       </Link>
@@ -74,13 +76,13 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               to={link.path}
               className={cn(
                 "transition-colors duration-200",
-                isLinkActive(link.path) ? "text-white" : "text-white/60 hover:text-white"
+                isLinkActive(link.path) ? "text-foreground" : "text-foreground/60 hover:text-foreground"
               )}
             >
               {link.name}
             </Link>
             {i < 4 && (
-              <span className="text-white/10">•</span>
+              <span className="text-foreground/10">•</span>
             )}
           </React.Fragment>
         ))}
@@ -88,19 +90,28 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
 
       {/* Right Side: Auth & Social Icons */}
       <div className="flex items-center gap-4">
+        {/* Theme Toggle */}
+        <button
+          onClick={toggleTheme}
+          aria-label="Toggle theme"
+          className="w-9 h-9 rounded-full flex items-center justify-center bg-foreground/5 text-foreground/60 hover:bg-foreground/10 hover:text-foreground transition-all duration-200"
+        >
+          {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+        </button>
+
         {/* Auth State */}
         <div className="hidden md:flex items-center gap-4">
           {user ? (
             <>
               <button
                 onClick={onProfile}
-                className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+                className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Profile
               </button>
               <button
                 onClick={() => signOut()}
-                className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+                className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Logout
               </button>
@@ -109,13 +120,13 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             <>
               <button
                 onClick={onLogin}
-                className="text-[13px] font-medium text-white/60 hover:text-white transition-colors"
+                className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
               >
                 Log In
               </button>
               <button
                 onClick={onSignup}
-                className="text-[13px] font-bold px-5 py-1.5 rounded-full bg-white text-black hover:bg-white/90 transition-all active:scale-95"
+                className="text-[13px] font-bold px-5 py-1.5 rounded-full bg-foreground text-background hover:bg-foreground/90 transition-all active:scale-95"
               >
                 SIGN UP
               </button>
@@ -136,7 +147,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               aria-label={label}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-9 h-9 rounded-full flex items-center justify-center bg-white/5 text-white/40 hover:bg-white/10 hover:text-white transition-all duration-200"
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-foreground/5 text-foreground/40 hover:bg-foreground/10 hover:text-foreground transition-all duration-200"
             >
               <Icon size={14} />
             </motion.a>
@@ -145,7 +156,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
 
         {/* Mobile Menu Toggle */}
         <button
-          className="lg:hidden p-2 text-white transition-colors"
+          className="lg:hidden p-2 text-foreground transition-colors"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -159,7 +170,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="absolute top-full left-0 right-0 bg-black/95 backdrop-blur-xl border-b border-white/10 flex flex-col p-8 gap-6 lg:hidden"
+            className="absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border flex flex-col p-8 gap-6 lg:hidden"
           >
             {[
               { name: "Home", path: "/" },
@@ -172,8 +183,8 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                 key={link.name}
                 to={link.path}
                 className={cn(
-                  "text-lg font-medium border-b border-white/5 pb-2",
-                  isLinkActive(link.path) ? "text-white" : "text-white/60"
+                  "text-lg font-medium border-b border-border/50 pb-2",
+                  isLinkActive(link.path) ? "text-foreground" : "text-foreground/60"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
@@ -187,7 +198,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                     onLogin();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="text-center py-3 rounded-lg border border-white/10 text-white"
+                  className="text-center py-3 rounded-lg border border-border text-foreground"
                 >
                   Log In
                 </button>
@@ -196,7 +207,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                     onSignup();
                     setIsMobileMenuOpen(false);
                   }}
-                  className="text-center py-3 rounded-lg font-bold bg-white text-black"
+                  className="text-center py-3 rounded-lg font-bold bg-foreground text-background"
                 >
                   Sign Up
                 </button>
