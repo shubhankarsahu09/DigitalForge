@@ -20,6 +20,16 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
   // Determine if we're on the landing page or internal pages
   const isLandingPage = location.pathname === "/";
 
+  const isLinkActive = (path: string) => {
+    if (path.includes("tab=purchased")) {
+      return location.pathname.startsWith("/dashboard") && location.search.includes("tab=purchased");
+    }
+    if (path === "/dashboard") {
+      return location.pathname.startsWith("/dashboard") && !location.search.includes("tab=purchased");
+    }
+    return location.pathname === path;
+  };
+
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -64,7 +74,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               to={link.path}
               className={cn(
                 "transition-colors duration-200",
-                location.pathname === link.path ? "text-white" : "text-white/60 hover:text-white"
+                isLinkActive(link.path) ? "text-white" : "text-white/60 hover:text-white"
               )}
             >
               {link.name}
@@ -163,7 +173,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                 to={link.path}
                 className={cn(
                   "text-lg font-medium border-b border-white/5 pb-2",
-                  location.pathname === link.path ? "text-white" : "text-white/60"
+                  isLinkActive(link.path) ? "text-white" : "text-white/60"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
