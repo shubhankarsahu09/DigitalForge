@@ -110,7 +110,7 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl font-bold tracking-tight"
             >
-              {activeTab === "purchased" ? "My" : "Explore"} <span className={cn("font-serif italic font-normal", activeTab === "purchased" ? "text-emerald-600/40" : "text-black/30")}>Playbooks.</span>
+              {activeTab === "purchased" ? "My" : "Explore"} <span className={cn("font-serif italic font-normal", activeTab === "purchased" ? "text-emerald-600/40" : "text-black/30")}>Tools.</span>
             </motion.h1>
             
             <motion.p 
@@ -120,8 +120,8 @@ export default function Dashboard() {
               className="text-lg text-gray-400 max-w-lg leading-relaxed"
             >
               {activeTab === "purchased" 
-                ? "Your personal library of high-density learning materials. Continue where you left off."
-                : "The most comprehensive blueprints for modern skills. Precision-engineered for your growth."}
+                ? "Your personal library of high-performance tools. Access them anywhere."
+                : "The most powerful tools for modern professionals. Precision-engineered for your workflow."}
             </motion.p>
           </div>
 
@@ -243,7 +243,7 @@ export default function Dashboard() {
                 <div className="flex items-center gap-4 mb-8">
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400">
                     <BookOpen size={14} />
-                    {course.pages} Pages
+                    {course.pages || 'v1.0.0'} Version
                   </div>
                   <div className="w-1 h-1 rounded-full bg-gray-200" />
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400">
@@ -262,7 +262,7 @@ export default function Dashboard() {
                         : "bg-black text-white hover:bg-gray-800 shadow-lg shadow-black/10"
                     )}
                   >
-                    {course.isPurchased ? "Read Now" : "Get Access"}
+                    {course.isPurchased ? "Launch Tool" : "Get Access"}
                   </button>
                   <button className={cn(
                     "w-14 h-14 rounded-xl flex items-center justify-center transition-all",
@@ -288,11 +288,11 @@ export default function Dashboard() {
               {activeTab === "purchased" ? <BookOpen size={32} /> : <Filter size={32} />}
             </div>
             <h3 className="text-xl font-bold mb-2">
-              {activeTab === "purchased" ? "Your library is empty" : "No playbooks found"}
+              {activeTab === "purchased" ? "Your workspace is empty" : "No tools found"}
             </h3>
             <p className="text-gray-400 mb-8">
               {activeTab === "purchased" 
-                ? "You haven't added any playbooks to your collection yet." 
+                ? "You haven't added any tools to your collection yet." 
                 : "Try adjusting your search or category filters."}
             </p>
             {activeTab === "purchased" && (

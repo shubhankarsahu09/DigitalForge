@@ -15,14 +15,14 @@ export default function SearchSection() {
         {...fadeUp(0)}
         className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-2px] text-foreground leading-[1.05] mb-6"
       >
-        Education has <span className="font-serif italic font-normal">distilled.</span> Have you?
+        Workflows have <span className="font-serif italic font-normal">evolved.</span> Have you?
       </motion.h2>
 
       <motion.p
         {...fadeUp(0.1)}
         className="text-muted-foreground text-lg max-w-2xl mx-auto mb-24"
       >
-        Skip the noise of long-form video. Our PDF courses provide high-density, distilled knowledge that you can read, highlight, and master anywhere.
+        Skip the noise of clunky software. Our digital tools provide high-performance, seamless utility that you can use, integrate, and master anywhere.
       </motion.p>
 
       {/* Platform Cards */}
@@ -30,18 +30,18 @@ export default function SearchSection() {
         {[
           {
             icon: "/icon-chatgpt.png",
-            name: "Coding Guides",
-            description: "Deeply structured PDF playbooks covering modern development. From logic to deployment, master coding through written clarity.",
+            name: "Automation Scripts",
+            description: "Deeply structured scripts covering modern workflows. From logic to deployment, master automation through clean code.",
           },
           {
             icon: "/icon-perplexity.png",
-            name: "Design Blueprints",
-            description: "Visual-first PDF guides for creative professionals. Master editing, color theory, and digital layout with print-ready precision.",
+            name: "Design Extensions",
+            description: "Visual-first plugins for creative professionals. Master editing, color theory, and digital layout with pixel-perfect precision.",
           },
           {
             icon: "/icon-google.png",
-            name: "Growth Playbooks",
-            description: "Action-oriented PDF courses on business and marketing. Implement strategies directly from high-impact written curricula.",
+            name: "Analytics Dashboards",
+            description: "Action-oriented data tools on business and marketing. Implement strategies directly from high-impact metrics.",
           },
         ].map((platform, i) => (
           <motion.div
@@ -65,7 +65,7 @@ export default function SearchSection() {
         {...fadeUp(0.4)}
         className="text-muted-foreground text-sm text-center"
       >
-        Distilled knowledge. Downloadable instantly. Mastery in your pocket.
+        High-performance tools. Integrated instantly. Productivity in your pocket.
       </motion.p>
     </section>
   );

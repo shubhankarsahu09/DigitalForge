@@ -79,7 +79,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
           {...fadeUp(0.2)}
           className="text-muted-foreground text-lg mb-10 leading-relaxed"
         >
-          Join thousands of learners who are already mastering new skills through our premium PDF library. Download your first playbook today.
+          Join thousands of professionals who are already boosting productivity through our premium tools. Get your first tool today.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -96,7 +96,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
             whileTap={{ scale: 0.97 }}
             className="bg-foreground text-background rounded-lg px-8 py-3.5 text-sm font-semibold hover:bg-foreground/90 transition-colors duration-200"
           >
-            Download Now
+            Get Started
           </motion.button>
           <motion.button
             onClick={() => {
@@ -110,7 +110,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
             whileTap={{ scale: 0.97 }}
             className="liquid-glass rounded-lg px-8 py-3.5 text-sm font-semibold text-foreground hover:text-white transition-colors duration-200"
           >
-            Browse Library
+            Browse Tools
           </motion.button>
         </motion.div>
       </div>

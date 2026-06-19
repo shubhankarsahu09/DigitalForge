@@ -3,11 +3,11 @@ import { motion, useScroll, useTransform } from "framer-motion";
 
 const highlighted = new Set(["clarity", "meets", "depth"]);
 
-const para1 = "We're building a space where clarity meets depth — where students find structured mastery, authors find impact, and every PDF playbook becomes a catalyst for real-world growth.".split(
+const para1 = "We're building a space where clarity meets depth — where creators find powerful tools, builders find efficiency, and every software tool becomes a catalyst for real-world growth.".split(
   " "
 );
 
-const para2 = "A premium library of distilled education and professional playbooks — with zero noise, maximum density, and total portability for every learner.".split(
+const para2 = "A premium suite of high-performance tools and digital utilities — with zero noise, maximum productivity, and total flexibility for every professional.".split(
   " "
 );
 

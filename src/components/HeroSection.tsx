@@ -55,7 +55,7 @@ export default function HeroSection({ onLogin, onSignup }: HeroSectionProps) {
           transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
           className="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-2px] mb-8 max-w-5xl leading-[1.05]"
         >
-          Distilled <span className="font-serif italic font-normal">Knowledge</span> in Every PDF
+          Next-Generation <span className="font-serif italic font-normal">Tools</span> for Creators
         </motion.h1>
 
         {/* Subtitle */}
@@ -65,7 +65,7 @@ export default function HeroSection({ onLogin, onSignup }: HeroSectionProps) {
           transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
           className="text-lg text-hero-subtitle max-w-2xl mb-12 leading-relaxed"
         >
-          Master new skills with our premium, structured PDF playbooks. No fluff, no long videos — just high-density learning you can download and keep forever.
+          Supercharge your workflow with our premium, high-performance tools. Designed for professionals who want to build faster, smarter, and better.
         </motion.p>
 
         {/* Action Buttons */}
@@ -89,7 +89,7 @@ export default function HeroSection({ onLogin, onSignup }: HeroSectionProps) {
             onClick={handleBrowseLibrary}
             className="liquid-glass text-foreground border border-white/10 rounded-full px-8 py-4 font-bold text-sm tracking-wider w-full sm:w-auto"
           >
-            BROWSE LIBRARY
+            BROWSE TOOLS
           </motion.button>
         </motion.div>
 
