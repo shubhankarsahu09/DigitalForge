@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { FileText, Download, Search, Filter, BookOpen, Clock, Star } from "lucide-react";
+import { Cpu, ExternalLink, Search, Filter, Box, Clock, Star } from "lucide-react";
 import { useNavigate, useSearchParams, useParams, Link } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { supabase } from "../lib/supabase";
@@ -8,7 +8,14 @@ import { useAuth } from "../hooks/useAuth";
 
 const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
 
-const COURSES: any[] = [];
+const COURSES = [
+  { id: 1, title: "Smart SEO Analyzer", description: "Instantly analyze any webpage for SEO best practices and get actionable fixes.", category: "Marketing", pages: "v2.1", size: "Cloud App", isPurchased: false },
+  { id: 2, title: "Automated Video Editor", description: "Upload raw footage and let our AI cut, trim, and caption your content.", category: "Video Editing", pages: "v1.4", size: "Desktop", isPurchased: false },
+  { id: 3, title: "Code Boilerplate Gen", description: "Generate production-ready SaaS boilerplates in React, Next.js, and Node.", category: "Coding", pages: "v3.0", size: "CLI Tool", isPurchased: false },
+  { id: 4, title: "Figma to React", description: "Convert your Figma designs directly into pixel-perfect React components.", category: "Design", pages: "v1.2", size: "Plugin", isPurchased: false },
+  { id: 5, title: "Marketing Flow Builder", description: "Pre-built email and SMS workflows to instantly boost your conversion rates.", category: "Marketing", pages: "v2.0", size: "Web App", isPurchased: false },
+  { id: 6, title: "Schema Visualizer", description: "Connect your Postgres DB and get a beautiful interactive map of your tables.", category: "Coding", pages: "v1.1", size: "Cloud App", isPurchased: false }
+];
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -19,6 +26,7 @@ export default function Dashboard() {
   const activeCategory = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : "All";
   const [searchQuery, setSearchQuery] = useState("");
   const [courses, setCourses] = useState(COURSES);
+  const [activeTool, setActiveTool] = useState<any>(null);
 
   // Load purchases from Supabase on mount
   useEffect(() => {
@@ -84,6 +92,32 @@ export default function Dashboard() {
     const matchesTab = activeTab === "all" || (activeTab === "purchased" && course.isPurchased);
     return matchesCategory && matchesSearch && matchesTab;
   });
+
+  if (activeTool) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col pt-20">
+        <div className="border-b border-white/10 p-4 flex items-center justify-between">
+           <div className="flex items-center gap-4">
+             <button onClick={() => setActiveTool(null)} className="text-white/60 hover:text-white px-4 py-2 border border-white/10 rounded-lg transition-colors text-sm font-medium">Back to Dashboard</button>
+             <h2 className="text-lg font-bold tracking-tight">{activeTool.title}</h2>
+           </div>
+           <div className="flex items-center gap-4">
+             <span className="text-emerald-500 text-xs font-mono font-bold tracking-widest bg-emerald-500/10 px-3 py-1 rounded-full">{activeTool.pages}</span>
+           </div>
+        </div>
+        <div className="flex-1 flex items-center justify-center bg-zinc-950 p-8">
+           <motion.div initial={{opacity: 0, scale: 0.95}} animate={{opacity: 1, scale: 1}} className="max-w-2xl text-center flex flex-col items-center">
+             <div className="w-24 h-24 rounded-full bg-white/5 border border-white/10 flex items-center justify-center mb-8">
+               <Cpu size={40} className="text-white/60" />
+             </div>
+             <h3 className="text-4xl font-medium tracking-tight mb-4">{activeTool.title} Workspace</h3>
+             <p className="text-white/40 text-lg mb-10 leading-relaxed max-w-xl mx-auto">This is a premium high-performance environment for {activeTool.title}. The sleek, focused dark mode design removes all distractions so you can perform your best work.</p>
+             <button className="bg-white text-black px-10 py-4 rounded-full font-bold text-sm tracking-widest uppercase hover:scale-105 active:scale-95 transition-all shadow-[0_0_40px_rgba(255,255,255,0.2)]">Execute Task</button>
+           </motion.div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#FBFBFD] text-[#1D1D1F]">
@@ -212,7 +246,7 @@ export default function Dashboard() {
                     "w-14 h-14 rounded-2xl flex items-center justify-center transition-colors duration-500",
                     course.isPurchased ? "bg-emerald-50 text-emerald-300 group-hover:text-emerald-600" : "bg-gray-50 text-gray-300 group-hover:text-black"
                   )}>
-                    <FileText size={28} />
+                    <Cpu size={28} />
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <span className={cn(
@@ -242,7 +276,7 @@ export default function Dashboard() {
 
                 <div className="flex items-center gap-4 mb-8">
                   <div className="flex items-center gap-1.5 text-xs font-semibold text-gray-400">
-                    <BookOpen size={14} />
+                    <Box size={14} />
                     {course.pages || 'v1.0.0'} Version
                   </div>
                   <div className="w-1 h-1 rounded-full bg-gray-200" />
@@ -254,7 +288,7 @@ export default function Dashboard() {
 
                 <div className={cn("flex items-center gap-4 pt-8 border-t", course.isPurchased ? "border-emerald-50" : "border-gray-50")}>
                   <button 
-                    onClick={() => course.isPurchased ? null : handlePurchase(course.id)}
+                    onClick={() => course.isPurchased ? setActiveTool(course) : handlePurchase(course.id)}
                     className={cn(
                       "flex-1 rounded-xl py-4 text-sm font-bold active:scale-95 transition-all",
                       course.isPurchased 
@@ -264,13 +298,15 @@ export default function Dashboard() {
                   >
                     {course.isPurchased ? "Launch Tool" : "Get Access"}
                   </button>
-                  <button className={cn(
+                  <button 
+                    onClick={() => course.isPurchased ? setActiveTool(course) : null}
+                    className={cn(
                     "w-14 h-14 rounded-xl flex items-center justify-center transition-all",
                     course.isPurchased 
-                      ? "bg-emerald-50 text-emerald-600 hover:bg-emerald-100" 
-                      : "bg-gray-50 text-gray-400 hover:text-black hover:bg-gray-100"
+                      ? "bg-emerald-50 text-emerald-600 hover:bg-emerald-100 cursor-pointer" 
+                      : "bg-gray-50 text-gray-400 hover:text-black hover:bg-gray-100 cursor-default"
                   )}>
-                    <Download size={20} />
+                    <ExternalLink size={20} />
                   </button>
                 </div>
               </div>
@@ -285,7 +321,7 @@ export default function Dashboard() {
             className="text-center py-40 bg-white rounded-[3rem] border border-dashed border-gray-200"
           >
             <div className="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6 text-gray-200">
-              {activeTab === "purchased" ? <BookOpen size={32} /> : <Filter size={32} />}
+              {activeTab === "purchased" ? <Box size={32} /> : <Filter size={32} />}
             </div>
             <h3 className="text-xl font-bold mb-2">
               {activeTab === "purchased" ? "Your workspace is empty" : "No tools found"}
