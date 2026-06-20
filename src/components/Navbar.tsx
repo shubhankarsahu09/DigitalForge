@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Instagram, Linkedin, Twitter, Menu, X, Sun, Moon } from "lucide-react";
+import { Instagram, Twitter, Menu, X, Sun, Moon } from "lucide-react";
 import { cn } from "../lib/utils";
 import { useAuth } from "../hooks/useAuth";
 import { useTheme } from "../hooks/useTheme";
@@ -140,8 +140,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         <div className="flex items-center gap-2">
           {[
             { icon: Instagram, label: "Instagram" },
-            { icon: Linkedin, label: "LinkedIn" },
-            { icon: Twitter, label: "Twitter" },
+            { icon: Twitter, label: "X" },
           ].map(({ icon: Icon, label }) => (
             <motion.a
               key={label}

@@ -218,7 +218,7 @@ export default function Contact() {
             <div>
               <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Follow Us</h3>
               <div style={{ display: "flex", gap: 12 }}>
-                {["Instagram", "Twitter", "LinkedIn"].map(social => (
+                {["Instagram", "X"].map(social => (
                   <a key={social} href="#" style={{ 
                     padding: "8px 16px", 
                     background: "hsl(var(--card))", 
