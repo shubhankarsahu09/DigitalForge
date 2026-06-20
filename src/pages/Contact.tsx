@@ -64,8 +64,8 @@ export default function Contact() {
 
         .modern-input {
           width: 100%;
-          background: #111;
-          border: 1px solid #222;
+          background: hsl(var(--card));
+          border: 1px solid hsl(var(--border));
           border-radius: 12px;
           padding: 14px 18px;
           font-family: 'Inter', sans-serif;
@@ -76,7 +76,7 @@ export default function Contact() {
         }
 
         .modern-input:focus {
-          background: #000;
+          background: hsl(var(--background));
           border-color: hsl(var(--foreground));
           box-shadow: 0 0 0 4px hsl(var(--foreground) / 0.1);
         }
@@ -109,11 +109,12 @@ export default function Contact() {
         }
 
         .info-card {
-          background: #111;
+          background: hsl(var(--card));
           padding: 32px;
           border-radius: 24px;
           height: 100%;
-          border: 1px solid #222;
+          border: 1px solid hsl(var(--border));
+          box-shadow: 0 10px 30px hsl(var(--foreground) / 0.05);
         }
 
         @media (max-width: 768px) {
@@ -159,7 +160,7 @@ export default function Contact() {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2 }}
-            style={{ background: "#0a0a0a", padding: "40px", borderRadius: "32px", border: "1px solid #222", boxShadow: "0 20px 40px rgba(0,0,0,0.5)" }}
+            style={{ background: "hsl(var(--card))", padding: "40px", borderRadius: "32px", border: "1px solid hsl(var(--border))", boxShadow: "0 20px 40px hsl(var(--foreground) / 0.05)" }}
           >
             {submitted ? (
               <div style={{ textAlign: "center", padding: "40px 0" }}>
@@ -220,13 +221,13 @@ export default function Contact() {
                 {["Instagram", "Twitter", "LinkedIn"].map(social => (
                   <a key={social} href="#" style={{ 
                     padding: "8px 16px", 
-                    background: "#111", 
+                    background: "hsl(var(--card))", 
                     borderRadius: "100px", 
                     fontSize: 13, 
                     fontWeight: 600, 
                     color: "hsl(var(--foreground))", 
                     textDecoration: "none",
-                    border: "1px solid #333"
+                    border: "1px solid hsl(var(--border))"
                   }}>{social}</a>
                 ))}
               </div>
