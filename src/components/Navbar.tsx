@@ -139,12 +139,14 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         {/* Social Icons */}
         <div className="flex items-center gap-2">
           {[
-            { icon: Instagram, label: "Instagram" },
-            { icon: Twitter, label: "X" },
-          ].map(({ icon: Icon, label }) => (
+            { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/shubhankarsahu_09/?hl=en" },
+            { icon: Twitter, label: "X", href: "#" },
+          ].map(({ icon: Icon, label, href }) => (
             <motion.a
               key={label}
-              href="#"
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
               aria-label={label}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}

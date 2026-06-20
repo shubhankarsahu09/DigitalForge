@@ -218,8 +218,11 @@ export default function Contact() {
             <div>
               <h3 style={{ fontSize: 20, fontWeight: 700, marginBottom: 16 }}>Follow Us</h3>
               <div style={{ display: "flex", gap: 12 }}>
-                {["Instagram", "X"].map(social => (
-                  <a key={social} href="#" style={{ 
+                {[
+                  { name: "Instagram", href: "https://www.instagram.com/shubhankarsahu_09/?hl=en" },
+                  { name: "X", href: "#" }
+                ].map(social => (
+                  <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" style={{ 
                     padding: "8px 16px", 
                     background: "hsl(var(--card))", 
                     borderRadius: "100px", 
@@ -228,7 +231,7 @@ export default function Contact() {
                     color: "hsl(var(--foreground))", 
                     textDecoration: "none",
                     border: "1px solid hsl(var(--border))"
-                  }}>{social}</a>
+                  }}>{social.name}</a>
                 ))}
               </div>
             </div>
