@@ -6,7 +6,7 @@ import { cn } from "../lib/utils";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../hooks/useAuth";
 
-const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
+
 
 const COURSES: any[] = [
   {
@@ -149,35 +149,11 @@ export default function Dashboard() {
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-foreground transition-colors" size={18} />
               <input
                 type="text"
-                placeholder={`Search ${category ? activeCategory.toLowerCase() : 'all tools'}...`}
+                placeholder="Search all tools..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-card border border-border rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-1 focus:ring-ring transition-all placeholder:text-foreground/30 text-foreground"
               />
-            </div>
-
-            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar">
-              <Link
-                to="/dashboard"
-                className={cn(
-                  "px-6 py-3.5 rounded-full text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all",
-                  !category ? "bg-foreground text-background" : "bg-card text-muted-foreground hover:bg-secondary hover:text-foreground"
-                )}
-              >
-                All
-              </Link>
-              {CATEGORIES.map((cat) => (
-                <Link
-                  key={cat}
-                  to={`/dashboard/${cat.toLowerCase()}`}
-                  className={cn(
-                    "px-6 py-3.5 rounded-full text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all",
-                    category === cat.toLowerCase() ? "bg-foreground text-background" : "bg-card text-muted-foreground hover:bg-secondary hover:text-foreground"
-                  )}
-                >
-                  {cat}
-                </Link>
-              ))}
             </div>
           </div>
         </section>
