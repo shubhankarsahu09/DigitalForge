@@ -217,7 +217,10 @@ export default function Dashboard() {
                   >
                     {course.isPurchased ? "Launch Tool" : "Get Access"}
                   </button>
-                  <button className="w-12 h-12 rounded-full flex items-center justify-center bg-card text-muted-foreground hover:bg-secondary hover:text-foreground transition-all border border-border">
+                  <button 
+                    onClick={() => course.isPurchased ? window.open(course.route, '_blank') : null}
+                    className="w-12 h-12 rounded-full flex items-center justify-center bg-card text-muted-foreground hover:bg-secondary hover:text-foreground transition-all border border-border"
+                  >
                     {course.isPurchased ? <ExternalLink size={18} /> : <Download size={18} />}
                   </button>
                 </div>
