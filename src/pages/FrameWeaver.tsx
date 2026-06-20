@@ -188,7 +188,7 @@ export default function FrameWeaver() {
 
       <div className="app-container mx-auto">
         <header className="header">
-          <h1 className="title">FrameWeaver</h1>
+          <h1 className="title">Frame To Video Converter</h1>
           <p className="subtitle">Pro-level sequence encoding, instantly.</p>
         </header>
 

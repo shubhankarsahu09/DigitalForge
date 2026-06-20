@@ -11,7 +11,7 @@ import { useAuth } from "../hooks/useAuth";
 const COURSES: any[] = [
   {
     id: 1,
-    title: "FrameWeaver",
+    title: "Frame To Video Converter",
     description: "Pro-level sequence encoding instantly. Convert image frames to MP4 directly in the browser.",
     category: "Video Editing",
     pages: "v1.0.0",
