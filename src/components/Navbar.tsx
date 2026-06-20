@@ -140,7 +140,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         <div className="flex items-center gap-2">
           {[
             { icon: Instagram, label: "Instagram", href: "https://www.instagram.com/shubhankarsahu_09/?hl=en" },
-            { icon: Twitter, label: "X", href: "#" },
+            { icon: Twitter, label: "X", href: "https://x.com/Shubhankarsahuu" },
           ].map(({ icon: Icon, label, href }) => (
             <motion.a
               key={label}

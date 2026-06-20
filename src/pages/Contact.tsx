@@ -220,7 +220,7 @@ export default function Contact() {
               <div style={{ display: "flex", gap: 12 }}>
                 {[
                   { name: "Instagram", href: "https://www.instagram.com/shubhankarsahu_09/?hl=en" },
-                  { name: "X", href: "#" }
+                  { name: "X", href: "https://x.com/Shubhankarsahuu" }
                 ].map(social => (
                   <a key={social.name} href={social.href} target="_blank" rel="noopener noreferrer" style={{ 
                     padding: "8px 16px", 
