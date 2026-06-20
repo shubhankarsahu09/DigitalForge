@@ -8,7 +8,18 @@ import { useAuth } from "../hooks/useAuth";
 
 const CATEGORIES = ["Video Editing", "Coding", "Design", "Marketing"];
 
-const COURSES: any[] = [];
+const COURSES: any[] = [
+  {
+    id: 1,
+    title: "FrameWeaver",
+    description: "Pro-level sequence encoding instantly. Convert image frames to MP4 directly in the browser.",
+    category: "Video Editing",
+    pages: "v1.0.0",
+    size: "WASM Engine",
+    isPurchased: false,
+    route: "/tools/frameweaver"
+  }
+];
 
 export default function Dashboard() {
   const { user } = useAuth();
@@ -220,7 +231,7 @@ export default function Dashboard() {
 
                 <div className="flex items-center gap-3 pt-6 border-t border-border">
                   <button
-                    onClick={() => course.isPurchased ? null : handlePurchase(course.id)}
+                    onClick={() => course.isPurchased ? navigate(course.route) : handlePurchase(course.id)}
                     className={cn(
                       "flex-1 rounded-full py-3.5 text-xs font-bold tracking-wider uppercase transition-all",
                       course.isPurchased

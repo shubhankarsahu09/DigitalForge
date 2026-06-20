@@ -14,6 +14,7 @@ import AuroraAuth from "./components/AuroraAuth";
 import Dashboard from "./pages/Dashboard";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import FrameWeaver from "./pages/FrameWeaver";
 import { useAuth } from "./hooks/useAuth";
 import ProfileModal from "./components/ProfileModal";
 
@@ -97,6 +98,12 @@ function App() {
           <Route 
             path="/contact" 
             element={<Contact />} 
+          />
+          <Route 
+            path="/tools/frameweaver" 
+            element={
+              user ? <FrameWeaver /> : <Navigate to="/" replace />
+            } 
           />
         </Routes>
 
