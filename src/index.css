@@ -76,12 +76,12 @@
 
 @layer components {
   .liquid-glass {
-    background: rgba(255, 255, 255, 0.01);
+    background: hsl(var(--foreground) / 0.01);
     background-blend-mode: luminosity;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
     border: none;
-    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 1px 1px hsl(var(--foreground) / 0.1);
     position: relative;
     overflow: hidden;
   }
@@ -94,12 +94,12 @@
     padding: 1.4px;
     background: linear-gradient(
       180deg,
-      rgba(255, 255, 255, 0.45) 0%,
-      rgba(255, 255, 255, 0.15) 20%,
-      rgba(255, 255, 255, 0) 40%,
-      rgba(255, 255, 255, 0) 60%,
-      rgba(255, 255, 255, 0.15) 80%,
-      rgba(255, 255, 255, 0.45) 100%
+      hsl(var(--foreground) / 0.45) 0%,
+      hsl(var(--foreground) / 0.15) 20%,
+      hsl(var(--foreground) / 0) 40%,
+      hsl(var(--foreground) / 0) 60%,
+      hsl(var(--foreground) / 0.15) 80%,
+      hsl(var(--foreground) / 0.45) 100%
     );
     -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     -webkit-mask-composite: xor;
@@ -115,21 +115,29 @@
 
   /* Light Theme for internal pages */
   .light-theme {
-    --background: 0 0% 98%;
-    --foreground: 0 0% 10%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 10%;
-    --primary: 0 0% 0%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 95%;
-    --secondary-foreground: 0 0% 20%;
-    --muted: 0 0% 90%;
-    --muted-foreground: 0 0% 45%;
-    --border: 0 0% 88%;
-    --input: 0 0% 100%;
-    --ring: 0 0% 0%;
-    --hero-subtitle: 0 0% 30%;
-    --selection: 0 0% 0% / 0.1;
+    /* Cream/Beige Background */
+    --background: 40 20% 97%;
+    /* Deep warm grey for text */
+    --foreground: 20 10% 15%;
+    /* Slightly lighter cream for cards to stand out */
+    --card: 40 30% 99%;
+    --card-foreground: 20 10% 15%;
+    
+    --primary: 20 20% 20%;
+    --primary-foreground: 40 20% 97%;
+    
+    /* Warm beige for secondary/muted elements */
+    --secondary: 40 15% 92%;
+    --secondary-foreground: 20 10% 25%;
+    --muted: 40 15% 92%;
+    --muted-foreground: 20 5% 45%;
+    
+    --border: 40 15% 88%;
+    --input: 40 30% 99%;
+    --ring: 40 20% 70%;
+    
+    --hero-subtitle: 20 10% 35%;
+    --selection: 40 30% 50% / 0.2;
     --selection-foreground: inherit;
 
     background-color: hsl(var(--background));
@@ -137,7 +145,7 @@
   }
 
   .apple-glass {
-    background: rgba(255, 255, 255, 0.7);
+    background: hsl(var(--foreground) / 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid rgba(0, 0, 0, 0.05);
