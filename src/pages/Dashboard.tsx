@@ -51,7 +51,7 @@ export default function Dashboard() {
         .from('purchases')
         .insert({ user_id: user.id, course_id: String(courseId) });
       if (error && error.code !== '23505') throw error;
-      setCourses(prev => prev.map(course => 
+      setCourses(prev => prev.map(course =>
         course.id === courseId ? { ...course, isPurchased: true } : course
       ));
     } catch (error) {
@@ -71,8 +71,8 @@ export default function Dashboard() {
     <div className="min-h-screen bg-background text-foreground flex flex-col relative overflow-hidden">
       {/* Background elements to match landing page */}
       <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-white/[0.03] to-transparent pointer-events-none" />
-      <div className="absolute -top-40 -right-40 w-96 h-96 bg-white/[0.02] rounded-full blur-[100px] pointer-events-none" />
-      
+      <div className="absolute -top-40 -right-40 w-96 h-96 bg-foreground/[0.02] rounded-full blur-[100px] pointer-events-none" />
+
       {/* Top spacing for Navbar */}
       <div className="h-28" />
 
@@ -85,63 +85,63 @@ export default function Dashboard() {
               animate={{ opacity: 1, x: 0 }}
               className="flex items-center gap-3"
             >
-              <div className="w-8 h-[1px] bg-white/40" />
-              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-white/60">
+              <div className="w-8 h-[1px] bg-foreground/40" />
+              <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-muted-foreground">
                 {activeTab === "purchased" ? "Your Workspace" : "Tool Discovery"}
               </span>
             </motion.div>
-            
-            <motion.h1 
+
+            <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight"
             >
-              {activeTab === "purchased" ? "My" : "Explore"} <span className="font-serif italic text-white/50">Tools.</span>
+              {activeTab === "purchased" ? "My" : "Explore"} <span className="font-serif italic text-muted-foreground">Tools.</span>
             </motion.h1>
-            
-            <motion.p 
+
+            <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
-              className="text-lg text-white/40 max-w-lg leading-relaxed"
+              className="text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
-              {activeTab === "purchased" 
+              {activeTab === "purchased"
                 ? "Your personal workspace of high-performance tools. Ready for execution."
                 : "The most powerful utilities for modern professionals. Precision-engineered for your workflow."}
             </motion.p>
           </div>
 
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            className="flex items-center gap-10 border-l border-white/10 pl-10 h-20"
+            className="flex items-center gap-10 border-l border-border pl-10 h-20"
           >
             <div className="flex flex-col">
               <span className="text-3xl font-medium">{filteredCourses.length}</span>
-              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1">
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">
                 {activeTab === "purchased" ? "Owned" : "Available"}
               </span>
             </div>
             <div className="flex flex-col">
-              <span className="text-3xl font-medium text-white/60">
+              <span className="text-3xl font-medium text-muted-foreground">
                 {courses.filter(c => c.isPurchased).length}
               </span>
-              <span className="text-[10px] font-bold text-white/40 uppercase tracking-widest mt-1">Mastered</span>
+              <span className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest mt-1">Mastered</span>
             </div>
           </motion.div>
         </div>
 
         {/* Filters & Search */}
-        <section className="sticky top-20 z-30 bg-background/80 backdrop-blur-xl py-6 mb-12 border-b border-white/5">
+        <section className="sticky top-20 z-30 bg-background/80 backdrop-blur-xl py-6 mb-12 border-b border-border">
           <div className="flex flex-col lg:flex-row gap-6">
             <div className="relative flex-1 group">
-              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-white/40 group-focus-within:text-white transition-colors" size={18} />
+              <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-foreground transition-colors" size={18} />
               <input
                 type="text"
                 placeholder={`Search ${category ? activeCategory.toLowerCase() : 'all tools'}...`}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white/5 border border-white/10 rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-1 focus:ring-white/30 transition-all placeholder:text-white/30 text-white"
+                className="w-full bg-card border border-border rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-1 focus:ring-ring transition-all placeholder:text-foreground/30 text-foreground"
               />
             </div>
 
@@ -150,7 +150,7 @@ export default function Dashboard() {
                 to="/dashboard"
                 className={cn(
                   "px-6 py-3.5 rounded-full text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all",
-                  !category ? "bg-white text-black" : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                  !category ? "bg-foreground text-background" : "bg-card text-muted-foreground hover:bg-secondary hover:text-foreground"
                 )}
               >
                 All
@@ -161,7 +161,7 @@ export default function Dashboard() {
                   to={`/dashboard/${cat.toLowerCase()}`}
                   className={cn(
                     "px-6 py-3.5 rounded-full text-xs font-bold tracking-wider uppercase whitespace-nowrap transition-all",
-                    category === cat.toLowerCase() ? "bg-white text-black" : "bg-white/5 text-white/60 hover:bg-white/10 hover:text-white"
+                    category === cat.toLowerCase() ? "bg-foreground text-background" : "bg-card text-muted-foreground hover:bg-secondary hover:text-foreground"
                   )}
                 >
                   {cat}
@@ -179,58 +179,58 @@ export default function Dashboard() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: idx * 0.05 }}
-              className="group relative border border-white/10 rounded-3xl p-8 flex flex-col h-full bg-white/[0.02] hover:bg-white/[0.04] transition-all duration-300"
+              className="group relative border border-border rounded-3xl p-8 flex flex-col h-full bg-foreground/[0.02] hover:bg-foreground/[0.04] transition-all duration-300"
             >
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-8">
-                  <div className="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center text-white/60 group-hover:text-white transition-colors">
+                  <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground group-hover:text-foreground transition-colors">
                     <Cpu size={24} />
                   </div>
                   <div className="flex flex-col items-end gap-2">
-                    <span className="text-[10px] font-bold tracking-widest uppercase text-white/40 group-hover:text-white/60 transition-colors">
+                    <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground group-hover:text-muted-foreground transition-colors">
                       {course.category}
                     </span>
                     {course.isPurchased && (
-                      <span className="flex items-center gap-1 text-[9px] font-bold bg-white/10 text-white px-2.5 py-1 rounded-full tracking-wider border border-white/10">
+                      <span className="flex items-center gap-1 text-[9px] font-bold bg-secondary text-foreground px-2.5 py-1 rounded-full tracking-wider border border-border">
                         <Star size={8} fill="currentColor" /> OWNED
                       </span>
                     )}
                   </div>
                 </div>
 
-                <h3 className="text-xl font-medium mb-3 tracking-tight text-white/90 group-hover:text-white transition-colors">
+                <h3 className="text-xl font-medium mb-3 tracking-tight text-foreground group-hover:text-foreground transition-colors">
                   {course.title}
                 </h3>
-                
-                <p className="text-white/50 text-sm mb-8 line-clamp-2 leading-relaxed flex-1">
+
+                <p className="text-muted-foreground text-sm mb-8 line-clamp-2 leading-relaxed flex-1">
                   {course.description}
                 </p>
 
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="flex items-center gap-1.5 text-xs font-medium text-white/40">
+                  <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                     <Box size={14} />
                     {course.pages || 'v1.0.0'}
                   </div>
-                  <div className="w-1 h-1 rounded-full bg-white/20" />
-                  <div className="flex items-center gap-1.5 text-xs font-medium text-white/40">
+                  <div className="w-1 h-1 rounded-full bg-muted" />
+                  <div className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
                     <Clock size={14} />
                     {course.size}
                   </div>
                 </div>
 
-                <div className="flex items-center gap-3 pt-6 border-t border-white/10">
-                  <button 
+                <div className="flex items-center gap-3 pt-6 border-t border-border">
+                  <button
                     onClick={() => course.isPurchased ? null : handlePurchase(course.id)}
                     className={cn(
                       "flex-1 rounded-full py-3.5 text-xs font-bold tracking-wider uppercase transition-all",
-                      course.isPurchased 
-                        ? "bg-white/10 text-white hover:bg-white/20" 
-                        : "bg-white text-black hover:bg-white/90"
+                      course.isPurchased
+                        ? "bg-secondary text-foreground hover:bg-muted"
+                        : "bg-foreground text-background hover:bg-foreground/90"
                     )}
                   >
                     {course.isPurchased ? "Launch Tool" : "Get Access"}
                   </button>
-                  <button className="w-12 h-12 rounded-full flex items-center justify-center bg-white/5 text-white/40 hover:bg-white/10 hover:text-white transition-all border border-white/5">
+                  <button className="w-12 h-12 rounded-full flex items-center justify-center bg-card text-muted-foreground hover:bg-secondary hover:text-foreground transition-all border border-border">
                     {course.isPurchased ? <ExternalLink size={18} /> : <Download size={18} />}
                   </button>
                 </div>
@@ -241,27 +241,27 @@ export default function Dashboard() {
 
         {/* Empty State */}
         {filteredCourses.length === 0 && (
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className="flex flex-col items-center justify-center py-32 text-center"
           >
-            <div className="w-24 h-24 rounded-full border border-white/10 flex items-center justify-center mb-8 relative">
-               <div className="absolute inset-0 bg-white/5 rounded-full blur-xl" />
-               <Cpu size={32} className="text-white/40 relative z-10" />
+            <div className="w-24 h-24 rounded-full border border-border flex items-center justify-center mb-8 relative">
+              <div className="absolute inset-0 bg-card rounded-full blur-xl" />
+              <Cpu size={32} className="text-muted-foreground relative z-10" />
             </div>
-            <h3 className="text-2xl font-medium tracking-tight mb-3 text-white">
+            <h3 className="text-2xl font-medium tracking-tight mb-3 text-foreground">
               {activeTab === "purchased" ? "Your workspace is empty" : "No tools available yet"}
             </h3>
-            <p className="text-white/40 max-w-sm mx-auto leading-relaxed mb-8">
-              {activeTab === "purchased" 
-                ? "You haven't acquired any tools yet. Once you do, they will appear in your workspace." 
+            <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed mb-8">
+              {activeTab === "purchased"
+                ? "You haven't acquired any tools yet. Once you do, they will appear in your workspace."
                 : "We are currently forging new tools. Check back later to see what we've built."}
             </p>
             {activeTab === "purchased" && (
-              <button 
+              <button
                 onClick={() => navigate("/dashboard")}
-                className="bg-white text-black px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-white/90 transition-all"
+                className="bg-foreground text-background px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-foreground/90 transition-all"
               >
                 Browse Tools
               </button>

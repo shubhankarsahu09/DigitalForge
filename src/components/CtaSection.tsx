@@ -108,7 +108,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
             }}
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="liquid-glass rounded-lg px-8 py-3.5 text-sm font-semibold text-foreground hover:text-white transition-colors duration-200"
+            className="liquid-glass rounded-lg px-8 py-3.5 text-sm font-semibold text-foreground hover:text-foreground transition-colors duration-200"
           >
             Browse Tools
           </motion.button>

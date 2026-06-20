@@ -56,7 +56,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={onClose}
-            className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
           />
 
           {/* Modal Content */}
@@ -64,7 +64,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
             initial={{ opacity: 0, scale: 0.95, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            className="relative w-full max-w-md liquid-glass p-8 rounded-2xl border border-white/10 overflow-hidden"
+            className="relative w-full max-w-md liquid-glass p-8 rounded-2xl border border-border overflow-hidden"
           >
             {/* Close Button */}
             <button
@@ -103,7 +103,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="name@example.com"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/20 transition-all"
+                    className="w-full bg-card border border-border rounded-xl py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-border/20 transition-all"
                   />
                 </div>
               </div>
@@ -120,7 +120,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     placeholder="••••••••"
-                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-white/20 transition-all"
+                    className="w-full bg-card border border-border rounded-xl py-3 pl-10 pr-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:border-border/20 transition-all"
                   />
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function AuthModal({ isOpen, onClose, initialView = 'login' }: Au
             </form>
 
             {/* Footer */}
-            <div className="mt-8 pt-6 border-t border-white/5 text-center">
+            <div className="mt-8 pt-6 border-t border-border text-center">
               <p className="text-sm text-muted-foreground">
                 {view === 'login' ? "Don't have an account?" : "Already have an account?"}{' '}
                 <button

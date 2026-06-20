@@ -41,7 +41,7 @@ export default function Contact() {
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       background: "hsl(var(--background))",
       minHeight: "100vh",
-      color: "#ffffff",
+      color: "hsl(var(--foreground))",
       lineHeight: 1.5,
     }}>
       <style>{`
@@ -70,15 +70,15 @@ export default function Contact() {
           padding: 14px 18px;
           font-family: 'Inter', sans-serif;
           font-size: 15px;
-          color: #fff;
+          color: hsl(var(--foreground));
           transition: all 0.2s ease;
           outline: none;
         }
 
         .modern-input:focus {
           background: #000;
-          border-color: #fff;
-          box-shadow: 0 0 0 4px rgba(255,255,255,0.1);
+          border-color: hsl(var(--foreground));
+          box-shadow: 0 0 0 4px hsl(var(--foreground) / 0.1);
         }
 
         .modern-input::placeholder {
@@ -87,7 +87,7 @@ export default function Contact() {
 
         .submit-btn {
           width: 100%;
-          background: #fff;
+          background: hsl(var(--foreground));
           color: #000;
           border: none;
           padding: 16px;
@@ -101,7 +101,7 @@ export default function Contact() {
 
         .submit-btn:hover {
           transform: translateY(-1px);
-          box-shadow: 0 8px 24px rgba(255,255,255,0.15);
+          box-shadow: 0 8px 24px hsl(var(--foreground) / 0.15);
         }
 
         .submit-btn:active {
@@ -224,7 +224,7 @@ export default function Contact() {
                     borderRadius: "100px", 
                     fontSize: 13, 
                     fontWeight: 600, 
-                    color: "#fff", 
+                    color: "hsl(var(--foreground))", 
                     textDecoration: "none",
                     border: "1px solid #333"
                   }}>{social}</a>

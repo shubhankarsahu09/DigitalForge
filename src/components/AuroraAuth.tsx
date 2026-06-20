@@ -32,14 +32,14 @@ const StepItem = ({ number, text, active }: StepItemProps) => (
     className={cn(
       "flex items-center gap-4 p-4 rounded-2xl transition-all duration-300",
       active 
-        ? "bg-foreground text-background shadow-[0_0_20px_rgba(255,255,255,0.1)]" 
+        ? "bg-foreground text-background shadow-[0_0_20px_hsl(var(--foreground)/0.1)]" 
         : "liquid-glass text-muted-foreground opacity-60 hover:opacity-80"
     )}
   >
     <div
       className={cn(
         "w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold",
-        active ? "bg-black text-white" : "bg-white/10 text-white/40"
+        active ? "bg-background text-foreground" : "bg-secondary text-muted-foreground"
       )}
     >
       {number}
@@ -52,7 +52,7 @@ const SocialButton = ({ icon: Icon, label, onClick }: SocialButtonProps) => (
   <button
     type="button"
     onClick={onClick}
-    className="flex items-center justify-center gap-3 liquid-glass rounded-xl py-3.5 hover:bg-white/5 transition-all active:scale-[0.98] group cursor-pointer pointer-events-auto relative z-[110]"
+    className="flex items-center justify-center gap-3 liquid-glass rounded-xl py-3.5 hover:bg-card transition-all active:scale-[0.98] group cursor-pointer pointer-events-auto relative z-[110]"
   >
     <Icon size={18} className="text-muted-foreground group-hover:text-foreground transition-colors" />
     <span className="text-sm font-medium text-muted-foreground group-hover:text-foreground transition-colors">{label}</span>
@@ -76,7 +76,7 @@ const InputGroup = ({ label, placeholder, type, value, onChange, required }: Inp
           value={value}
           onChange={onChange}
           placeholder={placeholder}
-          className="w-full bg-black/40 border border-white/10 rounded-xl h-12 px-4 text-foreground placeholder:text-white/20 focus:outline-none focus:ring-4 focus:ring-white/5 focus:border-white transition-all shadow-xl backdrop-blur-sm"
+          className="w-full bg-background/40 border border-border rounded-xl h-12 px-4 text-foreground placeholder:text-foreground/20 focus:outline-none focus:ring-4 focus:ring-ring focus:border-border transition-all shadow-xl backdrop-blur-sm"
         />
         {isPassword && (
           <button
@@ -183,11 +183,11 @@ export default function AuroraAuth({
   };
 
   return (
-    <div className="fixed inset-0 z-[100] bg-black">
-      <main className="flex min-h-screen w-full bg-black selection:bg-white/30 p-2 lg:h-screen lg:overflow-hidden lg:p-4 transition-all duration-500">
+    <div className="fixed inset-0 z-[100] bg-background">
+      <main className="flex min-h-screen w-full bg-background selection:bg-foreground/30 p-2 lg:h-screen lg:overflow-hidden lg:p-4 transition-all duration-500">
         
         {/* Left Column (Hero) */}
-        <section className="relative hidden lg:flex w-[52%] flex-col items-center justify-end pb-32 px-12 rounded-3xl overflow-hidden shadow-2xl h-full border border-white/5">
+        <section className="relative hidden lg:flex w-[52%] flex-col items-center justify-end pb-32 px-12 rounded-3xl overflow-hidden shadow-2xl h-full border border-border">
           <video
             autoPlay
             muted
@@ -213,10 +213,10 @@ export default function AuroraAuth({
               animate={{ opacity: 1, y: 0 }}
               className="flex items-center gap-3"
             >
-              <div className="relative flex items-center justify-center w-7 h-7 rounded-full border-2 border-white">
-                <div className="w-3 h-3 rounded-full border border-white" />
+              <div className="relative flex items-center justify-center w-7 h-7 rounded-full border-2 border-border">
+                <div className="w-3 h-3 rounded-full border border-border" />
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">DigitalForge</span>
+              <span className="text-xl font-bold tracking-tight text-foreground">DigitalForge</span>
             </motion.div>
 
             <motion.div
@@ -224,10 +224,10 @@ export default function AuroraAuth({
               animate={{ opacity: 1, y: 0 }}
               className="space-y-4"
             >
-              <h1 className="text-4xl font-medium tracking-tight whitespace-nowrap text-white">
+              <h1 className="text-4xl font-medium tracking-tight whitespace-nowrap text-foreground">
                 {view === "signup" ? "Join DigitalForge" : view === "login" ? "Welcome Back" : view === "forgot-password" ? "Reset Access" : "New Password"}
               </h1>
-              <p className="text-white/60 text-sm leading-relaxed">
+              <p className="text-muted-foreground text-sm leading-relaxed">
                 {view === "signup" 
                   ? "Follow these 3 quick phases to activate your space." 
                   : view === "login"
@@ -251,7 +251,7 @@ export default function AuroraAuth({
         </section>
 
         {/* Right Column (Form) */}
-        <section className="flex-1 flex flex-col items-center justify-center py-12 lg:py-6 px-4 sm:px-12 lg:px-16 xl:px-24 overflow-y-auto lg:overflow-hidden bg-black">
+        <section className="flex-1 flex flex-col items-center justify-center py-12 lg:py-6 px-4 sm:px-12 lg:px-16 xl:px-24 overflow-y-auto lg:overflow-hidden bg-background">
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -291,9 +291,9 @@ export default function AuroraAuth({
             {/* Divider */}
             <div className="relative flex items-center justify-center">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-white/10"></div>
+                <div className="w-full border-t border-border"></div>
               </div>
-              <span className="relative bg-black px-4 text-xs font-medium text-muted-foreground uppercase tracking-widest">
+              <span className="relative bg-background px-4 text-xs font-medium text-muted-foreground uppercase tracking-widest">
                 {view === "forgot-password" ? "Security Verification" : view === "update-password" ? "New Credentials" : "Or"}
               </span>
             </div>
@@ -352,7 +352,7 @@ export default function AuroraAuth({
                       <button
                         type="button"
                         onClick={() => setView("forgot-password")}
-                        className="text-[10px] text-foreground/40 hover:text-foreground font-medium transition-colors"
+                        className="text-[10px] text-muted-foreground hover:text-foreground font-medium transition-colors"
                       >
                         Forgot Password?
                       </button>
@@ -384,7 +384,7 @@ export default function AuroraAuth({
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full h-14 bg-foreground text-background font-bold rounded-xl hover:bg-foreground/90 active:scale-[0.98] mt-4 flex items-center justify-center gap-2 group disabled:opacity-50 transition-all shadow-[0_0_20px_rgba(255,255,255,0.05)]"
+                className="w-full h-14 bg-foreground text-background font-bold rounded-xl hover:bg-foreground/90 active:scale-[0.98] mt-4 flex items-center justify-center gap-2 group disabled:opacity-50 transition-all shadow-[0_0_20px_hsl(var(--foreground)/0.05)]"
               >
                 {isLoading ? (
                   <Loader2 className="animate-spin" size={20} />

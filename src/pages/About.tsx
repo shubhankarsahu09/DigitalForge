@@ -284,7 +284,7 @@ export default function About() {
       fontFamily: "'Inter', system-ui, -apple-system, sans-serif",
       background: "hsl(var(--background))",
       minHeight: "100vh",
-      color: "#fff",
+      color: "hsl(var(--foreground))",
       lineHeight: 1.7,
     }}>
       <style>{`
@@ -321,11 +321,11 @@ export default function About() {
           left: 0;
           width: 0;
           height: 2px;
-          background: #fff;
+          background: hsl(var(--foreground));
           transition: width 0.3s ease;
         }
 
-        .tab-btn.active { color: #fff; }
+        .tab-btn.active { color: hsl(var(--foreground)); }
         .tab-btn.active::after { width: 100%; }
 
         .section-card {
@@ -353,14 +353,14 @@ export default function About() {
           border-bottom: 1px solid transparent;
         }
 
-        .nav-item:hover, .nav-item.active { color: #fff; }
+        .nav-item:hover, .nav-item.active { color: hsl(var(--foreground)); }
 
         .badge {
           font-family: 'DM Mono', monospace;
           font-size: 10px;
           letter-spacing: 0.1em;
           text-transform: uppercase;
-          background: #fff;
+          background: hsl(var(--foreground));
           color: #000;
           padding: 6px 14px;
           border-radius: 100px;
@@ -376,7 +376,7 @@ export default function About() {
         }
 
         .content-text strong {
-          color: #fff;
+          color: hsl(var(--foreground));
           font-weight: 600;
         }
 
@@ -398,7 +398,7 @@ export default function About() {
             <div className="mono" style={{ fontSize: 12, letterSpacing: "0.3em", color: "#c9a96e", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>
               Legal Framework
             </div>
-            <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "#fff", marginBottom: 40 }}>
+            <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "hsl(var(--foreground))", marginBottom: 40 }}>
               Trust & <em style={{ color: "#c9a96e" }}>Integrity</em>
             </h1>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
@@ -434,7 +434,7 @@ export default function About() {
 
           {/* Sidebar Navigation */}
           <div className="sidebar" style={{ paddingTop: 64, paddingRight: 60, position: "sticky", top: 140, height: "fit-content" }}>
-            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.15em", color: "#fff", textTransform: "uppercase", marginBottom: 32, fontWeight: 600 }}>
+            <div className="mono" style={{ fontSize: 11, letterSpacing: "0.15em", color: "hsl(var(--foreground))", textTransform: "uppercase", marginBottom: 32, fontWeight: 600 }}>
               Navigation
             </div>
             {currentSections.map((s) => (
@@ -465,7 +465,7 @@ export default function About() {
               <div className="badge" style={{ marginBottom: 24 }}>
                 {activeTab === "tos" ? "Terms & Conditions" : "Privacy & Data"}
               </div>
-              <h3 className="cormorant" style={{ fontSize: 36, fontWeight: 400, color: "#fff", marginBottom: 24 }}>
+              <h3 className="cormorant" style={{ fontSize: 36, fontWeight: 400, color: "hsl(var(--foreground))", marginBottom: 24 }}>
                 {activeTab === "tos" 
                   ? "Our promise of quality and service." 
                   : "How we protect your digital footprint."}
@@ -488,7 +488,7 @@ export default function About() {
                   style={{
                     fontSize: 32,
                     fontWeight: 400,
-                    color: "#fff",
+                    color: "hsl(var(--foreground))",
                     marginBottom: 28,
                     letterSpacing: "-0.02em"
                   }}
@@ -500,14 +500,14 @@ export default function About() {
             ))}
 
             {/* Premium Footer Branding */}
-            <div style={{ marginTop: 120, paddingTop: 64, borderTop: "4px solid #fff" }}>
+            <div style={{ marginTop: 120, paddingTop: 64, border: "4px solid hsl(var(--foreground))" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40 }}>
                 <div>
                   <div className="cormorant" style={{ fontSize: 32, fontWeight: 400, marginBottom: 12 }}>DigitalForge</div>
                   <p className="mono" style={{ fontSize: 12, color: "#999", letterSpacing: "0.1em" }}>DISTILLED KNOWLEDGE</p>
                 </div>
                 <div style={{ textAlign: "right" }}>
-                  <p className="mono" style={{ fontSize: 13, color: "#fff", fontWeight: 600, marginBottom: 8 }}>Questions or Feedback?</p>
+                  <p className="mono" style={{ fontSize: 13, color: "hsl(var(--foreground))", fontWeight: 600, marginBottom: 8 }}>Questions or Feedback?</p>
                   <p className="mono" style={{ fontSize: 13, color: "#c9a96e", textDecoration: "underline" }}>{SUPPORT_EMAIL}</p>
                 </div>
               </div>

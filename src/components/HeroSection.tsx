@@ -87,7 +87,7 @@ export default function HeroSection({ onLogin, onSignup }: HeroSectionProps) {
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.98 }}
             onClick={handleBrowseLibrary}
-            className="liquid-glass text-foreground border border-white/10 rounded-full px-8 py-4 font-bold text-sm tracking-wider w-full sm:w-auto"
+            className="liquid-glass text-foreground border border-border rounded-full px-8 py-4 font-bold text-sm tracking-wider w-full sm:w-auto"
           >
             BROWSE TOOLS
           </motion.button>
