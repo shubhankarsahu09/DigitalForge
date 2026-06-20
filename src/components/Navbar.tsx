@@ -48,7 +48,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-8 md:px-28 py-4 transition-all duration-300",
         isScrolled 
-          ? "bg-background/80 backdrop-blur-md border-b border-border/50 py-3" 
+          ? "bg-background/80 backdrop-blur-md border-b border-border py-3" 
           : (!isLandingPage ? "bg-background/40 backdrop-blur-sm py-4" : "bg-transparent")
       )}
     >
@@ -76,7 +76,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               to={link.path}
               className={cn(
                 "transition-colors duration-200",
-                isLinkActive(link.path) ? "text-foreground" : "text-foreground/60 hover:text-foreground"
+                isLinkActive(link.path) ? "text-foreground" : "text-muted-foreground hover:text-foreground"
               )}
             >
               {link.name}
@@ -91,13 +91,15 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
       {/* Right Side: Auth & Social Icons */}
       <div className="flex items-center gap-4">
         {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          aria-label="Toggle theme"
-          className="w-9 h-9 rounded-full flex items-center justify-center bg-foreground/5 text-foreground/60 hover:bg-foreground/10 hover:text-foreground transition-all duration-200"
-        >
-          {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
-        </button>
+        {!isLandingPage && (
+          <button
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="w-9 h-9 rounded-full flex items-center justify-center bg-card text-muted-foreground hover:bg-secondary hover:text-foreground transition-all duration-200"
+          >
+            {theme === "light" ? <Moon size={16} /> : <Sun size={16} />}
+          </button>
+        )}
 
         {/* Auth State */}
         <div className="hidden md:flex items-center gap-4">
@@ -105,13 +107,13 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             <>
               <button
                 onClick={onProfile}
-                className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
+                className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 Profile
               </button>
               <button
                 onClick={() => signOut()}
-                className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
+                className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 Logout
               </button>
@@ -120,7 +122,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             <>
               <button
                 onClick={onLogin}
-                className="text-[13px] font-medium text-foreground/60 hover:text-foreground transition-colors"
+                className="text-[13px] font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
                 Log In
               </button>
@@ -147,7 +149,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               aria-label={label}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="w-9 h-9 rounded-full flex items-center justify-center bg-foreground/5 text-foreground/40 hover:bg-foreground/10 hover:text-foreground transition-all duration-200"
+              className="w-9 h-9 rounded-full flex items-center justify-center bg-card text-muted-foreground hover:bg-secondary hover:text-foreground transition-all duration-200"
             >
               <Icon size={14} />
             </motion.a>
@@ -183,8 +185,8 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
                 key={link.name}
                 to={link.path}
                 className={cn(
-                  "text-lg font-medium border-b border-border/50 pb-2",
-                  isLinkActive(link.path) ? "text-foreground" : "text-foreground/60"
+                  "text-lg font-medium border-b border-border pb-2",
+                  isLinkActive(link.path) ? "text-foreground" : "text-muted-foreground"
                 )}
                 onClick={() => setIsMobileMenuOpen(false)}
               >
