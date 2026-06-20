@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Cpu, ExternalLink, Search, Box, Clock, Star, Download } from "lucide-react";
-import { useNavigate, useSearchParams, useParams, Link } from "react-router-dom";
+import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../hooks/useAuth";
