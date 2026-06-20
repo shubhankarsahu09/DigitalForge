@@ -67,9 +67,9 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         {[
           { name: "Home", path: "/" },
           { name: "About Us", path: "/about" },
-          { name: "Contact", path: "/contact" },
           { name: "Tools", path: "/dashboard" },
           { name: "My Tools", path: "/dashboard?tab=purchased" },
+          { name: "Contact", path: "/contact" },
         ].map((link, i) => (
           <React.Fragment key={link.name}>
             <Link
@@ -178,9 +178,9 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
-              { name: "Contact", path: "/contact" },
               { name: "Tools", path: "/dashboard" },
               { name: "My Tools", path: "/dashboard?tab=purchased" },
+              { name: "Contact", path: "/contact" },
             ].map((link) => (
               <Link
                 key={link.name}
