@@ -500,7 +500,7 @@ export default function About() {
             ))}
 
             {/* Premium Footer Branding */}
-            <div style={{ marginTop: 120, paddingTop: 64, border: "4px solid hsl(var(--foreground))" }}>
+            <div style={{ marginTop: 120, padding: 64, border: "4px solid hsl(var(--foreground))" }}>
               <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", flexWrap: "wrap", gap: 40 }}>
                 <div>
                   <div className="cormorant" style={{ fontSize: 32, fontWeight: 400, marginBottom: 12 }}>DigitalForge</div>
