@@ -378,7 +378,7 @@ export default function About() {
           letter-spacing: 0.1em;
           text-transform: uppercase;
           background: hsl(var(--foreground));
-          color: #000;
+          color: hsl(var(--background));
           padding: 6px 14px;
           border-radius: 100px;
           display: inline-block;
