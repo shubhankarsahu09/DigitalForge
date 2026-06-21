@@ -7,7 +7,7 @@ export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
     const savedTheme = localStorage.getItem("theme");
     if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
-    return window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+    return "dark";
   });
 
   const location = useLocation();
