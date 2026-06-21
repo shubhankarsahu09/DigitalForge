@@ -11,7 +11,7 @@ app.use(cors());
 
 app.get('/download', async (req, res) => {
   try {
-    const { url, format } = req.query;
+    const { url, format, quality } = req.query;
 
     if (!url) {
       return res.status(400).json({ error: 'Invalid or missing YouTube URL' });
@@ -48,8 +48,13 @@ app.get('/download', async (req, res) => {
     } else if (format === 'video') {
       res.header('Content-Disposition', `attachment; filename="${title}.mp4"`);
       
+      let videoFormatStr = 'best';
+      if (quality && quality !== 'best') {
+        videoFormatStr = `best[height<=${quality}]`;
+      }
+      
       const videoStream = youtubedl.exec(url, {
-        format: 'best',
+        format: videoFormatStr,
         output: '-', // stdout
       });
       

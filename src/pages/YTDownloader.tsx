@@ -6,8 +6,9 @@ export default function YTDownloader() {
   const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
   const [progress, setProgress] = useState(0);
+  const [showQualityModal, setShowQualityModal] = useState(false);
 
-  const handleDownload = (format: 'audio' | 'video') => {
+  const handleDownload = (format: 'audio' | 'video', quality?: string) => {
     if (!url) {
       setStatus('error');
       setMessage('Please enter a valid YouTube URL');
@@ -28,7 +29,10 @@ export default function YTDownloader() {
 
     try {
       // Direct to our new Node.js backend
-      const backendUrl = `http://localhost:3001/download?url=${encodeURIComponent(url)}&format=${format}`;
+      let backendUrl = `http://localhost:3001/download?url=${encodeURIComponent(url)}&format=${format}`;
+      if (quality) {
+        backendUrl += `&quality=${quality}`;
+      }
       
       const a = document.createElement('a');
       a.href = backendUrl;
@@ -118,7 +122,14 @@ export default function YTDownloader() {
 
             <button 
               className="download-btn video-btn group relative overflow-hidden rounded-xl bg-gradient-to-br from-pink-600 to-rose-700 p-[1px] transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-50 disabled:pointer-events-none"
-              onClick={() => handleDownload('video')}
+              onClick={() => {
+                if (!url || !/^(https?\:\/\/)?(www\.youtube\.com|youtu\.?be)\/.+$/.test(url)) {
+                  setStatus('error');
+                  setMessage('Please enter a valid YouTube URL');
+                  return;
+                }
+                setShowQualityModal(true);
+              }}
               disabled={status === 'loading'}
             >
               <div className="relative flex items-center justify-center gap-3 bg-black/50 backdrop-blur-sm rounded-xl py-4 px-6 transition-all group-hover:bg-black/20">
@@ -161,6 +172,43 @@ export default function YTDownloader() {
           )}
         </main>
       </div>
+
+      {/* Quality Selection Modal */}
+      {showQualityModal && (
+        <div className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <div className="bg-gray-900 border border-white/10 rounded-2xl p-6 w-full max-w-sm shadow-2xl">
+            <h3 className="text-xl font-bold text-white mb-4">Select Video Quality</h3>
+            <div className="space-y-3 mb-6">
+              {[
+                { label: 'Best Available', value: 'best' },
+                { label: '720p', value: '720' },
+                { label: '480p', value: '480' },
+                { label: '360p', value: '360' },
+              ].map((q) => (
+                <button
+                  key={q.value}
+                  onClick={() => {
+                    setShowQualityModal(false);
+                    handleDownload('video', q.value);
+                  }}
+                  className="w-full py-3 px-4 bg-white/5 hover:bg-white/10 border border-white/5 rounded-xl text-white font-medium transition-all flex justify-between items-center group"
+                >
+                  <span>{q.label}</span>
+                  <svg className="w-5 h-5 text-gray-500 group-hover:text-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                  </svg>
+                </button>
+              ))}
+            </div>
+            <button 
+              onClick={() => setShowQualityModal(false)}
+              className="w-full py-3 rounded-xl bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white transition-all font-medium"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
