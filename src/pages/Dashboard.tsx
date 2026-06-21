@@ -18,6 +18,16 @@ const COURSES: any[] = [
     size: "WASM Engine",
     isPurchased: false,
     route: "/tools/frameweaver"
+  },
+  {
+    id: 2,
+    title: "YouTube Downloader",
+    description: "High-speed video and audio extraction. Download YouTube content directly to your device.",
+    category: "Utilities",
+    pages: "v1.0.0",
+    size: "Cloud Engine",
+    isPurchased: false,
+    route: "/tools/ytdownloader"
   }
 ];
 
