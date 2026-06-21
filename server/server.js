@@ -33,11 +33,10 @@ app.get('/download', async (req, res) => {
     const title = (info.title || 'video').replace(/[^\w\s-]/gi, '_');
 
     if (format === 'audio') {
-      res.header('Content-Disposition', `attachment; filename="${title}.mp3"`);
+      res.header('Content-Disposition', `attachment; filename="${title}.webm"`); // or .m4a
       
       const audioStream = youtubedl.exec(url, {
-        extractAudio: true,
-        audioFormat: 'mp3',
+        format: 'bestaudio',
         output: '-', // stdout
       });
       
