@@ -7,6 +7,23 @@ const SUPPORT_EMAIL = "shubhankarsahu82@gmail.com";
 const WEBSITE = "www.digitalforge.com";
 
 const sections = {
+  about: [
+    {
+      id: "our-mission",
+      title: "1. Our Mission",
+      content: `At DigitalForge, we are dedicated to building and providing premium software tools designed to elevate your workflow. Our mission is to empower professionals, creators, and businesses by delivering high-performance, aesthetically pleasing, and highly functional digital tools.`
+    },
+    {
+      id: "what-we-do",
+      title: "2. What We Do",
+      content: `We specialize in crafting cutting-edge tools that solve real-world problems. Whether you need utilities to streamline your daily tasks, sophisticated software to manage complex projects, or creative tools to bring your ideas to life, DigitalForge is your premier destination.`
+    },
+    {
+      id: "our-values",
+      title: "3. Our Values",
+      content: `Integrity, innovation, and design excellence are at the core of everything we do. We believe that tools should not only function flawlessly but also offer a delightful user experience. Every product we sell is rigorously tested and refined to meet our uncompromising standards.`
+    }
+  ],
   tos: [
     {
       id: "acceptance",
@@ -42,14 +59,14 @@ By registering an account, you represent and warrant that you meet all eligibili
 
 4.2 Payment Processing. Payments are processed by third-party payment processors. By completing a purchase, you authorize DigitalForge to charge your selected payment method for the full purchase amount. DigitalForge does not store complete payment card information on its servers.
 
-4.3 Order Confirmation. Upon successful payment, you will receive a confirmation email at the address associated with your account. Access to your purchased playbook(s) will be reflected in your Studio dashboard.`
+4.3 Order Confirmation. Upon successful payment, you will receive a confirmation email at the address associated with your account. Access to your purchased tool(s) will be reflected in your Studio dashboard.`
     },
     {
       id: "refunds",
       title: "5. No Refund Policy",
-      content: `ALL SALES ARE FINAL. Due to the immediate and irreversible nature of digital product delivery, DigitalForge does not offer refunds, exchanges, or credits for any purchased PDF playbooks once the transaction has been completed and the product has been made accessible in your account.
+      content: `ALL SALES ARE FINAL. Due to the immediate and irreversible nature of digital product delivery, DigitalForge does not offer refunds, exchanges, or credits for any purchased digital tools once the transaction has been completed and the product has been made accessible in your account.
 
-This policy applies regardless of whether you have downloaded the file or opened it. By completing a purchase, you expressly acknowledge and accept this no-refund policy.
+This policy applies regardless of whether you have downloaded the tool or opened it. By completing a purchase, you expressly acknowledge and accept this no-refund policy.
 
 Exceptions. We may, at our sole discretion, offer a refund or account credit in cases where:
 
@@ -61,16 +78,16 @@ To request a review under these limited exceptions, contact ${SUPPORT_EMAIL} wit
     {
       id: "intellectual-property",
       title: "6. Intellectual Property & License",
-      content: `6.1 Ownership. All PDF playbooks, written content, graphics, branding, logos, and materials available on DigitalForge (collectively, "Content") are the exclusive intellectual property of DigitalForge or its licensed authors and are protected by applicable copyright, trademark, and intellectual property laws.
+      content: `6.1 Ownership. All digital tools, software applications, graphics, branding, logos, and materials available on DigitalForge (collectively, "Content") are the exclusive intellectual property of DigitalForge or its licensed authors and are protected by applicable copyright, trademark, and intellectual property laws.
 
-6.2 Personal Use License. Upon purchase, DigitalForge grants you a limited, non-exclusive, non-transferable, revocable license to access and use the purchased PDF for your own personal, non-commercial educational purposes only.
+6.2 Personal Use License. Upon purchase, DigitalForge grants you a limited, non-exclusive, non-transferable, revocable license to access and use the purchased tool for your own personal, non-commercial purposes only.
 
 6.3 Prohibited Uses. You expressly agree NOT to:
 
-• Copy, reproduce, duplicate, or redistribute any purchased PDF in whole or in part.
+• Copy, reproduce, duplicate, or redistribute any purchased tool in whole or in part.
 • Sell, resell, sublicense, rent, or otherwise commercially exploit any purchased content.
 • Share your account login credentials to provide others access to purchased content.
-• Upload, post, or otherwise make available any purchased PDF on any public or private platform, website, or file-sharing service.
+• Upload, post, or otherwise make available any purchased tool on any public or private platform, website, or file-sharing service.
 • Modify, reverse-engineer, or create derivative works from any purchased content without express written permission.
 
 6.4 Enforcement. DigitalForge actively monitors for unauthorized distribution of its content. Violations of this section may result in immediate account termination, legal action, and pursuit of damages to the fullest extent permitted by law.`
@@ -90,7 +107,7 @@ To request a review under these limited exceptions, contact ${SUPPORT_EMAIL} wit
     {
       id: "disclaimers",
       title: "8. Disclaimers & Limitation of Liability",
-      content: `8.1 Educational Nature. All PDF playbooks sold on DigitalForge are educational materials intended for informational purposes only. Nothing in our Content constitutes professional legal, financial, medical, or other licensed professional advice.
+      content: `8.1 Software Tools. All digital tools sold on DigitalForge are software products provided for professional and personal use. Nothing in our Content constitutes professional legal, financial, medical, or other licensed professional advice.
 
 8.2 "As Is" Basis. The Platform and all Content are provided on an "as is" and "as available" basis, without warranty of any kind, express or implied, including but not limited to warranties of merchantability, fitness for a particular purpose, or non-infringement.
 
@@ -155,7 +172,7 @@ We do not receive or store your passwords for Google or GitHub. The scope of dat
       content: `We use the information we collect for the following purposes:
 
 • Account Management: To create, authenticate, and manage your DigitalForge account.
-• Product Delivery: To grant access to purchased PDF playbooks in your Studio dashboard.
+• Product Delivery: To grant access to purchased digital tools in your Studio dashboard.
 • Communication: To send you order confirmations, receipts, and essential account notifications.
 • Customer Support: To respond to your inquiries and resolve issues.
 • Platform Improvement: To analyze usage patterns and improve our features, content, and user experience.
@@ -262,13 +279,13 @@ We will respond to all privacy inquiries within 30 days.`
 
 export default function About() {
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("tos");
+  const [activeTab, setActiveTab] = useState("about");
   const [activeSection, setActiveSection] = useState<string | null>(null);
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const tab = params.get("tab");
-    if (tab === "privacy" || tab === "tos") {
+    if (tab === "privacy" || tab === "tos" || tab === "about") {
       setActiveTab(tab);
     }
   }, [location.search]);
@@ -396,24 +413,34 @@ export default function About() {
             transition={{ duration: 0.8 }}
           >
             <div className="mono" style={{ fontSize: 12, letterSpacing: "0.3em", color: "#c9a96e", textTransform: "uppercase", marginBottom: 24, fontWeight: 500 }}>
-              Legal Framework
+              {activeTab === "about" ? "Our Story" : "Legal Framework"}
             </div>
             <h1 className="cormorant" style={{ fontSize: "clamp(56px, 10vw, 110px)", fontWeight: 300, lineHeight: 0.9, letterSpacing: "-0.04em", color: "hsl(var(--foreground))", marginBottom: 40 }}>
-              Trust & <em style={{ color: "#c9a96e" }}>Integrity</em>
+              {activeTab === "about" ? <>Crafting <em style={{ color: "#c9a96e" }}>Excellence</em></> : <>Trust & <em style={{ color: "#c9a96e" }}>Integrity</em></>}
             </h1>
             <div style={{ display: "flex", flexWrap: "wrap", alignItems: "flex-end", justifyContent: "space-between", gap: 32 }}>
               <p style={{ fontSize: 20, color: "#999", maxWidth: 650, lineHeight: 1.5, fontWeight: 400 }}>
-                DigitalForge is built on a foundation of clarity. Our policies ensure a secure and transparent environment for every learner.
+                {activeTab === "about" 
+                  ? "We build premium digital tools to empower your workflow and elevate your business." 
+                  : "DigitalForge is built on a foundation of clarity. Our policies ensure a secure and transparent environment for every user."}
               </p>
-              <div className="mono" style={{ fontSize: 12, color: "#666", borderLeft: "1px solid #333", paddingLeft: 20 }}>
-                Version 1.0.4<br />
-                Updated {LAST_UPDATED}
-              </div>
+              {activeTab !== "about" && (
+                <div className="mono" style={{ fontSize: 12, color: "#666", borderLeft: "1px solid #333", paddingLeft: 20 }}>
+                  Version 1.0.4<br />
+                  Updated {LAST_UPDATED}
+                </div>
+              )}
             </div>
           </motion.div>
 
           {/* Tab Switcher */}
-          <div style={{ display: "flex", marginTop: 80, borderBottom: "1px solid #222" }}>
+          <div style={{ display: "flex", marginTop: 80, borderBottom: "1px solid #222", overflowX: "auto" }}>
+            <button
+              className={`tab-btn ${activeTab === "about" ? "active" : ""}`}
+              onClick={() => setActiveTab("about")}
+            >
+              About Us
+            </button>
             <button
               className={`tab-btn ${activeTab === "tos" ? "active" : ""}`}
               onClick={() => setActiveTab("tos")}
@@ -463,15 +490,19 @@ export default function About() {
           <div className="main-content" style={{ paddingTop: 64, paddingLeft: "clamp(0px, 10vw, 100px)" }}>
             <div style={{ marginBottom: 80 }}>
               <div className="badge" style={{ marginBottom: 24 }}>
-                {activeTab === "tos" ? "Terms & Conditions" : "Privacy & Data"}
+                {activeTab === "about" ? "About DigitalForge" : activeTab === "tos" ? "Terms & Conditions" : "Privacy & Data"}
               </div>
               <h3 className="cormorant" style={{ fontSize: 36, fontWeight: 400, color: "hsl(var(--foreground))", marginBottom: 24 }}>
-                {activeTab === "tos" 
+                {activeTab === "about"
+                  ? "Empowering creators with premium tools."
+                  : activeTab === "tos" 
                   ? "Our promise of quality and service." 
                   : "How we protect your digital footprint."}
               </h3>
               <p className="content-text" style={{ fontSize: 19, color: "#ccc" }}>
-                {activeTab === "tos" 
+                {activeTab === "about"
+                  ? "Discover who we are, what we do, and the values that drive us to build the best tools in the industry."
+                  : activeTab === "tos" 
                   ? "These terms outline the agreement between DigitalForge and our users. By using our platform, you agree to uphold these standards." 
                   : "We believe in radical transparency. This policy details our commitment to your privacy and how we manage your information."}
               </p>
