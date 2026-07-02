@@ -68,6 +68,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
           { name: "Home", path: "/" },
           { name: "About Us", path: "/about" },
           { name: "Products", path: "/products" },
+          { name: "Purchased", path: "/purchased" },
           { name: "Contact", path: "/contact" },
         ].map((link, i) => (
           <React.Fragment key={link.name}>
@@ -80,7 +81,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             >
               {link.name}
             </Link>
-            {i < 3 && (
+            {i < 4 && (
               <span className="text-foreground/10">•</span>
             )}
           </React.Fragment>
@@ -178,6 +179,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
               { name: "Products", path: "/products" },
+              { name: "Purchased", path: "/purchased" },
               { name: "Contact", path: "/contact" },
             ].map((link) => (
               <Link
