@@ -81,13 +81,13 @@ function App() {
             element={<LandingPage openLogin={openLogin} openSignup={openSignup} />} 
           />
           <Route 
-            path="/dashboard" 
+            path="/products" 
             element={
               user ? <Dashboard /> : <Navigate to="/" replace />
             } 
           />
           <Route 
-            path="/dashboard/:category" 
+            path="/products/:category" 
             element={
               user ? <Dashboard /> : <Navigate to="/" replace />
             } 
