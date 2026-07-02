@@ -12,6 +12,8 @@ import CtaSection from "./components/CtaSection";
 import Footer from "./components/Footer";
 import AuroraAuth from "./components/AuroraAuth";
 import Dashboard from "./pages/Dashboard";
+import Checkout from "./pages/Checkout";
+import Purchased from "./pages/Purchased";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FrameWeaver from "./pages/FrameWeaver";
@@ -90,6 +92,18 @@ function App() {
             path="/products/:category" 
             element={
               user ? <Dashboard /> : <Navigate to="/" replace />
+            } 
+          />
+          <Route 
+            path="/checkout/:id" 
+            element={
+              user ? <Checkout /> : <Navigate to="/" replace />
+            } 
+          />
+          <Route 
+            path="/purchased" 
+            element={
+              user ? <Purchased /> : <Navigate to="/" replace />
             } 
           />
           <Route 
