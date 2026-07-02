@@ -17,39 +17,6 @@ const PRODUCTS: any[] = [
     size: "WASM Engine",
     isPurchased: false,
     route: "/tools/frameweaver"
-  },
-  {
-    id: 2,
-    title: "YouTube Downloader",
-    description: "High-speed video and audio extraction. Download YouTube content directly to your device.",
-    topic: "After Effects",
-    type: "Tools",
-    pages: "v1.0.0",
-    size: "Cloud Engine",
-    isPurchased: false,
-    route: "/tools/ytdownloader"
-  },
-  {
-    id: 3,
-    title: "Blender Ultimate Asset Pack",
-    description: "A huge collection of 3D models and textures.",
-    topic: "Blender",
-    type: "Assets",
-    pages: "v2.1",
-    size: "4.5 GB",
-    isPurchased: false,
-    route: "#"
-  },
-  {
-    id: 4,
-    title: "Advanced React Template",
-    description: "Next-gen React boilerplate for quick start.",
-    topic: "Coding",
-    type: "Assets",
-    pages: "v1.0",
-    size: "15 MB",
-    isPurchased: false,
-    route: "#"
   }
 ];
 
