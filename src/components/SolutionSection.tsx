@@ -46,20 +46,20 @@ export default function SolutionSection() {
       <div className="grid md:grid-cols-4 gap-8">
         {[
           {
-            title: "High-Performance Workflows",
-            description: "Beautifully designed, fast tools that you can integrate seamlessly into your daily workflow to save hours of manual work.",
+            title: "Ready-to-use Assets",
+            description: "Beautifully designed 3D models and templates that you can integrate seamlessly to save hours of manual work.",
           },
           {
-            title: "Advanced Capabilities",
-            description: "No fluff. Every tool is packed with powerful features, intuitive interfaces, and real-world solutions you can implement instantly.",
+            title: "Workflow Automation Tools",
+            description: "No fluff. Every tool is packed with powerful features and real-world solutions you can implement instantly.",
           },
           {
-            title: "Cloud & Local Sync",
-            description: "Work anywhere without losing context. Your tools are yours to keep, synced across devices and always accessible.",
+            title: "Lifetime Access",
+            description: "Your assets and tools are yours to keep. Purchase once, own forever, and download anytime.",
           },
           {
             title: "Built for Professionals",
-            description: "Get the direct logic of industry experts distilled into structured applications that act as a co-pilot in your pocket.",
+            description: "Get the direct logic of industry experts distilled into production-ready assets and scripts.",
           },
         ].map((feature, i) => (
           <motion.div key={feature.title} {...fadeUp(0.1 * (i + 1))}>
