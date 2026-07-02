@@ -79,7 +79,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
           {...fadeUp(0.2)}
           className="text-muted-foreground text-lg mb-10 leading-relaxed"
         >
-          Join thousands of professionals who are already boosting productivity through our premium tools. Get your first tool today.
+          Join thousands of professionals who are already boosting productivity through our premium assets and tools. Explore the marketplace today.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -87,7 +87,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
           <motion.button
             onClick={() => {
               if (user) {
-                navigate("/dashboard");
+                navigate("/products");
               } else {
                 onAuthRequired();
               }
@@ -101,7 +101,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
           <motion.button
             onClick={() => {
               if (user) {
-                navigate("/dashboard?tab=purchased");
+                navigate("/products?tab=purchased");
               } else {
                 onAuthRequired();
               }
@@ -110,7 +110,7 @@ export default function CtaSection({ onAuthRequired }: CtaSectionProps) {
             whileTap={{ scale: 0.97 }}
             className="liquid-glass rounded-lg px-8 py-3.5 text-sm font-semibold text-foreground hover:text-foreground transition-colors duration-200"
           >
-            Browse Tools
+            Browse Products
           </motion.button>
         </motion.div>
       </div>
