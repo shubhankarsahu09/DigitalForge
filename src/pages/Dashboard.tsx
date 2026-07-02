@@ -247,7 +247,7 @@ export default function Dashboard() {
 
                 <div className="flex items-center gap-3 pt-6 border-t border-border">
                   <button
-                    onClick={() => course.isPurchased ? navigate(course.route) : handlePurchase(course.id)}
+                    onClick={() => course.isPurchased ? navigate(course.route) : navigate(`/checkout/${course.id}`)}
                     className={cn(
                       "flex-1 rounded-full py-3.5 text-xs font-bold tracking-wider uppercase transition-all",
                       course.isPurchased
