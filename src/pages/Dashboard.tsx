@@ -1,19 +1,18 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Cpu, ExternalLink, Search, Box, Clock, Star, Download } from "lucide-react";
-import { useNavigate, useSearchParams, useParams } from "react-router-dom";
+import { Cpu, ExternalLink, Search, Box, Clock, Star, Download, Filter } from "lucide-react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { cn } from "../lib/utils";
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../hooks/useAuth";
 
-
-
-const COURSES: any[] = [
+const PRODUCTS: any[] = [
   {
     id: 1,
     title: "Frame To Video Converter",
     description: "Pro-level sequence encoding instantly. Convert image frames to MP4 directly in the browser.",
-    category: "Video Editing",
+    topic: "Premiere Pro",
+    type: "Tools",
     pages: "v1.0.0",
     size: "WASM Engine",
     isPurchased: false,
@@ -23,23 +22,50 @@ const COURSES: any[] = [
     id: 2,
     title: "YouTube Downloader",
     description: "High-speed video and audio extraction. Download YouTube content directly to your device.",
-    category: "Utilities",
+    topic: "After Effects",
+    type: "Tools",
     pages: "v1.0.0",
     size: "Cloud Engine",
     isPurchased: false,
     route: "/tools/ytdownloader"
+  },
+  {
+    id: 3,
+    title: "Blender Ultimate Asset Pack",
+    description: "A huge collection of 3D models and textures.",
+    topic: "Blender",
+    type: "Assets",
+    pages: "v2.1",
+    size: "4.5 GB",
+    isPurchased: false,
+    route: "#"
+  },
+  {
+    id: 4,
+    title: "Advanced React Template",
+    description: "Next-gen React boilerplate for quick start.",
+    topic: "Coding",
+    type: "Assets",
+    pages: "v1.0",
+    size: "15 MB",
+    isPurchased: false,
+    route: "#"
   }
 ];
+
+const TOPICS = ["All", "Blender", "After Effects", "Premiere Pro", "Coding"];
+const TYPES = ["All", "Tools", "Assets"];
 
 export default function Dashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
-  const { category } = useParams();
   const [searchParams] = useSearchParams();
   const activeTab = searchParams.get("tab") || "all";
-  const activeCategory = category ? (category.charAt(0).toUpperCase() + category.slice(1)) : "All";
+  
   const [searchQuery, setSearchQuery] = useState("");
-  const [courses, setCourses] = useState(COURSES);
+  const [activeTopic, setActiveTopic] = useState("All");
+  const [activeType, setActiveType] = useState("All");
+  const [courses, setCourses] = useState(PRODUCTS);
 
   // Load purchases from Supabase on mount
   useEffect(() => {
@@ -82,10 +108,11 @@ export default function Dashboard() {
   };
 
   const filteredCourses = courses.filter((course) => {
-    const matchesCategory = activeCategory === "All" || course.category === activeCategory;
+    const matchesTopic = activeTopic === "All" || course.topic === activeTopic;
+    const matchesType = activeType === "All" || course.type === activeType;
     const matchesSearch = course.title.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesTab = activeTab === "all" || (activeTab === "purchased" && course.isPurchased);
-    return matchesCategory && matchesSearch && matchesTab;
+    return matchesTopic && matchesType && matchesSearch && matchesTab;
   });
 
   return (
@@ -108,7 +135,7 @@ export default function Dashboard() {
             >
               <div className="w-8 h-[1px] bg-foreground/40" />
               <span className="text-[10px] font-bold tracking-[0.2em] uppercase text-muted-foreground">
-                {activeTab === "purchased" ? "Your Workspace" : "Tool Discovery"}
+                {activeTab === "purchased" ? "Your Workspace" : "Product Discovery"}
               </span>
             </motion.div>
 
@@ -117,7 +144,7 @@ export default function Dashboard() {
               animate={{ opacity: 1, y: 0 }}
               className="text-4xl md:text-6xl lg:text-7xl font-medium tracking-tight"
             >
-              {activeTab === "purchased" ? "My" : "Explore"} <span className="font-serif italic text-muted-foreground">Tools.</span>
+              {activeTab === "purchased" ? "My" : "Explore"} <span className="font-serif italic text-muted-foreground">Products.</span>
             </motion.h1>
 
             <motion.p
@@ -127,8 +154,8 @@ export default function Dashboard() {
               className="text-lg text-muted-foreground max-w-lg leading-relaxed"
             >
               {activeTab === "purchased"
-                ? "Your personal workspace of high-performance tools. Ready for execution."
-                : "The most powerful utilities for modern professionals. Precision-engineered for your workflow."}
+                ? "Your personal workspace of high-performance tools and assets."
+                : "The most powerful tools and high-quality assets for modern creators."}
             </motion.p>
           </div>
 
@@ -159,11 +186,47 @@ export default function Dashboard() {
               <Search className="absolute left-5 top-1/2 -translate-y-1/2 text-muted-foreground group-focus-within:text-foreground transition-colors" size={18} />
               <input
                 type="text"
-                placeholder="Search all tools..."
+                placeholder="Search all products..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-card border border-border rounded-full py-4 pl-14 pr-6 text-sm focus:outline-none focus:ring-1 focus:ring-ring transition-all placeholder:text-foreground/30 text-foreground"
               />
+            </div>
+            
+            <div className="flex items-center gap-4 overflow-x-auto pb-2 lg:pb-0 scrollbar-none">
+              <div className="flex items-center gap-2 bg-card border border-border rounded-full p-1.5">
+                {TOPICS.map(topic => (
+                  <button
+                    key={topic}
+                    onClick={() => setActiveTopic(topic)}
+                    className={cn(
+                      "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all",
+                      activeTopic === topic 
+                        ? "bg-foreground text-background" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary"
+                    )}
+                  >
+                    {topic}
+                  </button>
+                ))}
+              </div>
+
+              <div className="flex items-center gap-2 bg-card border border-border rounded-full p-1.5">
+                {TYPES.map(type => (
+                  <button
+                    key={type}
+                    onClick={() => setActiveType(type)}
+                    className={cn(
+                      "px-4 py-2 rounded-full text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-all",
+                      activeType === type 
+                        ? "bg-secondary text-foreground" 
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                    )}
+                  >
+                    {type}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -181,11 +244,11 @@ export default function Dashboard() {
               <div className="relative z-10 flex flex-col h-full">
                 <div className="flex items-start justify-between mb-8">
                   <div className="w-12 h-12 rounded-xl bg-secondary flex items-center justify-center text-muted-foreground group-hover:text-foreground transition-colors">
-                    <Cpu size={24} />
+                    {course.type === 'Tools' ? <Cpu size={24} /> : <Box size={24} />}
                   </div>
                   <div className="flex flex-col items-end gap-2">
                     <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground group-hover:text-muted-foreground transition-colors">
-                      {course.category}
+                      {course.topic} • {course.type}
                     </span>
                     {course.isPurchased && (
                       <span className="flex items-center gap-1 text-[9px] font-bold bg-secondary text-foreground px-2.5 py-1 rounded-full tracking-wider border border-border">
@@ -225,7 +288,7 @@ export default function Dashboard() {
                         : "bg-foreground text-background hover:bg-foreground/90"
                     )}
                   >
-                    {course.isPurchased ? "Launch Tool" : "Get Access"}
+                    {course.isPurchased ? "Launch" : "Get Access"}
                   </button>
                   <button 
                     onClick={() => course.isPurchased ? window.open(course.route, '_blank') : null}
@@ -248,22 +311,22 @@ export default function Dashboard() {
           >
             <div className="w-24 h-24 rounded-full border border-border flex items-center justify-center mb-8 relative">
               <div className="absolute inset-0 bg-card rounded-full blur-xl" />
-              <Cpu size={32} className="text-muted-foreground relative z-10" />
+              <Filter size={32} className="text-muted-foreground relative z-10" />
             </div>
             <h3 className="text-2xl font-medium tracking-tight mb-3 text-foreground">
-              {activeTab === "purchased" ? "Your workspace is empty" : "No tools available yet"}
+              {activeTab === "purchased" ? "Your workspace is empty" : "No products found"}
             </h3>
             <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed mb-8">
               {activeTab === "purchased"
-                ? "You haven't acquired any tools yet. Once you do, they will appear in your workspace."
-                : "We are currently forging new tools. Check back later to see what we've built."}
+                ? "You haven't acquired any products yet. Once you do, they will appear in your workspace."
+                : "Try adjusting your filters or search query to find what you're looking for."}
             </p>
             {activeTab === "purchased" && (
               <button
-                onClick={() => navigate("/dashboard")}
+                onClick={() => navigate("/products")}
                 className="bg-foreground text-background px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-foreground/90 transition-all"
               >
-                Browse Tools
+                Browse Products
               </button>
             )}
           </motion.div>
