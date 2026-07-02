@@ -24,10 +24,10 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
 
   const isLinkActive = (path: string) => {
     if (path.includes("tab=purchased")) {
-      return location.pathname.startsWith("/dashboard") && location.search.includes("tab=purchased");
+      return location.pathname.startsWith("/products") && location.search.includes("tab=purchased");
     }
-    if (path === "/dashboard") {
-      return location.pathname.startsWith("/dashboard") && !location.search.includes("tab=purchased");
+    if (path === "/products") {
+      return location.pathname.startsWith("/products") && !location.search.includes("tab=purchased");
     }
     return location.pathname === path;
   };
@@ -67,8 +67,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
         {[
           { name: "Home", path: "/" },
           { name: "About Us", path: "/about" },
-          { name: "Tools", path: "/dashboard" },
-          { name: "My Tools", path: "/dashboard?tab=purchased" },
+          { name: "Products", path: "/products" },
           { name: "Contact", path: "/contact" },
         ].map((link, i) => (
           <React.Fragment key={link.name}>
@@ -81,7 +80,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             >
               {link.name}
             </Link>
-            {i < 4 && (
+            {i < 3 && (
               <span className="text-foreground/10">•</span>
             )}
           </React.Fragment>
@@ -178,8 +177,7 @@ export default function Navbar({ onLogin, onSignup, onProfile }: NavbarProps) {
             {[
               { name: "Home", path: "/" },
               { name: "About Us", path: "/about" },
-              { name: "Tools", path: "/dashboard" },
-              { name: "My Tools", path: "/dashboard?tab=purchased" },
+              { name: "Products", path: "/products" },
               { name: "Contact", path: "/contact" },
             ].map((link) => (
               <Link
