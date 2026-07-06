@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { Cpu, ExternalLink, Search, Box, Clock, Star, UploadCloud } from "lucide-react";
 import { useNavigate } from "react-router-dom";
-import { cn } from "../lib/utils";
+
 import { supabase } from "../lib/supabase";
 import { useAuth } from "../hooks/useAuth";
 

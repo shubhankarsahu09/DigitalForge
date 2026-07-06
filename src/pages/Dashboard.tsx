@@ -58,21 +58,7 @@ export default function Dashboard() {
     fetchPurchases();
   }, [user]);
 
-  const handlePurchase = async (courseId: number) => {
-    if (!user) return;
-    try {
-      const { error } = await supabase
-        .from('purchases')
-        .insert({ user_id: user.id, course_id: String(courseId) });
-      if (error && error.code !== '23505') throw error;
-      setCourses(prev => prev.map(course =>
-        course.id === courseId ? { ...course, isPurchased: true } : course
-      ));
-    } catch (error) {
-      console.error("Error saving purchase:", error);
-      alert("Failed to save purchase. Please try again.");
-    }
-  };
+
 
   const filteredCourses = courses.filter((course) => {
     const matchesTopic = activeTopic === "All" || course.topic === activeTopic;
