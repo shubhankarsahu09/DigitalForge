@@ -17,7 +17,6 @@ import Purchased from "./pages/Purchased";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
 import FrameWeaver from "./pages/FrameWeaver";
-import AviToMp4 from "./pages/AviToMp4";
 import YTDownloader from "./pages/YTDownloader";
 import { useAuth } from "./hooks/useAuth";
 import ProfileModal from "./components/ProfileModal";
@@ -119,12 +118,6 @@ function App() {
             path="/tools/frameweaver" 
             element={
               user ? <FrameWeaver /> : <Navigate to="/" replace />
-            } 
-          />
-          <Route 
-            path="/tools/avitomp4" 
-            element={
-              user ? <AviToMp4 /> : <Navigate to="/" replace />
             } 
           />
           <Route 

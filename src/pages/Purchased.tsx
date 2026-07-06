@@ -16,16 +16,6 @@ const ALL_PRODUCTS: any[] = [
     pages: "v1.0.0",
     size: "WASM Engine",
     route: "/tools/frameweaver"
-  },
-  {
-    id: 1, // Using same course_id as requested
-    title: "AVI to MP4 Converter",
-    description: "Lightning fast client-side AVI to MP4 conversion directly in the browser.",
-    topic: "Video Tools",
-    type: "Tools",
-    pages: "v1.0.0",
-    size: "WASM Engine",
-    route: "/tools/avitomp4"
   }
 ];
 
