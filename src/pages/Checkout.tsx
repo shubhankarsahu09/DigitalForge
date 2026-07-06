@@ -1,6 +1,6 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, CheckCircle, Smartphone } from "lucide-react";
+import { ArrowLeft, CheckCircle } from "lucide-react";
 
 export default function Checkout() {
   const { id } = useParams();
