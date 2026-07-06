@@ -47,12 +47,8 @@ export default function Checkout() {
               </div>
             </div>
             
-            <div className="w-48 h-48 bg-secondary rounded-2xl flex items-center justify-center border border-border relative overflow-hidden shrink-0">
-               {/* Placeholder for QR Code */}
-               <div className="absolute inset-0 flex flex-col items-center justify-center text-muted-foreground">
-                 <Smartphone size={32} className="mb-2" />
-                 <span className="text-[10px] font-bold uppercase tracking-widest text-center px-4">QR Code Placeholder</span>
-               </div>
+            <div className="w-48 h-48 bg-secondary rounded-2xl flex items-center justify-center border border-border relative overflow-hidden shrink-0 p-2">
+               <img src="/payment-qr.png" alt="Payment QR Code" className="w-full h-full object-contain rounded-xl" />
             </div>
           </div>
 
