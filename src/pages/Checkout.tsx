@@ -8,7 +8,7 @@ export default function Checkout() {
 
   // Placeholder details
   const UPI_ID = "your-upi-id@bank";
-  const WHATSAPP_NUMBER = "917978967374";
+  const WHATSAPP_NUMBER = "918448130657";
   const productName = id === "1" ? "Frame To Video Converter" : "Premium Tool";
   
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to buy ${productName} from your website.`)}`;
