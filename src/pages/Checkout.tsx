@@ -8,10 +8,10 @@ export default function Checkout() {
 
   // Placeholder details
   const UPI_ID = "your-upi-id@bank";
-  const WHATSAPP_NUMBER = "1234567890";
+  const WHATSAPP_NUMBER = "917978967374";
   const productName = id === "1" ? "Frame To Video Converter" : "Premium Tool";
   
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`Hi! I just made a payment for ${productName}. Here is my payment screenshot.`)}`;
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(`I want to buy ${productName} from your website.`)}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground flex flex-col items-center pt-32 px-6 pb-20">
