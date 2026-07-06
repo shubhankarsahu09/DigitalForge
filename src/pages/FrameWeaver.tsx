@@ -1,6 +1,9 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { FFmpeg } from '@ffmpeg/ffmpeg';
 import { fetchFile } from '@ffmpeg/util';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../hooks/useAuth';
+import { supabase } from '../lib/supabase';
 import './FrameWeaver.css';
 
 interface FrameFile {
@@ -9,6 +12,10 @@ interface FrameFile {
 }
 
 export default function FrameWeaver() {
+  const { user } = useAuth();
+  const navigate = useNavigate();
+  const [isAuthorized, setIsAuthorized] = useState<boolean | null>(null);
+
   const [frames, setFrames] = useState<FrameFile[]>([]);
   const [fps, setFps] = useState(24);
   const [isGenerating, setIsGenerating] = useState(false);
@@ -17,6 +24,31 @@ export default function FrameWeaver() {
   const [isDragActive, setIsDragActive] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   
+  useEffect(() => {
+    const checkAuth = async () => {
+      if (!user) {
+        setIsAuthorized(false);
+        return;
+      }
+      try {
+        const { data } = await supabase
+          .from('purchases')
+          .select('course_id')
+          .eq('user_id', user.id)
+          .eq('course_id', '1');
+        
+        if (data && data.length > 0) {
+          setIsAuthorized(true);
+        } else {
+          setIsAuthorized(false);
+        }
+      } catch (err) {
+        setIsAuthorized(false);
+      }
+    };
+    checkAuth();
+  }, [user]);
+
   const ffmpegRef = useRef(new FFmpeg());
   const [loaded, setLoaded] = useState(false);
 
@@ -170,6 +202,25 @@ export default function FrameWeaver() {
       setIsGenerating(false);
     }
   };
+
+  if (isAuthorized === null) {
+    return <div className="min-h-screen bg-background flex items-center justify-center text-muted-foreground">Checking access...</div>;
+  }
+
+  if (!isAuthorized) {
+    return (
+      <div className="frameweaver-app pt-32 min-h-screen relative z-10 flex flex-col items-center text-center px-6">
+        <h1 className="text-4xl font-medium mb-4 text-foreground">Access Restricted</h1>
+        <p className="text-muted-foreground mb-8 max-w-md">You need to purchase the Frame To Video Converter to access this tool.</p>
+        <button 
+          onClick={() => navigate('/checkout/1')}
+          className="bg-foreground text-background px-8 py-3.5 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-foreground/90 transition-all"
+        >
+          Get Access
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div className="frameweaver-app pt-24 min-h-screen relative z-10">
