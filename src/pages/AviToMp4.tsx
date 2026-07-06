@@ -124,6 +124,13 @@ export default function AviToMp4() {
     setStatus('Loading file into memory...');
 
     const ffmpeg = ffmpegRef.current;
+    
+    // Capture logs for debugging
+    let ffmpegLogs = '';
+    const logCallback = ({ message }: { message: string }) => {
+      ffmpegLogs += message + '\n';
+    };
+    ffmpeg.on('log', logCallback);
 
     try {
       const filename = 'input.avi';
@@ -132,7 +139,7 @@ export default function AviToMp4() {
 
       setStatus('Encoding (Peak Speed)...');
 
-      // Peak speed MP4 conversion
+      // Simple MP4 conversion
       const ret = await ffmpeg.exec([
         '-i', filename,
         '-c:v', 'libx264',
@@ -140,8 +147,11 @@ export default function AviToMp4() {
         'out.mp4'
       ]);
 
+      ffmpeg.off('log', logCallback);
+
       if (ret !== 0) {
-        throw new Error('Conversion failed. The input file might be corrupted or in an unsupported format.');
+        console.error('FFmpeg Logs:', ffmpegLogs);
+        throw new Error(`FFmpeg failed (Code ${ret}). Logs: ${ffmpegLogs.slice(-200)}`);
       }
 
       setStatus('Finalizing...');
