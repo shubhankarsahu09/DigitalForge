@@ -133,16 +133,16 @@ export default function AviToMp4() {
       setStatus('Encoding (Peak Speed)...');
 
       // Peak speed MP4 conversion
-      await ffmpeg.exec([
+      const ret = await ffmpeg.exec([
         '-i', filename,
         '-c:v', 'libx264',
         '-preset', 'ultrafast',
-        '-tune', 'fastdecode',
-        '-tune', 'zerolatency',
-        '-threads', '0',
-        '-c:a', 'aac', // Encode audio to AAC for wide MP4 compatibility
         'out.mp4'
       ]);
+
+      if (ret !== 0) {
+        throw new Error('Conversion failed. The input file might be corrupted or in an unsupported format.');
+      }
 
       setStatus('Finalizing...');
 
