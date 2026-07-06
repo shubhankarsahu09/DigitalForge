@@ -7,7 +7,7 @@ export default function Checkout() {
   const navigate = useNavigate();
 
   // Placeholder details
-  const UPI_ID = "your-upi-id@bank";
+  const UPI_ID = "7978967374@fam";
   const WHATSAPP_NUMBER = "918448130657";
   const productName = id === "1" ? "Frame To Video Converter" : "Premium Tool";
   
