@@ -1,4 +1,4 @@
-:root {
+.avitomp4-app {
   --bg-color: transparent;
   --surface-color: rgba(17, 17, 17, 0.65);
   --surface-hover: rgba(28, 28, 30, 0.75);
@@ -7,15 +7,7 @@
   --text-muted: #a1a1a6;
   --accent-color: #0a84ff;
   --accent-hover: #007aff;
-}
-
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-body {
+  
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
   background-color: var(--bg-color);
   color: var(--text-main);
@@ -28,7 +20,13 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.app-container {
+.avitomp4-app * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.avitomp4-app .app-container {
   width: 100%;
   max-width: 800px;
   padding: 2rem;
@@ -42,7 +40,7 @@ body {
 }
 
 /* Video Background */
-.video-bg-container {
+.avitomp4-app .video-bg-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -53,7 +51,7 @@ body {
   background-color: #000;
 }
 
-.hero-video {
+.avitomp4-app .hero-video {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -65,7 +63,7 @@ body {
   object-fit: cover;
 }
 
-.video-overlay {
+.avitomp4-app .video-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -77,18 +75,18 @@ body {
 }
 
 /* Header */
-.header {
+.avitomp4-app .header {
   text-align: center;
 }
 
-.title {
+.avitomp4-app .title {
   font-size: 3rem;
   font-weight: 700;
   letter-spacing: -0.04em;
   margin-bottom: 0.5rem;
 }
 
-.subtitle {
+.avitomp4-app .subtitle {
   font-size: 1.25rem;
   font-weight: 400;
   color: var(--text-muted);
@@ -96,7 +94,7 @@ body {
 }
 
 /* Main Area */
-main {
+.avitomp4-app main {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -104,7 +102,7 @@ main {
 }
 
 /* Dropzone */
-.dropzone-container {
+.avitomp4-app .dropzone-container {
   width: 100%;
   height: 320px;
   background: var(--surface-color);
@@ -122,18 +120,18 @@ main {
   -webkit-backdrop-filter: blur(24px);
 }
 
-.dropzone-container:hover {
+.avitomp4-app .dropzone-container:hover {
   background: var(--surface-hover);
   transform: scale(1.01);
 }
 
-.dropzone-container.active {
+.avitomp4-app .dropzone-container.active {
   background: rgba(10, 132, 255, 0.1);
   border-color: var(--accent-color);
   transform: scale(0.99);
 }
 
-.dropzone-icon {
+.avitomp4-app .dropzone-icon {
   width: 48px;
   height: 48px;
   margin-bottom: 1rem;
@@ -141,28 +139,28 @@ main {
   transition: color 0.3s ease;
 }
 
-.dropzone-container:hover .dropzone-icon {
+.avitomp4-app .dropzone-container:hover .dropzone-icon {
   color: var(--text-main);
 }
 
-.dropzone-text {
+.avitomp4-app .dropzone-text {
   font-size: 1.25rem;
   font-weight: 600;
   letter-spacing: -0.02em;
   margin-bottom: 0.25rem;
 }
 
-.dropzone-subtext {
+.avitomp4-app .dropzone-subtext {
   font-size: 0.95rem;
   color: var(--text-muted);
 }
 
-.file-input {
+.avitomp4-app .file-input {
   display: none;
 }
 
 /* Controls */
-.controls-wrapper {
+.avitomp4-app .controls-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -173,13 +171,13 @@ main {
   animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.info-pill {
+.avitomp4-app .info-pill {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.frames-count {
+.avitomp4-app .frames-count {
   font-size: 1rem;
   font-weight: 500;
   color: var(--text-main);
@@ -191,7 +189,7 @@ main {
   -webkit-backdrop-filter: blur(12px);
 }
 
-.clear-btn {
+.avitomp4-app .clear-btn {
   background: transparent;
   border: none;
   color: var(--text-muted);
@@ -200,51 +198,17 @@ main {
   transition: color 0.2s;
 }
 
-.clear-btn:hover {
+.avitomp4-app .clear-btn:hover {
   color: #ff3b30;
 }
 
-.actions-group {
+.avitomp4-app .actions-group {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.select-wrapper {
-  position: relative;
-}
-
-.framerate-select {
-  appearance: none;
-  background: var(--surface-color);
-  border: 1px solid var(--border-color);
-  color: var(--text-main);
-  padding: 0.75rem 2.5rem 0.75rem 1rem;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  outline: none;
-  cursor: pointer;
-  transition: all 0.2s;
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-}
-
-.framerate-select:hover {
-  background: var(--surface-hover);
-}
-
-.select-icon {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-.generate-btn {
+.avitomp4-app .generate-btn {
   background: var(--text-main);
   color: #000000;
   border: none;
@@ -259,19 +223,19 @@ main {
   gap: 0.5rem;
 }
 
-.generate-btn:hover:not(:disabled) {
+.avitomp4-app .generate-btn:hover:not(:disabled) {
   transform: scale(1.05);
   background: #ffffff;
 }
 
-.generate-btn:disabled {
+.avitomp4-app .generate-btn:disabled {
   opacity: 0.5;
   cursor: not-allowed;
   transform: none;
 }
 
 /* Status & Progress */
-.status-container {
+.avitomp4-app .status-container {
   width: 100%;
   background: var(--surface-color);
   border-radius: 16px;
@@ -285,7 +249,7 @@ main {
   -webkit-backdrop-filter: blur(24px);
 }
 
-.status-text-row {
+.avitomp4-app .status-text-row {
   display: flex;
   justify-content: space-between;
   font-size: 0.9rem;
@@ -293,7 +257,7 @@ main {
   color: var(--text-main);
 }
 
-.progress-track {
+.avitomp4-app .progress-track {
   width: 100%;
   height: 6px;
   background: rgba(255, 255, 255, 0.1);
@@ -301,14 +265,14 @@ main {
   overflow: hidden;
 }
 
-.progress-fill {
+.avitomp4-app .progress-fill {
   height: 100%;
   background: var(--accent-color);
   border-radius: 3px;
   transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.success-message {
+.avitomp4-app .success-message {
   text-align: center;
   color: #32d74b;
   font-weight: 500;
@@ -342,7 +306,7 @@ main {
   }
 }
 
-.spinner {
+.avitomp4-app .spinner {
   display: inline-block;
   width: 16px;
   height: 16px;
